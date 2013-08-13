@@ -1,0 +1,137 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% define standard comments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\todo}[1]{\emph{\textcolor{red}{#1}}}
+\newcommand{\comment}[1]{\emph{\textcolor{blue}{#1}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% NOTE: Pay attention on newline in source file. Could lead not intended indent or some other warings.
+% You can keep the newline if you fake it with the comment character: %
+% http://stackoverflow.com/a/12166542
+% example:
+% break newline in code by inseting %
+\subfloat[]{%
+\includegraphics[width=\textwidth]{images/examples/toys_and_calendar_1920x1080_cropd_orig.png}%
+}%
+
+
+% merge cells in table
+\multicolumn{<number>}{<formatting>}{<contents>}
+%This is also how you change the formatting of a single field in only one row of the table. Just use \multicolumn{1}{<new format>}{<contents>}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% non-breaking space (tilde ~) prevents to insert a line break at this white space
+% should be used between names C.~Hoffmann or citations Ong et al.~\citations or figure~1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% https://en.wikipedia.org/wiki/Non-breaking_space
+Ong~et~al.~\cite{ong2005}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% text in equation
+% Apart from function and operator names, as is customary in mathematics, variables and letters are in italics; digits are not. For other text, (like variable labels) to avoid being rendered in italics like variables, use \text, \mbox, or \mathrm. You can also define new function names using (https://en.wikipedia.org/wiki/Help:Displaying_a_formula#Rendering)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Text in equation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Recommended: \mathrm{text}
+Formatted text
+Using the \mbox is fine and gets the basic result. Yet, there is an alternative that offers a little more flexibility. You may recall from the Formatting Tutorial, the introduction of font formatting commands, such as \textrm, \textit, \textbf, etc. These commands format the argument accordingly, e.g., \textbf{bold text} gives bold text. These commands are equally valid within a maths environment to include text. The added benefit here is that you can have better control over the font formatting, rather than the standard text achieved with \mbox.
+
+\begin{equation}
+  50 \textrm{ apples} \times 100 \textbf{ apples} = 
+  \textit{lots of apples}
+\end{equation}
+
+However, as is the case with LaTeX, there is more than one way to skin a cat! There are a set of formatting commands very similar to the font formatting ones just used, except they are aimed specifically for text in maths mode. So why bother showing you \textrm and co if there are equivalents for maths? Well, that's because they are subtly different. The maths formatting commands are:
+
+Command	Format	Example
+\mathrm{...}	Roman	
+\mathit{...}	Italic	
+\mathbf{...}	Bold	
+\mathsf{...}	Sans serif	
+\mathtt{...}	Typewriter	
+\mathcal{...}	Calligraphy	
+The maths formatting commands can be wrapped around the entire equation, and not just on the textual elements: they only format letters, numbers, and uppercase Greek, and the rest of the maths syntax is ignored. So, generally, it is better to use the specific maths commands if required. Note that the calligraphy example gives rather strange output. This is because for letters, it requires upper case characters. The reminding letters are mapped to special symbols.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table: height expand 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+A more sophisticated approach is to used the array package [7] and change the
+length \extrarowheight as follows:
+\usepackage{array}
+...
+{ % environment to change setting locally (only between {...})
+\setlength{\extrarowheight}{1.5pt}
+\begin{tabular}{|l|l|}
+\hline
+a & Row 1 \\ \hline
+b & Row 2 \\ \hline
+c & Row 3 \\
+d & Row 4 \\ \hline
+\end{tabular}
+}
+This adds space only above the text. With the correct value, it compensates for
+the \hline command spacing. Its effect is to turn
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Acronym
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%ftp://ftp.rrzn.uni-hannover.de/pub/mirror/tex-archive/macros/latex/contrib/acronym/acronym.pdf
+\usepackage[nolist,nohyperlinks]{acronym} %http://staff.science.uva.nl/~polko/HOWTO/LATEX/acronym.html
+% Using the acronyms
+% 
+% The standard command to use an acronym is \ac{label}. The first time you use this, the acronym will be written in full with the acronym in parentheses: supernova (SN). At later times it will just print the acronym: SN.
+% Other commands
+% 
+% \acresetall: resets all acronyms to not used. Useful after the abstract to redefine all acronyms in the introduction.
+% \acf{label}: written out form with acronym in parentheses, irrespective of previous use
+% \acs{label}: acronym form, irrespective of previous use
+% \acl{label}: written out form without following acronym
+% \acp{label}: plural form of acronym by adding an s. \acfp. \acsp, \aclp work as well.
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % Define acronyms
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \acrodef{label}   [acronym]       {written out form} % if acronym contains math symbols
+\acrodef{etacar}  [$\eta$ Car]    {$\eta$ Carinae} % example
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Change margins of text in latex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ftp://xyz.lcs.mit.edu/pub/CTAN/macros/latex/contrib/geometry/geometry.pdf
+\usepackage[margin=1in]{geometry}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use graphicx
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NOTE: Seems only to work in the ieee class
+\usepackage[pdftex]{graphicx}
+\graphicspath{{./images/}}%{../jpeg/}}
+\DeclareGraphicsExtensions{.pdf,.png}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Some definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\x{{\mathbf x}}
+\def\L{{\cal L}}
+\def\h264{H.264/MPEG-4~AVC}
+\def\myfloatwidth{\linewidth}
+\def\myhalfloatwidth{.49\linewidth}
