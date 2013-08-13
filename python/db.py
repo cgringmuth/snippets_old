@@ -58,8 +58,9 @@ f.closed  # -> True
 
 
 ############################################################################
-# Use __all__ mechnism to prevent name clashes if you import a module by
+# Use __all__ mechanism to prevent name clashes if you import a module by
 # form M import *
+# http://www.python.org/dev/peps/pep-0008/#global-variable-names
 ############################################################################
 # Specify what is visible from other modules if current module imported by
 # form M import *
