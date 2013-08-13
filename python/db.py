@@ -54,3 +54,17 @@ It is good practice to use the with keyword when dealing with file objects. This
 with open('workfile', 'r') as f:
     read_data = f.read()
 f.closed  # -> True
+
+
+
+############################################################################
+# Use __all__ mechnism to prevent name clashes if you import a module by
+# form M import *
+############################################################################
+# Specify what is visible from other modules if current module imported by
+# form M import *
+__all__ = ['foobar'] # only foobar is visible
+
+
+foobar = 'hey'
+foobarprivate = 'should not be seen'
