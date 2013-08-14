@@ -75,9 +75,10 @@ foobarprivate = 'should not be seen'
 # Class to handle a bunch of different variables
 # http://code.activestate.com/recipes/52308-the-simple-but-handy-collector-of-a-bunch-of-named/?in=user-97991
 ############################################################################
-class Bunch:
-    def __init__(self, **kwds):
-        self.__dict__.update(kwds)
+class Bunch(dict):
+    def __init__(self, **kw):
+        dict.__init__(self, kw)         # This has the added benefit that it can directly be printed and it shows its contents in interactive environments like ipython.
+        self.__dict__.update(kw)
 
 # that's it!  Now, you can create a Bunch
 # whenever you want to group a few variables:
