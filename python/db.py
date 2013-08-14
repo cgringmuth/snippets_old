@@ -69,3 +69,23 @@ __all__ = ['foobar'] # only foobar is visible
 
 foobar = 'hey'
 foobarprivate = 'should not be seen'
+
+
+############################################################################
+# Class to handle a bunch of different variables
+# http://code.activestate.com/recipes/52308-the-simple-but-handy-collector-of-a-bunch-of-named/?in=user-97991
+############################################################################
+class Bunch:
+    def __init__(self, **kwds):
+        self.__dict__.update(kwds)
+
+# that's it!  Now, you can create a Bunch
+# whenever you want to group a few variables:
+
+point = Bunch(datum=y, squared=y*y, coord=x)
+
+# and of course you can read/write the named
+# attributes you just created, add others, del
+# some of them, etc, etc:
+if point.squared > threshold:
+    point.isok = 1
