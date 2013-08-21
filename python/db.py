@@ -90,3 +90,22 @@ point = Bunch(datum=y, squared=y*y, coord=x)
 # some of them, etc, etc:
 if point.squared > threshold:
     point.isok = 1
+
+
+############################################################################
+# Dictionary default value
+# Source: http://stackoverflow.com/questions/101268/hidden-features-of-python
+############################################################################
+d = {}                      # empty dictionary
+dafaultKey = 1234           # default value for key
+d['key']                    # -> exception 'KeyError'
+d.get('key')                # -> None
+d.get('key', dafaultKey)    # -> defaultKey = 1234
+# Great for:
+d['key'] = d.get('key', dafaultKey) + 1
+
+
+
+############################################################################
+#
+############################################################################
