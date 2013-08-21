@@ -107,5 +107,25 @@ d['key'] = d.get('key', dafaultKey) + 1
 
 
 ############################################################################
-#
+# How to write binary bits to a file
 ############################################################################
+import struct   # http://docs.python.org/2/library/struct.html
+
+num = [1,2,3,4]
+
+# http://docs.python.org/2/library/struct.html#struct.pack
+# 'B' : unsigned byte -> 0..255
+data = struct.pack('BBBB', *num)
+# more general:
+data = struct.pack('B' * len(num), *num)
+
+filename = 'test.bin'
+with open(filename, 'wb') as f:
+    f.write(data)
+
+
+
+# Copy this
+############################################################################
+# 
+############################################################################            
