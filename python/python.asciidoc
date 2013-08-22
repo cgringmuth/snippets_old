@@ -123,6 +123,7 @@ if point.squared > threshold:
 
 
 == Dictionary default value [Source: http://stackoverflow.com/questions/101268/hidden-features-of-python[#]]
+
 [source,python]
 ----
 d = {}                      # empty dictionary
@@ -136,6 +137,7 @@ d['key'] = d.get('key', dafaultKey) + 1
 
 
 == How to write binary bits to a file
+
 [source,python]
 ----
 import struct                               # <1>
@@ -157,6 +159,7 @@ with open(filename, 'wb') as f:
 
 
 == Mandatory vs. Optional Arguments
+
 [source,python]
 ----
 def func(v1, v2, **args):
