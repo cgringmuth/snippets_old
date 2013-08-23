@@ -990,7 +990,7 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_list_get_list_of_all_folders">List get list of all Folders</h2>
+<h2 id="_list_all_folders">List all Folders</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.6
@@ -999,8 +999,23 @@ http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> os
 
-curFolder <span style="color: #990000">=</span> <span style="color: #FF0000">'.'</span>         <span style="font-style: italic"><span style="color: #9A1900"># current folder</span></span>
-folder <span style="color: #990000">=</span> <span style="color: #990000">[</span>f <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> f <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">listdir</span></span><span style="color: #990000">(</span>curFolder<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdir</span></span><span style="color: #990000">(</span>f<span style="color: #990000">)]</span></tt></pre></div></div>
+
+folder <span style="color: #990000">=</span> <span style="color: #990000">[</span>f <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> f <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">listdir</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'.'</span><span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdir</span></span><span style="color: #990000">(</span>f<span style="color: #990000">)]</span>                       <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span>
+
+of <span style="color: #990000">=</span> <span style="color: #FF0000">'/path/to/other/folder'</span>         <span style="font-style: italic"><span style="color: #9A1900"># current folder</span></span>
+folder <span style="color: #990000">=</span> <span style="color: #990000">[</span>f <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> f <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">listdir</span></span><span style="color: #990000">(</span>of<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdir</span></span><span style="color: #990000">(</span>os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span>of<span style="color: #990000">,</span> f<span style="color: #990000">))]</span>      <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;2&gt;</b></span></span></tt></pre></div></div>
+<div class="colist arabic"><ol>
+<li>
+<p>
+Only works if one is looking for folders in the current folder
+</p>
+</li>
+<li>
+<p>
+More general case
+</p>
+</li>
+</ol></div>
 </div>
 </div>
 </div>
@@ -1008,7 +1023,7 @@ folder <span style="color: #990000">=</span> <span style="color: #990000">[</spa
 <div id="footer">
 <div id="footer-text">
 Version 3.1415926<br />
-Last updated 2013-08-23 15:19:22 CEST
+Last updated 2013-08-23 16:23:41 CEST
 </div>
 </div>
 </body>

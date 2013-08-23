@@ -187,12 +187,18 @@ func(1,2)           # <2>
 <2> >>> 1 2 -1
 
 
-== List get list of all Folders
+== List all Folders
 
 [source,python]
 ----
 import os
 
-curFolder = '.'         # current folder
-folder = [f for f in os.listdir(curFolder) if os.path.isdir(f)]
+
+folder = [f for f in os.listdir('.') if os.path.isdir(f)]                       # <1>
+
+of = '/path/to/other/folder'         # current folder
+folder = [f for f in os.listdir(of) if os.path.isdir(os.path.join(of, f))]      # <2>
 ----
+
+<1> Only works if one is looking for folders in the current folder
+<2> More general case
