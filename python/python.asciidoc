@@ -78,9 +78,22 @@ It is good practice to use the with keyword when dealing with file objects. This
 ----
 with open('workfile', 'r') as f:
     read_data = f.read()
-f.closed  # -> True
-----
 
+doOtherStuff()  # <1>
+----
+<1> f is closed here automatically even if  an exception raised
+
+or with multiple files
+
+[source,python]
+----
+with open('a', 'w') as a, open('b', 'w') as b:
+    data_a = a.read()
+    data_b = b.read()
+
+doOtherStuff()  # <1>
+----
+<1> a and b are closed here automatically even if  an exception raised
 
 == \_\_all__ mechanism
 
@@ -172,3 +185,14 @@ func(1,2)           # <2>
 ----
 <1> >>> 1  2 22
 <2> >>> 1 2 -1
+
+
+== List get list of all Folders
+
+[source,python]
+----
+import os
+
+curFolder = '.'         # current folder
+folder = [f for f in os.listdir(curFolder) if os.path.isdir(f)]
+----
