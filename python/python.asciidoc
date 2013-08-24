@@ -72,23 +72,36 @@ if __name__ == '__main__':
 
 == Use "with" for files [Source: http://docs.python.org/2/tutorial/inputoutput.html#methods-of-file-objects[#]]
 
-
-http://www.python.org/dev/peps/pep-0008/#global-variable-names[#]
 It is good practice to use the with keyword when dealing with file objects. This has the advantage that the file is properly closed after its suite finishes, even if an exception is raised on the way. It is also much shorter than writing equivalent try-finally blocks:
 
 [source,python]
 ----
 with open('workfile', 'r') as f:
     read_data = f.read()
-f.closed  # -> True
+
+doOtherStuff()  # <1>
 ----
+<1> f is closed here automatically even if  an exception raised
+
+or with multiple files
+
+[source,python]
+----
+with open('a', 'w') as a, open('b', 'w') as b:
+    data_a = a.read()
+    data_b = b.read()
+
+doOtherStuff()  # <1>
+----
+<1> a and b are closed here automatically even if  an exception raised
+
 
 :test_link: http://www.python.org/dev/peps/pep-0008/#global-variable-names[#]
-
 == \_\_all__ mechanism
 
 Use \_\_all__ mechanism to prevent name clashes if you import a module by _from M import *_ [Source: {test_link}]
 
+.foobar.py
 [source,python]
 ----
 # Specify what is visible from other modules if current module imported by
@@ -99,6 +112,17 @@ __all__ = ['foobar'] # only foobar is visible
 foobar = 'hey'
 foobarprivate = 'should not be seen'
 ----
+
+.main.py
+[source,python]
+----
+from foobar import *
+
+foobar          # <1>
+foobarprivate   # <2>
+----
+<1> Ok
+<2> Error
 
 
 == Class to handle a bunch of different variables [Source: http://code.activestate.com/recipes/52308-the-simple-but-handy-collector-of-a-bunch-of-named/?in=user-97991[#]] 
@@ -175,3 +199,20 @@ func(1,2)           # <2>
 ----
 <1> >>> 1  2 22
 <2> >>> 1 2 -1
+
+
+== List all Folders
+
+[source,python]
+----
+import os
+
+
+folder = [f for f in os.listdir('.') if os.path.isdir(f)]                       # <1>
+
+of = '/path/to/other/folder'         # current folder
+folder = [f for f in os.listdir(of) if os.path.isdir(os.path.join(of, f))]      # <2>
+----
+
+<1> Only works if one is looking for folders in the current folder
+<2> More general case

@@ -820,8 +820,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="sect1">
 <h2 id="_use_with_for_files_source_a_href_http_docs_python_org_2_tutorial_inputoutput_html_methods_of_file_objects_a">Use "with" for files [Source: <a href="http://docs.python.org/2/tutorial/inputoutput.html#methods-of-file-objects">#</a>]</h2>
 <div class="sectionbody">
-<div class="paragraph"><p><a href="http://www.python.org/dev/peps/pep-0008/global-variable-names">http://www.python.org/dev/peps/pep-0008/global-variable-names</a>
-It is good practice to use the with keyword when dealing with file objects. This has the advantage that the file is properly closed after its suite finishes, even if an exception is raised on the way. It is also much shorter than writing equivalent try-finally blocks:</p></div>
+<div class="paragraph"><p>It is good practice to use the with keyword when dealing with file objects. This has the advantage that the file is properly closed after its suite finishes, even if an exception is raised on the way. It is also much shorter than writing equivalent try-finally blocks:</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
@@ -829,7 +828,33 @@ http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt>with <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'workfile'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'r'</span><span style="color: #990000">)</span> as f<span style="color: #990000">:</span>
     read_data <span style="color: #990000">=</span> f<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">()</span>
-f<span style="color: #990000">.</span>closed  <span style="font-style: italic"><span style="color: #9A1900"># -&gt; True</span></span></tt></pre></div></div>
+
+<span style="font-weight: bold"><span style="color: #000000">doOtherStuff</span></span><span style="color: #990000">()</span>  <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span></tt></pre></div></div>
+<div class="colist arabic"><ol>
+<li>
+<p>
+f is closed here automatically even if  an exception raised
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>or with multiple files</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>with <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'a'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'w'</span><span style="color: #990000">)</span> as a<span style="color: #990000">,</span> <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'b'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'w'</span><span style="color: #990000">)</span> as b<span style="color: #990000">:</span>
+    data_a <span style="color: #990000">=</span> a<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">()</span>
+    data_b <span style="color: #990000">=</span> b<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">()</span>
+
+<span style="font-weight: bold"><span style="color: #000000">doOtherStuff</span></span><span style="color: #990000">()</span>  <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span></tt></pre></div></div>
+<div class="colist arabic"><ol>
+<li>
+<p>
+a and b are closed here automatically even if  an exception raised
+</p>
+</li>
+</ol></div>
 </div>
 </div>
 <div class="sect1">
@@ -837,6 +862,7 @@ f<span style="color: #990000">.</span>closed  <span style="font-style: italic"><
 <div class="sectionbody">
 <div class="paragraph"><p>Use __all__ mechanism to prevent name clashes if you import a module by <em>from M import *</em> [Source: <a href="http://www.python.org/dev/peps/pep-0008/#global-variable-names">#</a>]</p></div>
 <div class="listingblock">
+<div class="title">foobar.py</div>
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
@@ -848,6 +874,28 @@ __all__ <span style="color: #990000">=</span> <span style="color: #990000">[</sp
 
 foobar <span style="color: #990000">=</span> <span style="color: #FF0000">'hey'</span>
 foobarprivate <span style="color: #990000">=</span> <span style="color: #FF0000">'should not be seen'</span></tt></pre></div></div>
+<div class="listingblock">
+<div class="title">main.py</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">from</span></span> foobar <span style="font-weight: bold"><span style="color: #000080">import</span></span> <span style="color: #990000">*</span>
+
+foobar          <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span>
+foobarprivate   <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;2&gt;</b></span></span></tt></pre></div></div>
+<div class="colist arabic"><ol>
+<li>
+<p>
+Ok
+</p>
+</li>
+<li>
+<p>
+Error
+</p>
+</li>
+</ol></div>
 </div>
 </div>
 <div class="sect1">
@@ -962,12 +1010,41 @@ http://www.gnu.org/software/src-highlite -->
 </ol></div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_list_all_folders">List all Folders</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> os
+
+
+folder <span style="color: #990000">=</span> <span style="color: #990000">[</span>f <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> f <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">listdir</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'.'</span><span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdir</span></span><span style="color: #990000">(</span>f<span style="color: #990000">)]</span>                       <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span>
+
+of <span style="color: #990000">=</span> <span style="color: #FF0000">'/path/to/other/folder'</span>         <span style="font-style: italic"><span style="color: #9A1900"># current folder</span></span>
+folder <span style="color: #990000">=</span> <span style="color: #990000">[</span>f <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> f <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">listdir</span></span><span style="color: #990000">(</span>of<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdir</span></span><span style="color: #990000">(</span>os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span>of<span style="color: #990000">,</span> f<span style="color: #990000">))]</span>      <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;2&gt;</b></span></span></tt></pre></div></div>
+<div class="colist arabic"><ol>
+<li>
+<p>
+Only works if one is looking for folders in the current folder
+</p>
+</li>
+<li>
+<p>
+More general case
+</p>
+</li>
+</ol></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
 Version 3.1415926<br />
-Last updated 2013-08-22 23:33:59 CEST
+Last updated 2013-08-24 20:43:49 CEST
 </div>
 </div>
 </body>
