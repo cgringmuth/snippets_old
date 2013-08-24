@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+
+<article lang="en">
+<articleinfo>
+    <title>A List of python Tips, Tricks and Idioms</title>
+    <author>
+        <firstname>Christoph</firstname>
+        <surname>Hoffmann</surname>
+        <email>choffmann1983@gmail.com</email>
+    </author>
+    <authorinitials>CH</authorinitials>
+</articleinfo>
+<section id="_shebang_ulink_url_https_en_wikipedia_org_wiki_shebang__unix_wiki_ulink">
+<title>Shebang (<ulink url="https://en.wikipedia.org/wiki/Shebang_(Unix)">Wiki</ulink>)</title>
+<programlisting language="python" linenumbering="unnumbered">#!/usr/bin/env python</programlisting>
+</section>
+<section id="_enum_in_python">
+<title>Enum in python</title>
+<programlisting language="python" linenumbering="unnumbered">def enum(*sequential, **named):
+    '''
+    Example:  num = enum(ONE=1, TWO=2, THREE='three')
+              num.ONE &gt;&gt;&gt; 1
+    Support for converting the values back to names can be added this way:
+              num.reverse_mapping[2] &gt;&gt; 'TWO'
+    Source: http://stackoverflow.com/a/1695250
+    '''
+    enums = dict(zip(sequential, range(len(sequential))), **named)
+    reverse = dict((value, key) for key, value in enums.iteritems())
+    enums['reverse_mapping'] = reverse
+    return type('Enum', (), enums)</programlisting>
+</section>
+<section id="_python_imaging_library_ulink_url_http_www_pythonware_com_products_pil_pil_ulink">
+<title>Python Imaging Library (<ulink url="http://www.pythonware.com/products/pil/">PIL</ulink>)</title>
+<simpara>Installing the PIL on Ubuntu 64 bit revealed some issues.</simpara>
+<blockquote>
+<attribution>
+anonymous
+</attribution>
+<simpara>It turns out that the APT installations put the libraries under <emphasis>/usr/lib/x86_64-linux-gnu</emphasis> and PIL will search for them in <emphasis>/usr/lib/</emphasis>. So you have to create symlinks for PIL to see them.</simpara>
+</blockquote>
+<programlisting language="shell" linenumbering="unnumbered">ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
+ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
+ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib</programlisting>
+<simpara>Source: <ulink url="http://jj.isgeek.net/2011/09/install-pil-with-jpeg-support-on-ubuntu-oneiric-64bits/">http://jj.isgeek.net/2011/09/install-pil-with-jpeg-support-on-ubuntu-oneiric-64bits/</ulink></simpara>
+</section>
+<section id="_importing_libs_if_called_as_main">
+<title>Importing libs if called as main</title>
+<simpara>Sometimes libs are only needed if a lib is called as main process. Thus, it is meaningful to import such libs only if this module is called as main process.</simpara>
+<programlisting language="python" linenumbering="unnumbered">if __name__ == '__main__':
+    from paste import httpserver    # Paste &lt;http://pythonpaste.org&gt;
+    httpserver.serve(app, host='127.0.0.1', port=8080)</programlisting>
+<simpara>or</simpara>
+<programlisting language="python" linenumbering="unnumbered">if __name__ == '__main__':
+    import sys
+    main(sys.argv[1:])</programlisting>
+</section>
+<section id="_use_with_for_files_source_ulink_url_http_docs_python_org_2_tutorial_inputoutput_html_methods_of_file_objects_ulink">
+<title>Use "with" for files [Source: <ulink url="http://docs.python.org/2/tutorial/inputoutput.html#methods-of-file-objects">#</ulink>]</title>
+<simpara>It is good practice to use the with keyword when dealing with file objects. This has the advantage that the file is properly closed after its suite finishes, even if an exception is raised on the way. It is also much shorter than writing equivalent try-finally blocks:</simpara>
+<programlisting language="python" linenumbering="unnumbered">with open('workfile', 'r') as f:
+    read_data = f.read()
+f.closed  # -&gt; True</programlisting>
+</section>
+<section id="_all___mechanism">
+<title>__all__ mechanism</title>
+<simpara>Use __all__ mechanism to prevent name clashes if you import a module by <emphasis>form M import *</emphasis> [Source <ulink url="http://www.python.org/dev/peps/pep-0008/global-variable-names">http://www.python.org/dev/peps/pep-0008/global-variable-names</ulink>]</simpara>
+<programlisting language="python" linenumbering="unnumbered"># Specify what is visible from other modules if current module imported by
+# form M import *
+__all__ = ['foobar'] # only foobar is visible
+
+
+foobar = 'hey'
+foobarprivate = 'should not be seen'</programlisting>
+</section>
+<section id="_class_to_handle_a_bunch_of_different_variables_source_ulink_url_http_code_activestate_com_recipes_52308_the_simple_but_handy_collector_of_a_bunch_of_named_in_user_97991_ulink">
+<title>Class to handle a bunch of different variables [Source: <ulink url="http://code.activestate.com/recipes/52308-the-simple-but-handy-collector-of-a-bunch-of-named/?in=user-97991">#</ulink>]</title>
+<programlisting language="python" linenumbering="unnumbered">class Bunch(dict):
+    def __init__(self, **kw):
+        dict.__init__(self, kw)     # <co id="CO1-1"/>
+        self.__dict__.update(kw)
+
+# that's it!  Now, you can create a Bunch
+# whenever you want to group a few variables:
+
+point = Bunch(datum=y, squared=y*y, coord=x)
+
+# and of course you can read/write the named
+# attributes you just created, add others, del
+# some of them, etc, etc:
+if point.squared &gt; threshold:
+    point.isok = 1</programlisting>
+<calloutlist>
+<callout arearefs="CO1-1">
+<para>
+This has the added benefit that it can directly be printed and it shows its contents in interactive environments like ipython.
+</para>
+</callout>
+</calloutlist>
+</section>
+<section id="_dictionary_default_value_source_ulink_url_http_stackoverflow_com_questions_101268_hidden_features_of_python_ulink">
+<title>Dictionary default value [Source: <ulink url="http://stackoverflow.com/questions/101268/hidden-features-of-python">#</ulink>]</title>
+<programlisting language="python" linenumbering="unnumbered">d = {}                      # empty dictionary
+dafaultKey = 1234           # default value for key
+d['key']                    # -&gt; exception 'KeyError'
+d.get('key')                # -&gt; None
+d.get('key', dafaultKey)    # -&gt; defaultKey = 1234
+# Great for:
+d['key'] = d.get('key', dafaultKey) + 1</programlisting>
+</section>
+<section id="_how_to_write_binary_bits_to_a_file">
+<title>How to write binary bits to a file</title>
+<programlisting language="python" linenumbering="unnumbered">import struct                               # <co id="CO2-1"/>
+
+num = [1,2,3,4]
+
+# 'B' : unsigned byte -&gt; 0..255
+data = struct.pack('BBBB', *num)            # <co id="CO2-2"/>
+# more general:
+data = struct.pack('B' * len(num), *num)    # <co id="CO2-3"/>
+
+filename = 'test.bin'
+with open(filename, 'wb') as f:
+    f.write(data)</programlisting>
+<calloutlist>
+<callout arearefs="CO2-1">
+<para>
+Link: <ulink url="http://docs.python.org/2/library/struct.html">struct</ulink>
+</para>
+</callout>
+<callout arearefs="CO2-2 CO2-3">
+<para>
+Link: <ulink url="http://docs.python.org/2/library/struct.html#struct.pack">struct.pack</ulink>
+</para>
+</callout>
+</calloutlist>
+</section>
+<section id="_mandatory_vs_optional_arguments">
+<title>Mandatory vs. Optional Arguments</title>
+<programlisting language="python" linenumbering="unnumbered">def func(v1, v2, **args):
+    defaultV3 = -1
+    v3 = args.get('v3', defaultV3)
+    print v1, v2, v3
+
+func(1,2,v3=22)     # <co id="CO3-1"/>
+func(1,2)           # <co id="CO3-2"/></programlisting>
+<calloutlist>
+<callout arearefs="CO3-1">
+<para>
+&gt;&gt;&gt; 1  2 22
+</para>
+</callout>
+<callout arearefs="CO3-2">
+<para>
+&gt;&gt;&gt; 1 2 -1
+</para>
+</callout>
+</calloutlist>
+</section>
+</article>

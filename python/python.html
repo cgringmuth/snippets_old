@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.7" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
 <title>A List of python Tips, Tricks and Idioms</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -349,7 +349,7 @@ div.colist td img {
   margin-bottom: 0.1em;
 }
 
-div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -407,8 +407,6 @@ span.underline { text-decoration: underline; }
 span.overline { text-decoration: overline; }
 span.line-through { text-decoration: line-through; }
 
-div.unbreakable { page-break-inside: avoid; }
-
 
 /*
  * xhtml11 specific
@@ -416,7 +414,7 @@ div.unbreakable { page-break-inside: avoid; }
  * */
 
 tt {
-  font-family: "Courier New", Courier, monospace;
+  font-family: monospace;
   font-size: inherit;
   color: navy;
 }
@@ -455,7 +453,7 @@ div.tableblock > table[frame="vsides"] {
  * */
 
 .monospaced {
-  font-family: "Courier New", Courier, monospace;
+  font-family: monospace;
   font-size: inherit;
   color: navy;
 }
@@ -583,7 +581,7 @@ toc: function (toclevels) {
 
   function tocEntries(el, toclevels) {
     var result = new Array;
-    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
     // Function that scans the DOM tree for header elements (the DOM2
     // nodeIterator API would be a better technique but not supported by all
     // browsers).
@@ -612,7 +610,7 @@ toc: function (toclevels) {
   var i;
   for (i = 0; i < toc.childNodes.length; i++) {
     var entry = toc.childNodes[i];
-    if (entry.nodeName.toLowerCase() == 'div'
+    if (entry.nodeName == 'div'
      && entry.getAttribute("class")
      && entry.getAttribute("class").match(/^toclevel/))
       tocEntriesToRemove.push(entry);
@@ -658,7 +656,7 @@ footnotes: function () {
   var entriesToRemove = [];
   for (i = 0; i < noteholder.childNodes.length; i++) {
     var entry = noteholder.childNodes[i];
-    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+    if (entry.nodeName == 'div' && entry.getAttribute("class") == "footnote")
       entriesToRemove.push(entry);
   }
   for (i = 0; i < entriesToRemove.length; i++) {
@@ -747,7 +745,7 @@ asciidoc.install();
 <h2 id="_shebang_a_href_https_en_wikipedia_org_wiki_shebang__unix_wiki_a">Shebang (<a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">Wiki</a>)</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -758,7 +756,7 @@ http://www.gnu.org/software/src-highlite -->
 <h2 id="_enum_in_python">Enum in python</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -786,7 +784,7 @@ http://www.gnu.org/software/src-highlite -->
 &#8212; anonymous
 </div></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -801,7 +799,7 @@ ln -s /usr/lib/x86_64-linux-gnu/libz<span style="color: #990000">.</span>so /usr
 <div class="sectionbody">
 <div class="paragraph"><p>Sometimes libs are only needed if a lib is called as main process. Thus, it is meaningful to import such libs only if this module is called as main process.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -810,7 +808,7 @@ http://www.gnu.org/software/src-highlite -->
     httpserver<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">serve</span></span><span style="color: #990000">(</span>app<span style="color: #990000">,</span> host<span style="color: #990000">=</span><span style="color: #FF0000">'127.0.0.1'</span><span style="color: #990000">,</span> port<span style="color: #990000">=</span><span style="color: #993399">8080</span><span style="color: #990000">)</span></tt></pre></div></div>
 <div class="paragraph"><p>or</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -822,9 +820,10 @@ http://www.gnu.org/software/src-highlite -->
 <div class="sect1">
 <h2 id="_use_with_for_files_source_a_href_http_docs_python_org_2_tutorial_inputoutput_html_methods_of_file_objects_a">Use "with" for files [Source: <a href="http://docs.python.org/2/tutorial/inputoutput.html#methods-of-file-objects">#</a>]</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>It is good practice to use the with keyword when dealing with file objects. This has the advantage that the file is properly closed after its suite finishes, even if an exception is raised on the way. It is also much shorter than writing equivalent try-finally blocks:</p></div>
+<div class="paragraph"><p><a href="http://www.python.org/dev/peps/pep-0008/global-variable-names">http://www.python.org/dev/peps/pep-0008/global-variable-names</a>
+It is good practice to use the with keyword when dealing with file objects. This has the advantage that the file is properly closed after its suite finishes, even if an exception is raised on the way. It is also much shorter than writing equivalent try-finally blocks:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -836,14 +835,14 @@ f<span style="color: #990000">.</span>closed  <span style="font-style: italic"><
 <div class="sect1">
 <h2 id="_all___mechanism">__all__ mechanism</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Use __all__ mechanism to prevent name clashes if you import a module by <em>form M import *</em> [Source <a href="http://www.python.org/dev/peps/pep-0008/global-variable-names">http://www.python.org/dev/peps/pep-0008/global-variable-names</a>]</p></div>
+<div class="paragraph"><p>Use __all__ mechanism to prevent name clashes if you import a module by <em>from M import *</em> [Source: <a href="http://www.python.org/dev/peps/pep-0008/#global-variable-names">#</a>]</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-style: italic"><span style="color: #9A1900"># Specify what is visible from other modules if current module imported by</span></span>
-<span style="font-style: italic"><span style="color: #9A1900"># form M import *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># from M import *</span></span>
 __all__ <span style="color: #990000">=</span> <span style="color: #990000">[</span><span style="color: #FF0000">'foobar'</span><span style="color: #990000">]</span> <span style="font-style: italic"><span style="color: #9A1900"># only foobar is visible</span></span>
 
 
@@ -855,7 +854,7 @@ foobarprivate <span style="color: #990000">=</span> <span style="color: #FF0000"
 <h2 id="_class_to_handle_a_bunch_of_different_variables_source_a_href_http_code_activestate_com_recipes_52308_the_simple_but_handy_collector_of_a_bunch_of_named_in_user_97991_a">Class to handle a bunch of different variables [Source: <a href="http://code.activestate.com/recipes/52308-the-simple-but-handy-collector-of-a-bunch-of-named/?in=user-97991">#</a>]</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -887,7 +886,7 @@ This has the added benefit that it can directly be printed and it shows its cont
 <h2 id="_dictionary_default_value_source_a_href_http_stackoverflow_com_questions_101268_hidden_features_of_python_a">Dictionary default value [Source: <a href="http://stackoverflow.com/questions/101268/hidden-features-of-python">#</a>]</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -904,7 +903,7 @@ d<span style="color: #990000">[</span><span style="color: #FF0000">'key'</span><
 <h2 id="_how_to_write_binary_bits_to_a_file">How to write binary bits to a file</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -938,7 +937,7 @@ Link: <a href="http://docs.python.org/2/library/struct.html#struct.pack">struct.
 <h2 id="_mandatory_vs_optional_arguments">Mandatory vs. Optional Arguments</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -968,7 +967,7 @@ http://www.gnu.org/software/src-highlite -->
 <div id="footer">
 <div id="footer-text">
 Version 3.1415926<br />
-Last updated 2013-08-22 16:19:38 CEST
+Last updated 2013-08-22 23:33:59 CEST
 </div>
 </div>
 </body>

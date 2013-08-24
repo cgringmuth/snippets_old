@@ -72,6 +72,8 @@ if __name__ == '__main__':
 
 == Use "with" for files [Source: http://docs.python.org/2/tutorial/inputoutput.html#methods-of-file-objects[#]]
 
+
+http://www.python.org/dev/peps/pep-0008/#global-variable-names[#]
 It is good practice to use the with keyword when dealing with file objects. This has the advantage that the file is properly closed after its suite finishes, even if an exception is raised on the way. It is also much shorter than writing equivalent try-finally blocks:
 
 [source,python]
@@ -81,15 +83,16 @@ with open('workfile', 'r') as f:
 f.closed  # -> True
 ----
 
+:test_link: http://www.python.org/dev/peps/pep-0008/#global-variable-names[#]
 
 == \_\_all__ mechanism
 
-Use \_\_all__ mechanism to prevent name clashes if you import a module by _form M import *_ [Source http://www.python.org/dev/peps/pep-0008/#global-variable-names[#]]
+Use \_\_all__ mechanism to prevent name clashes if you import a module by _from M import *_ [Source: {test_link}]
 
 [source,python]
 ----
 # Specify what is visible from other modules if current module imported by
-# form M import *
+# from M import *
 __all__ = ['foobar'] # only foobar is visible
 
 
