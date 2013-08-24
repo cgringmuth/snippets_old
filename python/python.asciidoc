@@ -187,6 +187,8 @@ with open(filename, 'wb') as f:
 
 == Mandatory vs. Optional Arguments
 
+Sometimes it is useful to have arguments which are mandatory while others are not necessary because they can be predicted, inferred by other values or they have some default values.
+
 [source,python]
 ----
 def func(v1, v2, **args):
@@ -194,8 +196,8 @@ def func(v1, v2, **args):
     v3 = args.get('v3', defaultV3)
     print v1, v2, v3
 
-func(1,2,v3=22)     # <1>
-func(1,2)           # <2>
+func(1, 2, v3=22)       # <1>
+func(1, 2)              # <2>
 ----
 <1> >>> 1  2 22
 <2> >>> 1 2 -1
@@ -210,9 +212,66 @@ import os
 
 folder = [f for f in os.listdir('.') if os.path.isdir(f)]                       # <1>
 
-of = '/path/to/other/folder'         # current folder
+of = '/path/to/other/folder'         # working folder
 folder = [f for f in os.listdir(of) if os.path.isdir(os.path.join(of, f))]      # <2>
 ----
 
 <1> Only works if one is looking for folders in the current folder
 <2> More general case
+
+
+
+== List Comprehensions [Source: http://docs.python.org/2.7/tutorial/datastructures.html#list-comprehensions[#]]
+
+Compact way to generate specific lists.
+
+[source,python]
+----
+[(x, y) for x in [1, 2, 3] for y in [3, 1, 5] if x!=z]  # <1>
+----
+
+<1> >>> [(1, 3), (1, 5), (2, 3), (2, 1), (2, 5), (3, 1), (3, 5)]
+
+=== Unpacking list in list
+
+[source,python]
+----
+vec = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+[num for elem in vec for num in elem]   # <1>
+----
+
+<1> >>> [1, 2, 3, 4, 5, 6, 7, 9]
+
+=== Nested list comprehension
+
+[source,python]
+----
+matrix = [
+    [1, 5, 9],
+    [2, 6, 10],
+    [3, 7, 11],
+    [4, 8, 12]
+]
+
+matrix_trans = [[row[n] for row in matrix] for n in range(len(matrix))]  
+print matrix_trans      # <1>
+----
+
+<1> >>> \[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
+
+
+=== Slice copy when changing a list while iterate over same list
+
+To change a sequence you are iterating over while inside the loop (for example to duplicate certain items), it is recommended that you first make a copy. Looping over a sequence does not implicitly make a copy. The slice notation makes this especially convenient [http://docs.python.org/2.7/tutorial/datastructures.html#looping-techniques[#]]:
+
+[source,python]
+----
+words = ['cat', 'window', 'defenestrate']
+for w in words[:]:  # Loop over a slice copy of the entire list.
+    if len(w) > 6:
+        words.insert(0, w)
+
+words       # <1>
+----
+
+<1> >>> ['defenestrate', 'cat', 'window', 'defenestrate']

@@ -984,6 +984,7 @@ Link: <a href="http://docs.python.org/2/library/struct.html#struct.pack">struct.
 <div class="sect1">
 <h2 id="_mandatory_vs_optional_arguments">Mandatory vs. Optional Arguments</h2>
 <div class="sectionbody">
+<div class="paragraph"><p>Sometimes it is useful to have arguments which are mandatory while others are not necessary because they can be predicted, inferred by other values or they have some default values.</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
@@ -994,8 +995,8 @@ http://www.gnu.org/software/src-highlite -->
     v3 <span style="color: #990000">=</span> args<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'v3'</span><span style="color: #990000">,</span> defaultV3<span style="color: #990000">)</span>
     <span style="font-weight: bold"><span style="color: #0000FF">print</span></span> v1<span style="color: #990000">,</span> v2<span style="color: #990000">,</span> v3
 
-<span style="font-weight: bold"><span style="color: #000000">func</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">,</span><span style="color: #993399">2</span><span style="color: #990000">,</span>v3<span style="color: #990000">=</span><span style="color: #993399">22</span><span style="color: #990000">)</span>     <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span>
-<span style="font-weight: bold"><span style="color: #000000">func</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">,</span><span style="color: #993399">2</span><span style="color: #990000">)</span>           <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;2&gt;</b></span></span></tt></pre></div></div>
+<span style="font-weight: bold"><span style="color: #000000">func</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">,</span> v3<span style="color: #990000">=</span><span style="color: #993399">22</span><span style="color: #990000">)</span>       <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span>
+<span style="font-weight: bold"><span style="color: #000000">func</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">)</span>              <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;2&gt;</b></span></span></tt></pre></div></div>
 <div class="colist arabic"><ol>
 <li>
 <p>
@@ -1023,7 +1024,7 @@ http://www.gnu.org/software/src-highlite -->
 
 folder <span style="color: #990000">=</span> <span style="color: #990000">[</span>f <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> f <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">listdir</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'.'</span><span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdir</span></span><span style="color: #990000">(</span>f<span style="color: #990000">)]</span>                       <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span>
 
-of <span style="color: #990000">=</span> <span style="color: #FF0000">'/path/to/other/folder'</span>         <span style="font-style: italic"><span style="color: #9A1900"># current folder</span></span>
+of <span style="color: #990000">=</span> <span style="color: #FF0000">'/path/to/other/folder'</span>         <span style="font-style: italic"><span style="color: #9A1900"># working folder</span></span>
 folder <span style="color: #990000">=</span> <span style="color: #990000">[</span>f <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> f <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">listdir</span></span><span style="color: #990000">(</span>of<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdir</span></span><span style="color: #990000">(</span>os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span>of<span style="color: #990000">,</span> f<span style="color: #990000">))]</span>      <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;2&gt;</b></span></span></tt></pre></div></div>
 <div class="colist arabic"><ol>
 <li>
@@ -1039,12 +1040,94 @@ More general case
 </ol></div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_list_comprehensions_source_a_href_http_docs_python_org_2_7_tutorial_datastructures_html_list_comprehensions_a">List Comprehensions [Source: <a href="http://docs.python.org/2.7/tutorial/datastructures.html#list-comprehensions">#</a>]</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Compact way to generate specific lists.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #990000">[(</span>x<span style="color: #990000">,</span> y<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> x <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">,</span> <span style="color: #993399">3</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> y <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="color: #990000">[</span><span style="color: #993399">3</span><span style="color: #990000">,</span> <span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">5</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> x<span style="color: #990000">!=</span>z<span style="color: #990000">]</span>  <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span></tt></pre></div></div>
+<div class="colist arabic"><ol>
+<li>
+<p>
+&gt;&gt;&gt; [(1, 3), (1, 5), (2, 3), (2, 1), (2, 5), (3, 1), (3, 5)]
+</p>
+</li>
+</ol></div>
+<div class="sect2">
+<h3 id="_unpacking_list_in_list">Unpacking list in list</h3>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>vec <span style="color: #990000">=</span> <span style="color: #990000">[[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">,</span> <span style="color: #993399">3</span><span style="color: #990000">],</span> <span style="color: #990000">[</span><span style="color: #993399">4</span><span style="color: #990000">,</span> <span style="color: #993399">5</span><span style="color: #990000">,</span> <span style="color: #993399">6</span><span style="color: #990000">],</span> <span style="color: #990000">[</span><span style="color: #993399">7</span><span style="color: #990000">,</span> <span style="color: #993399">8</span><span style="color: #990000">,</span> <span style="color: #993399">9</span><span style="color: #990000">]]</span>
+<span style="color: #990000">[</span>num <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> elem <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> vec <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> num <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> elem<span style="color: #990000">]</span>   <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span></tt></pre></div></div>
+<div class="colist arabic"><ol>
+<li>
+<p>
+&gt;&gt;&gt; [1, 2, 3, 4, 5, 6, 7, 9]
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_nested_list_comprehension">Nested list comprehension</h3>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>matrix <span style="color: #990000">=</span> <span style="color: #990000">[</span>
+    <span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">5</span><span style="color: #990000">,</span> <span style="color: #993399">9</span><span style="color: #990000">],</span>
+    <span style="color: #990000">[</span><span style="color: #993399">2</span><span style="color: #990000">,</span> <span style="color: #993399">6</span><span style="color: #990000">,</span> <span style="color: #993399">10</span><span style="color: #990000">],</span>
+    <span style="color: #990000">[</span><span style="color: #993399">3</span><span style="color: #990000">,</span> <span style="color: #993399">7</span><span style="color: #990000">,</span> <span style="color: #993399">11</span><span style="color: #990000">],</span>
+    <span style="color: #990000">[</span><span style="color: #993399">4</span><span style="color: #990000">,</span> <span style="color: #993399">8</span><span style="color: #990000">,</span> <span style="color: #993399">12</span><span style="color: #990000">]</span>
+<span style="color: #990000">]</span>
+
+matrix_trans <span style="color: #990000">=</span> <span style="color: #990000">[[</span>row<span style="color: #990000">[</span>n<span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> row <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> matrix<span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> n <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">range</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">len</span></span><span style="color: #990000">(</span>matrix<span style="color: #990000">))]</span>
+<span style="font-weight: bold"><span style="color: #0000FF">print</span></span> matrix_trans      <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span></tt></pre></div></div>
+<div class="colist arabic"><ol>
+<li>
+<p>
+&gt;&gt;&gt; [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_slice_copy_when_changing_a_list_while_iterate_over_same_list">Slice copy when changing a list while iterate over same list</h3>
+<div class="paragraph"><p>To change a sequence you are iterating over while inside the loop (for example to duplicate certain items), it is recommended that you first make a copy. Looping over a sequence does not implicitly make a copy. The slice notation makes this especially convenient [<a href="http://docs.python.org/2.7/tutorial/datastructures.html#looping-techniques">#</a>]:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>words <span style="color: #990000">=</span> <span style="color: #990000">[</span><span style="color: #FF0000">'cat'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'window'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'defenestrate'</span><span style="color: #990000">]</span>
+<span style="font-weight: bold"><span style="color: #0000FF">for</span></span> w <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> words<span style="color: #990000">[:]:</span>  <span style="font-style: italic"><span style="color: #9A1900"># Loop over a slice copy of the entire list.</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="font-weight: bold"><span style="color: #000000">len</span></span><span style="color: #990000">(</span>w<span style="color: #990000">)</span> <span style="color: #990000">&gt;</span> <span style="color: #993399">6</span><span style="color: #990000">:</span>
+        words<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">insert</span></span><span style="color: #990000">(</span><span style="color: #993399">0</span><span style="color: #990000">,</span> w<span style="color: #990000">)</span>
+
+words       <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span></tt></pre></div></div>
+<div class="colist arabic"><ol>
+<li>
+<p>
+&gt;&gt;&gt; [<em>defenestrate</em>, <em>cat</em>, <em>window</em>, <em>defenestrate</em>]
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
 Version 3.1415926<br />
-Last updated 2013-08-24 20:43:49 CEST
+Last updated 2013-08-24 23:28:51 CEST
 </div>
 </div>
 </body>
