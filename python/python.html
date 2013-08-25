@@ -729,7 +729,7 @@ install: function(toclevels) {
 }
 
 }
-asciidoc.install();
+asciidoc.install(2);
 /*]]>*/
 </script>
 </head>
@@ -739,11 +739,22 @@ asciidoc.install();
 <span id="author">Christoph Hoffmann</span><br />
 <span id="email"><tt>&lt;<a href="mailto:choffmann1983@gmail.com">choffmann1983@gmail.com</a>&gt;</tt></span><br />
 <span id="revnumber">version 3.1415926</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_shebang_a_href_https_en_wikipedia_org_wiki_shebang__unix_wiki_a">Shebang (<a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">Wiki</a>)</h2>
+<h2 id="_introduction">1. Introduction</h2>
 <div class="sectionbody">
+<div class="paragraph"><p>TODO</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_shebang_a_href_https_en_wikipedia_org_wiki_shebang__unix_wiki_a">2. Shebang (<a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">Wiki</a>)</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Shebang ist used let the operation system know how to interpret the given script. Such shebang hast be placed at the top of each file.</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
@@ -753,7 +764,7 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_enum_in_python">Enum in python</h2>
+<h2 id="_enum_in_python">3. Enum in python</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
@@ -775,8 +786,9 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_python_imaging_library_a_href_http_www_pythonware_com_products_pil_pil_a">Python Imaging Library (<a href="http://www.pythonware.com/products/pil/">PIL</a>)</h2>
+<h2 id="_python_imaging_library_a_href_http_www_pythonware_com_products_pil_pil_a">4. Python Imaging Library (<a href="http://www.pythonware.com/products/pil/">PIL</a>)</h2>
 <div class="sectionbody">
+<div class="paragraph"><p>PIL is a good library to handle images in python.</p></div>
 <div class="paragraph"><p>Installing the PIL on Ubuntu 64 bit revealed some issues.</p></div>
 <div class="quoteblock">
 <div class="content">It turns out that the APT installations put the libraries under <em>/usr/lib/x86_64-linux-gnu</em> and PIL will search for them in <em>/usr/lib/</em>. So you have to create symlinks for PIL to see them.</div>
@@ -795,7 +807,7 @@ ln -s /usr/lib/x86_64-linux-gnu/libz<span style="color: #990000">.</span>so /usr
 </div>
 </div>
 <div class="sect1">
-<h2 id="_importing_libs_if_called_as_main">Importing libs if called as main</h2>
+<h2 id="_importing_libs_in_main_only">5. Importing libs in main only</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Sometimes libs are only needed if a lib is called as main process. Thus, it is meaningful to import such libs only if this module is called as main process.</p></div>
 <div class="listingblock">
@@ -818,7 +830,7 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_use_with_for_files_source_a_href_http_docs_python_org_2_tutorial_inputoutput_html_methods_of_file_objects_a">Use "with" for files [Source: <a href="http://docs.python.org/2/tutorial/inputoutput.html#methods-of-file-objects">#</a>]</h2>
+<h2 id="_use_with_for_files_source_a_href_http_docs_python_org_2_tutorial_inputoutput_html_methods_of_file_objects_a">6. Use "with" for files [Source: <a href="http://docs.python.org/2/tutorial/inputoutput.html#methods-of-file-objects">#</a>]</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>It is good practice to use the with keyword when dealing with file objects. This has the advantage that the file is properly closed after its suite finishes, even if an exception is raised on the way. It is also much shorter than writing equivalent try-finally blocks:</p></div>
 <div class="listingblock">
@@ -829,14 +841,12 @@ http://www.gnu.org/software/src-highlite -->
 <pre><tt>with <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'workfile'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'r'</span><span style="color: #990000">)</span> as f<span style="color: #990000">:</span>
     read_data <span style="color: #990000">=</span> f<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">()</span>
 
-<span style="font-weight: bold"><span style="color: #000000">doOtherStuff</span></span><span style="color: #990000">()</span>  <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span></tt></pre></div></div>
-<div class="colist arabic"><ol>
-<li>
-<p>
+<span style="font-weight: bold"><span style="color: #000000">doOtherStuff</span></span><span style="color: #990000">()</span>  <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
 f is closed here automatically even if  an exception raised
-</p>
-</li>
-</ol></div>
+</td></tr>
+</table></div>
 <div class="paragraph"><p>or with multiple files</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
@@ -847,18 +857,16 @@ http://www.gnu.org/software/src-highlite -->
     data_a <span style="color: #990000">=</span> a<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">()</span>
     data_b <span style="color: #990000">=</span> b<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">()</span>
 
-<span style="font-weight: bold"><span style="color: #000000">doOtherStuff</span></span><span style="color: #990000">()</span>  <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span></tt></pre></div></div>
-<div class="colist arabic"><ol>
-<li>
-<p>
+<span style="font-weight: bold"><span style="color: #000000">doOtherStuff</span></span><span style="color: #990000">()</span>  <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
 a and b are closed here automatically even if  an exception raised
-</p>
-</li>
-</ol></div>
+</td></tr>
+</table></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_all___mechanism">__all__ mechanism</h2>
+<h2 id="_all___mechanism">7. __all__ mechanism</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Use __all__ mechanism to prevent name clashes if you import a module by <em>from M import *</em> [Source: <a href="http://www.python.org/dev/peps/pep-0008/#global-variable-names">#</a>]</p></div>
 <div class="listingblock">
@@ -882,24 +890,20 @@ http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-weight: bold"><span style="color: #000080">from</span></span> foobar <span style="font-weight: bold"><span style="color: #000080">import</span></span> <span style="color: #990000">*</span>
 
-foobar          <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span>
-foobarprivate   <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;2&gt;</b></span></span></tt></pre></div></div>
-<div class="colist arabic"><ol>
-<li>
-<p>
+foobar          <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span>
+foobarprivate   <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
 Ok
-</p>
-</li>
-<li>
-<p>
+</td></tr>
+<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></td><td>
 Error
-</p>
-</li>
-</ol></div>
+</td></tr>
+</table></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_class_to_handle_a_bunch_of_different_variables_source_a_href_http_code_activestate_com_recipes_52308_the_simple_but_handy_collector_of_a_bunch_of_named_in_user_97991_a">Class to handle a bunch of different variables [Source: <a href="http://code.activestate.com/recipes/52308-the-simple-but-handy-collector-of-a-bunch-of-named/?in=user-97991">#</a>]</h2>
+<h2 id="_class_to_handle_a_bunch_of_different_variables_source_a_href_http_code_activestate_com_recipes_52308_the_simple_but_handy_collector_of_a_bunch_of_named_in_user_97991_a">8. Class to handle a bunch of different variables [Source: <a href="http://code.activestate.com/recipes/52308-the-simple-but-handy-collector-of-a-bunch-of-named/?in=user-97991">#</a>]</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
@@ -908,7 +912,7 @@ http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="font-weight: bold"><span style="color: #000000">Bunch</span></span><span style="color: #990000">(</span>dict<span style="color: #990000">):</span>
     <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> <span style="color: #990000">**</span>kw<span style="color: #990000">):</span>
-        dict<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> kw<span style="color: #990000">)</span>     <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span>
+        dict<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> kw<span style="color: #990000">)</span>     <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span>
         self<span style="color: #990000">.</span>__dict__<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">update</span></span><span style="color: #990000">(</span>kw<span style="color: #990000">)</span>
 
 <span style="font-style: italic"><span style="color: #9A1900"># that's it!  Now, you can create a Bunch</span></span>
@@ -921,17 +925,15 @@ point <span style="color: #990000">=</span> <span style="font-weight: bold"><spa
 <span style="font-style: italic"><span style="color: #9A1900"># some of them, etc, etc:</span></span>
 <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> point<span style="color: #990000">.</span>squared <span style="color: #990000">&gt;</span> threshold<span style="color: #990000">:</span>
     point<span style="color: #990000">.</span>isok <span style="color: #990000">=</span> <span style="color: #993399">1</span></tt></pre></div></div>
-<div class="colist arabic"><ol>
-<li>
-<p>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
 This has the added benefit that it can directly be printed and it shows its contents in interactive environments like ipython.
-</p>
-</li>
-</ol></div>
+</td></tr>
+</table></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_dictionary_default_value_source_a_href_http_stackoverflow_com_questions_101268_hidden_features_of_python_a">Dictionary default value [Source: <a href="http://stackoverflow.com/questions/101268/hidden-features-of-python">#</a>]</h2>
+<h2 id="_dictionary_default_value_source_a_href_http_stackoverflow_com_questions_101268_hidden_features_of_python_a">9. Dictionary default value [Source: <a href="http://stackoverflow.com/questions/101268/hidden-features-of-python">#</a>]</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
@@ -948,41 +950,37 @@ d<span style="color: #990000">[</span><span style="color: #FF0000">'key'</span><
 </div>
 </div>
 <div class="sect1">
-<h2 id="_how_to_write_binary_bits_to_a_file">How to write binary bits to a file</h2>
+<h2 id="_how_to_write_binary_bits_to_a_file">10. How to write binary bits to a file</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> struct                               <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span>
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> struct                               <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span>
 
 num <span style="color: #990000">=</span> <span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">,</span><span style="color: #993399">2</span><span style="color: #990000">,</span><span style="color: #993399">3</span><span style="color: #990000">,</span><span style="color: #993399">4</span><span style="color: #990000">]</span>
 
 <span style="font-style: italic"><span style="color: #9A1900"># 'B' : unsigned byte -&gt; 0..255</span></span>
-data <span style="color: #990000">=</span> struct<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">pack</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'BBBB'</span><span style="color: #990000">,</span> <span style="color: #990000">*</span>num<span style="color: #990000">)</span>            <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;2&gt;</b></span></span>
+data <span style="color: #990000">=</span> struct<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">pack</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'BBBB'</span><span style="color: #990000">,</span> <span style="color: #990000">*</span>num<span style="color: #990000">)</span>            <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></span></span>
 <span style="font-style: italic"><span style="color: #9A1900"># more general:</span></span>
-data <span style="color: #990000">=</span> struct<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">pack</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'B'</span> <span style="color: #990000">*</span> <span style="font-weight: bold"><span style="color: #000000">len</span></span><span style="color: #990000">(</span>num<span style="color: #990000">),</span> <span style="color: #990000">*</span>num<span style="color: #990000">)</span>    <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;2&gt;</b></span></span>
+data <span style="color: #990000">=</span> struct<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">pack</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'B'</span> <span style="color: #990000">*</span> <span style="font-weight: bold"><span style="color: #000000">len</span></span><span style="color: #990000">(</span>num<span style="color: #990000">),</span> <span style="color: #990000">*</span>num<span style="color: #990000">)</span>    <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></span></span>
 
 filename <span style="color: #990000">=</span> <span style="color: #FF0000">'test.bin'</span>
 with <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span>filename<span style="color: #990000">,</span> <span style="color: #FF0000">'wb'</span><span style="color: #990000">)</span> as f<span style="color: #990000">:</span>
     f<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">write</span></span><span style="color: #990000">(</span>data<span style="color: #990000">)</span></tt></pre></div></div>
-<div class="colist arabic"><ol>
-<li>
-<p>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
 Link: <a href="http://docs.python.org/2/library/struct.html">struct</a>
-</p>
-</li>
-<li>
-<p>
+</td></tr>
+<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></td><td>
 Link: <a href="http://docs.python.org/2/library/struct.html#struct.pack">struct.pack</a>
-</p>
-</li>
-</ol></div>
+</td></tr>
+</table></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_mandatory_vs_optional_arguments">Mandatory vs. Optional Arguments</h2>
+<h2 id="_mandatory_vs_optional_arguments">11. Mandatory vs. Optional Arguments</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Sometimes it is useful to have arguments which are mandatory while others are not necessary because they can be predicted, inferred by other values or they have some default values.</p></div>
 <div class="listingblock">
@@ -995,24 +993,20 @@ http://www.gnu.org/software/src-highlite -->
     v3 <span style="color: #990000">=</span> args<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'v3'</span><span style="color: #990000">,</span> defaultV3<span style="color: #990000">)</span>
     <span style="font-weight: bold"><span style="color: #0000FF">print</span></span> v1<span style="color: #990000">,</span> v2<span style="color: #990000">,</span> v3
 
-<span style="font-weight: bold"><span style="color: #000000">func</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">,</span> v3<span style="color: #990000">=</span><span style="color: #993399">22</span><span style="color: #990000">)</span>       <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span>
-<span style="font-weight: bold"><span style="color: #000000">func</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">)</span>              <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;2&gt;</b></span></span></tt></pre></div></div>
-<div class="colist arabic"><ol>
-<li>
-<p>
+<span style="font-weight: bold"><span style="color: #000000">func</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">,</span> v3<span style="color: #990000">=</span><span style="color: #993399">22</span><span style="color: #990000">)</span>       <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span>
+<span style="font-weight: bold"><span style="color: #000000">func</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">)</span>              <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
 &gt;&gt;&gt; 1  2 22
-</p>
-</li>
-<li>
-<p>
+</td></tr>
+<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></td><td>
 &gt;&gt;&gt; 1 2 -1
-</p>
-</li>
-</ol></div>
+</td></tr>
+</table></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_list_all_folders">List all Folders</h2>
+<h2 id="_list_all_folders">12. List all Folders</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
@@ -1022,26 +1016,22 @@ http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> os
 
 
-folder <span style="color: #990000">=</span> <span style="color: #990000">[</span>f <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> f <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">listdir</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'.'</span><span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdir</span></span><span style="color: #990000">(</span>f<span style="color: #990000">)]</span>                       <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span>
+folder <span style="color: #990000">=</span> <span style="color: #990000">[</span>f <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> f <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">listdir</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'.'</span><span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdir</span></span><span style="color: #990000">(</span>f<span style="color: #990000">)]</span>                       <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span>
 
 of <span style="color: #990000">=</span> <span style="color: #FF0000">'/path/to/other/folder'</span>         <span style="font-style: italic"><span style="color: #9A1900"># working folder</span></span>
-folder <span style="color: #990000">=</span> <span style="color: #990000">[</span>f <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> f <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">listdir</span></span><span style="color: #990000">(</span>of<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdir</span></span><span style="color: #990000">(</span>os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span>of<span style="color: #990000">,</span> f<span style="color: #990000">))]</span>      <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;2&gt;</b></span></span></tt></pre></div></div>
-<div class="colist arabic"><ol>
-<li>
-<p>
+folder <span style="color: #990000">=</span> <span style="color: #990000">[</span>f <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> f <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">listdir</span></span><span style="color: #990000">(</span>of<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdir</span></span><span style="color: #990000">(</span>os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span>of<span style="color: #990000">,</span> f<span style="color: #990000">))]</span>      <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
 Only works if one is looking for folders in the current folder
-</p>
-</li>
-<li>
-<p>
+</td></tr>
+<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></td><td>
 More general case
-</p>
-</li>
-</ol></div>
+</td></tr>
+</table></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_list_comprehensions_source_a_href_http_docs_python_org_2_7_tutorial_datastructures_html_list_comprehensions_a">List Comprehensions [Source: <a href="http://docs.python.org/2.7/tutorial/datastructures.html#list-comprehensions">#</a>]</h2>
+<h2 id="_list_comprehensions_source_a_href_http_docs_python_org_2_7_tutorial_datastructures_html_list_comprehensions_a">13. List Comprehensions [Source: <a href="http://docs.python.org/2.7/tutorial/datastructures.html#list-comprehensions">#</a>]</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Compact way to generate specific lists.</p></div>
 <div class="listingblock">
@@ -1049,33 +1039,29 @@ More general case
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="color: #990000">[(</span>x<span style="color: #990000">,</span> y<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> x <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">,</span> <span style="color: #993399">3</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> y <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="color: #990000">[</span><span style="color: #993399">3</span><span style="color: #990000">,</span> <span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">5</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> x<span style="color: #990000">!=</span>z<span style="color: #990000">]</span>  <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span></tt></pre></div></div>
-<div class="colist arabic"><ol>
-<li>
-<p>
+<pre><tt><span style="color: #990000">[(</span>x<span style="color: #990000">,</span> y<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> x <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">,</span> <span style="color: #993399">3</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> y <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="color: #990000">[</span><span style="color: #993399">3</span><span style="color: #990000">,</span> <span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">5</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> x<span style="color: #990000">!=</span>z<span style="color: #990000">]</span>  <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
 &gt;&gt;&gt; [(1, 3), (1, 5), (2, 3), (2, 1), (2, 5), (3, 1), (3, 5)]
-</p>
-</li>
-</ol></div>
+</td></tr>
+</table></div>
 <div class="sect2">
-<h3 id="_unpacking_list_in_list">Unpacking list in list</h3>
+<h3 id="_unpacking_list_in_list">13.1. Unpacking list in list</h3>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt>vec <span style="color: #990000">=</span> <span style="color: #990000">[[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">,</span> <span style="color: #993399">3</span><span style="color: #990000">],</span> <span style="color: #990000">[</span><span style="color: #993399">4</span><span style="color: #990000">,</span> <span style="color: #993399">5</span><span style="color: #990000">,</span> <span style="color: #993399">6</span><span style="color: #990000">],</span> <span style="color: #990000">[</span><span style="color: #993399">7</span><span style="color: #990000">,</span> <span style="color: #993399">8</span><span style="color: #990000">,</span> <span style="color: #993399">9</span><span style="color: #990000">]]</span>
-<span style="color: #990000">[</span>num <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> elem <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> vec <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> num <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> elem<span style="color: #990000">]</span>   <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span></tt></pre></div></div>
-<div class="colist arabic"><ol>
-<li>
-<p>
+<span style="color: #990000">[</span>num <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> elem <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> vec <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> num <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> elem<span style="color: #990000">]</span>   <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
 &gt;&gt;&gt; [1, 2, 3, 4, 5, 6, 7, 9]
-</p>
-</li>
-</ol></div>
+</td></tr>
+</table></div>
 </div>
 <div class="sect2">
-<h3 id="_nested_list_comprehension">Nested list comprehension</h3>
+<h3 id="_nested_list_comprehension">13.2. Nested list comprehension</h3>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
@@ -1089,17 +1075,15 @@ http://www.gnu.org/software/src-highlite -->
 <span style="color: #990000">]</span>
 
 matrix_trans <span style="color: #990000">=</span> <span style="color: #990000">[[</span>row<span style="color: #990000">[</span>n<span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> row <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> matrix<span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> n <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">range</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">len</span></span><span style="color: #990000">(</span>matrix<span style="color: #990000">))]</span>
-<span style="font-weight: bold"><span style="color: #0000FF">print</span></span> matrix_trans      <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span></tt></pre></div></div>
-<div class="colist arabic"><ol>
-<li>
-<p>
+<span style="font-weight: bold"><span style="color: #0000FF">print</span></span> matrix_trans      <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
 &gt;&gt;&gt; [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
-</p>
-</li>
-</ol></div>
+</td></tr>
+</table></div>
 </div>
 <div class="sect2">
-<h3 id="_slice_copy_when_changing_a_list_while_iterate_over_same_list">Slice copy when changing a list while iterate over same list</h3>
+<h3 id="_slice_copy_when_changing_a_list_while_iterate_over_same_list">13.3. Slice copy when changing a list while iterate over same list</h3>
 <div class="paragraph"><p>To change a sequence you are iterating over while inside the loop (for example to duplicate certain items), it is recommended that you first make a copy. Looping over a sequence does not implicitly make a copy. The slice notation makes this especially convenient [<a href="http://docs.python.org/2.7/tutorial/datastructures.html#looping-techniques">#</a>]:</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
@@ -1111,14 +1095,12 @@ http://www.gnu.org/software/src-highlite -->
     <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="font-weight: bold"><span style="color: #000000">len</span></span><span style="color: #990000">(</span>w<span style="color: #990000">)</span> <span style="color: #990000">&gt;</span> <span style="color: #993399">6</span><span style="color: #990000">:</span>
         words<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">insert</span></span><span style="color: #990000">(</span><span style="color: #993399">0</span><span style="color: #990000">,</span> w<span style="color: #990000">)</span>
 
-words       <span style="font-style: italic"><span style="color: #9A1900"># <b>&lt;1&gt;</b></span></span></tt></pre></div></div>
-<div class="colist arabic"><ol>
-<li>
-<p>
+words       <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
 &gt;&gt;&gt; [<em>defenestrate</em>, <em>cat</em>, <em>window</em>, <em>defenestrate</em>]
-</p>
-</li>
-</ol></div>
+</td></tr>
+</table></div>
 </div>
 </div>
 </div>
@@ -1127,7 +1109,7 @@ words       <span style="font-style: italic"><span style="color: #9A1900"># <b>&
 <div id="footer">
 <div id="footer-text">
 Version 3.1415926<br />
-Last updated 2013-08-24 23:28:51 CEST
+Last updated 2013-08-25 14:13:54 CEST
 </div>
 </div>
 </body>

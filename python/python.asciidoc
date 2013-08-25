@@ -1,11 +1,21 @@
-:source-highlighter: highlight
-
 = A List of python Tips, Tricks and Idioms
 :Author:    Christoph Hoffmann
 :Email:     choffmann1983@gmail.com
 :Revision:  3.1415926
+:source-highlighter: highlight
+:numbered:
+:toc:       // set table of content
+:icons:     // search for icons in :inconsdir: (default: ./images/icons.)
+:iconsdir: ../asciidoc/images/icons
+
+
+== Introduction
+
+TODO
 
 == Shebang (https://en.wikipedia.org/wiki/Shebang_(Unix)[Wiki])
+
+Shebang ist used let the operation system know how to interpret the given script. Such shebang hast be placed at the top of each file.
 
 [source,python]
 ----
@@ -34,6 +44,8 @@ def enum(*sequential, **named):
 
 == Python Imaging Library (http://www.pythonware.com/products/pil/[PIL])
 
+PIL is a good library to handle images in python.
+
 Installing the PIL on Ubuntu 64 bit revealed some issues.
 
 [quote, anonymous]
@@ -49,7 +61,7 @@ Source: http://jj.isgeek.net/2011/09/install-pil-with-jpeg-support-on-ubuntu-one
 
 
 
-== Importing libs if called as main
+== Importing libs in main only
 
 Sometimes libs are only needed if a lib is called as main process. Thus, it is meaningful to import such libs only if this module is called as main process. 
 
