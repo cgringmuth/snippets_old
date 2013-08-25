@@ -1,19 +1,24 @@
 = A List of python Tips, Tricks and Idioms
-:Author:    Christoph Hoffmann
-:Email:     choffmann1983@gmail.com
-:Revision:  3.1415926
-:source-highlighter: highlight
+:Author:                Christoph Hoffmann
+:Email:                 choffmann1983@gmail.com
+:Revision:              3.1415926
+:source-highlighter:    highlight
 :numbered:
-:toc:       // set table of content
-:icons:     // search for icons in :inconsdir: (default: ./images/icons.)
-:iconsdir: ../asciidoc/images/icons
-
+:toc:                   // set table of content
+:icons:                 // search for icons in :inconsdir: (default: ./images/icons.)
+:iconsdir:              ../asciidoc/images/icons
+:imagesdir:             ../asciidoc/images/
+// :scriptsdir:            ../asciidoc/js
+// :linkcss:
 
 == Introduction
 
 TODO
 
-== Shebang (https://en.wikipedia.org/wiki/Shebang_(Unix)[Wiki])
+== Shebang 
+
+[TIP]
+Detailed description at source: https://en.wikipedia.org/wiki/Shebang_(Unix)[wikipedia.org]
 
 Shebang ist used let the operation system know how to interpret the given script. Such shebang hast be placed at the top of each file.
 
@@ -82,7 +87,10 @@ if __name__ == '__main__':
 ----
 
 
-== Use "with" for files [Source: http://docs.python.org/2/tutorial/inputoutput.html#methods-of-file-objects[#]]
+== Use "with" for files 
+
+[TIP]
+Detailed description at source: http://docs.python.org/2/tutorial/inputoutput.html#methods-of-file-objects[docs.python.org]
 
 It is good practice to use the with keyword when dealing with file objects. This has the advantage that the file is properly closed after its suite finishes, even if an exception is raised on the way. It is also much shorter than writing equivalent try-finally blocks:
 
@@ -137,7 +145,10 @@ foobarprivate   # <2>
 <2> Error
 
 
-== Class to handle a bunch of different variables [Source: http://code.activestate.com/recipes/52308-the-simple-but-handy-collector-of-a-bunch-of-named/?in=user-97991[#]] 
+== Class to handle a bunch of different variables 
+
+[TIP]
+Detailed description at source: http://code.activestate.com/recipes/52308-the-simple-but-handy-collector-of-a-bunch-of-named/?in=user-97991[code.activestate.com]
 
 [source, python]
 ----
@@ -161,7 +172,10 @@ if point.squared > threshold:
 <1> This has the added benefit that it can directly be printed and it shows its contents in interactive environments like ipython.
 
 
-== Dictionary default value [Source: http://stackoverflow.com/questions/101268/hidden-features-of-python[#]]
+== Dictionary default value 
+
+[TIP]
+Detailed description at source: http://stackoverflow.com/questions/101268/hidden-features-of-python[stackoverflow.com]
 
 [source,python]
 ----
@@ -233,7 +247,10 @@ folder = [f for f in os.listdir(of) if os.path.isdir(os.path.join(of, f))]      
 
 
 
-== List Comprehensions [Source: http://docs.python.org/2.7/tutorial/datastructures.html#list-comprehensions[#]]
+== List Comprehensions 
+
+[TIP]
+Detailed description at source: http://docs.python.org/2.7/tutorial/datastructures.html#list-comprehensions[docs.python.org]
 
 Compact way to generate specific lists.
 
@@ -287,3 +304,45 @@ words       # <1>
 ----
 
 <1> >>> ['defenestrate', 'cat', 'window', 'defenestrate']
+
+== Looping Techniques 
+
+[TIP]
+==========================
+* Detailed description at source: http://docs.python.org/2.7/tutorial/datastructures.html#looping-techniques[docs.python.org]
+* todo
+==========================
+
+
+=== List
+
+To retreive index and value use `enumerate()`.
+
+[source,python]
+----
+for i, v in enumerate(['tic', 'tac', 'toe']):
+    print i, v
+----
+
+=== Dictionary
+
+Iterate over the complete dictionary.
+
+[source,python]
+--------------------------
+knights = {'gallahad': 'the pure', 'robin': 'the brave'}
+for k, v in knights.iteritems():
+    print k, v
+--------------------------
+
+
+//////////////////////////
+CommentBlock:     //////////////////////////
+PassthroughBlock: ++++++++++++++++++++++++++
+ListingBlock:     --------------------------
+LiteralBlock:     ..........................
+SidebarBlock:     **************************
+QuoteBlock:       __________________________
+ExampleBlock:     ==========================
+OpenBlock:        --
+//////////////////////////
