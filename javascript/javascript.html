@@ -759,7 +759,7 @@ asciidoc.install(2);
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">function</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+<pre><tt><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
     <span style="font-weight: bold"><span style="color: #000000">alert</span></span><span style="color: #990000">(</span>test<span style="color: #990000">)</span>
 <span style="color: #FF0000">}</span><span style="color: #990000">)();</span></tt></pre></div></div>
 <div class="paragraph"><p>or</p></div>
@@ -768,7 +768,7 @@ http://www.gnu.org/software/src-highlite -->
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">function</span></span><span style="color: #990000">(</span>window<span style="color: #990000">,</span> document<span style="color: #990000">,</span> undefined<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+<pre><tt><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="color: #990000">(</span>window<span style="color: #990000">,</span> document<span style="color: #990000">,</span> undefined<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
     <span style="font-weight: bold"><span style="color: #000000">alert</span></span><span style="color: #990000">(</span>test<span style="color: #990000">)</span>
 <span style="color: #FF0000">}</span><span style="color: #990000">)(</span><span style="font-weight: bold"><span style="color: #0000FF">this</span></span><span style="color: #990000">,</span> window<span style="color: #990000">);</span> <span style="font-style: italic"><span style="color: #9A1900">// this refers to the global object -&gt; in global scope the window</span></span></tt></pre></div></div>
 </div>
@@ -777,22 +777,32 @@ http://www.gnu.org/software/src-highlite -->
 <h2 id="_don_8217_t_use_setinterval_it_8217_s_bad">3. Don&#8217;t use setInterval (it&#8217;s bad)</h2>
 <div class="sectionbody">
 <div class="listingblock">
+<div class="title">Bad example</div>
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-weight: bold"><span style="color: #000000">setInterval</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">function</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+<pre><tt><span style="font-weight: bold"><span style="color: #000000">setInterval</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
     <span style="font-weight: bold"><span style="color: #000000">doStuff</span></span><span style="color: #990000">();</span>
-<span style="color: #FF0000">}</span><span style="color: #990000">,</span> <span style="color: #993399">100</span><span style="color: #990000">);</span>
-
-<span style="font-style: italic"><span style="color: #9A1900">// better do this:</span></span>
-<span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">mainloop</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+<span style="color: #FF0000">}</span><span style="color: #990000">,</span> <span style="color: #993399">100</span><span style="color: #990000">);</span></tt></pre></div></div>
+<div class="listingblock">
+<div class="title">Better this way</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">mainloop</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>          <span style="font-style: italic"><span style="color: #9A1900">// <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span>
 
     <span style="font-weight: bold"><span style="color: #000000">doStuff</span></span><span style="color: #990000">();</span>
 
-    <span style="font-weight: bold"><span style="color: #000000">setTimeout</span></span><span style="color: #990000">(</span>mainloop<span style="color: #990000">,</span> <span style="color: #993399">100</span><span style="color: #990000">);</span> <span style="font-style: italic"><span style="color: #9A1900">// wait until doStuff is finished</span></span>
+    <span style="font-weight: bold"><span style="color: #000000">setTimeout</span></span><span style="color: #990000">(</span>mainloop<span style="color: #990000">,</span> <span style="color: #993399">100</span><span style="color: #990000">);</span>  <span style="font-style: italic"><span style="color: #9A1900">// wait until doStuff is finished</span></span>
 
 <span style="color: #FF0000">}</span><span style="color: #990000">)();</span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+Here <tt>mainloop</tt> function name is important to enable recursive calling.
+</td></tr>
+</table></div>
 </div>
 </div>
 <div class="sect1">
@@ -834,7 +844,7 @@ test<span style="color: #990000">[</span><span style="color: #FF0000">'foo'</spa
 </div>
 </div>
 <div class="sect1">
-<h2 id="_attempting_retrieve_value_from_undefined_throws_typeerror_exception">6. Attempting retrieve value from undefined throws TypeError exception</h2>
+<h2 id="_attempts_retrieving_a_value_from_tt_undefined_tt_throws_typeerror_exception">6. Attempts retrieving a value from <tt>undefined</tt> throws TypeError exception</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
@@ -893,11 +903,8 @@ MYAPP <span style="color: #990000">=</span> <span style="color: #FF0000">{</span
 
 MYAPP<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">doSomething</span></span><span style="color: #990000">();</span>
 MYAPP<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">print</span></span><span style="color: #990000">();</span></tt></pre></div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_adding_object_to_global_object_literal">9. Adding object to global Object literal</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_adding_object_to_global_object_literal">8.1. Adding object to global Object literal</h3>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -927,8 +934,9 @@ MYAPP<span style="color: #990000">.</span>myObject<span style="color: #990000">.
 MYAPP<span style="color: #990000">.</span>myObject<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">print</span></span><span style="color: #990000">();</span> <span style="font-style: italic"><span style="color: #9A1900">// -&gt; 3</span></span></tt></pre></div></div>
 </div>
 </div>
+</div>
 <div class="sect1">
-<h2 id="_function_invocation_patter">10. Function Invocation Patter</h2>
+<h2 id="_function_invocation_patter">9. Function Invocation Patter</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="title">Problem</div>
@@ -961,8 +969,16 @@ MYAPP<span style="color: #990000">.</span>myObject<span style="color: #990000">.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_example_of_traversing_the_dom_tree_by_means_of_a_recursive_function">11. Example of traversing the DOM tree by means of a recursive function</h2>
+<h2 id="_example_of_traversing_the_dom_tree_by_means_of_a_recursive_function">10. Example of traversing the DOM tree by means of a recursive function</h2>
 <div class="sectionbody">
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="../asciidoc/images/icons/tip.png" alt="Tip" />
+</td>
+<td class="content">JavaScript: The Good Parts</td>
+</tr></table>
+</div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
@@ -1007,7 +1023,7 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_string_prototype_replace_g_and_i">12. String.prototype.replace: /g and /i</h2>
+<h2 id="_string_prototype_replace_g_and_i">11. String.prototype.replace: /g and /i</h2>
 <div class="sectionbody">
 <div class="admonitionblock">
 <table><tr>
@@ -1040,7 +1056,7 @@ str<span style="color: #990000">.</span><span style="font-weight: bold"><span st
 </div>
 </div>
 <div class="sect1">
-<h2 id="_array_prototype_sort">13. Array.prototype.sort</h2>
+<h2 id="_array_prototype_sort">12. Array.prototype.sort</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="title">Normal sorting</div>
@@ -1048,8 +1064,7 @@ str<span style="color: #990000">.</span><span style="font-weight: bold"><span st
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">3</span><span style="color: #990000">,</span> <span style="color: #993399">9</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">sort</span></span><span style="color: #990000">();</span>
-    <span style="font-style: italic"><span style="color: #9A1900">// Returns: [1, 2, 3, 9]</span></span></tt></pre></div></div>
+<pre><tt><span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">3</span><span style="color: #990000">,</span> <span style="color: #993399">9</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">sort</span></span><span style="color: #990000">();</span>    <span style="font-style: italic"><span style="color: #9A1900">// Returns: [1, 2, 3, 9]</span></span></tt></pre></div></div>
 <div class="listingblock">
 <div class="title">Powerful sorting</div>
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
@@ -1073,7 +1088,7 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_pass_objects_by_reference_correct_deletion_of_array">14. Pass-objects-by-reference (Correct deletion of array)</h2>
+<h2 id="_pass_objects_by_reference_correct_deletion_of_array">13. Pass-objects-by-reference (Correct deletion of array)</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
@@ -1090,7 +1105,7 @@ myArray<span style="color: #990000">.</span>length <span style="color: #990000">
 </div>
 </div>
 <div class="sect1">
-<h2 id="_array_merging_with_push">15. Array Merging with push</h2>
+<h2 id="_array_merging_with_push">14. Array Merging with push</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
@@ -1106,7 +1121,7 @@ mergeTo<span style="color: #990000">;</span> <span style="font-style: italic"><s
 </div>
 </div>
 <div class="sect1">
-<h2 id="_efficient_feature_object_property_detection">16. Efficient Feature/Object Property Detection</h2>
+<h2 id="_efficient_feature_object_property_detection">15. Efficient Feature/Object Property Detection</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
@@ -1130,12 +1145,52 @@ Better way to check property!
 </table></div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_prototype">16. Prototype</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">var</span></span> app <span style="color: #990000">=</span> <span style="color: #FF0000">{}</span><span style="color: #990000">;</span>
+
+
+app<span style="color: #990000">.</span>test <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="color: #990000">(</span>a<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">this</span></span><span style="color: #990000">.</span>val <span style="color: #990000">=</span> a <span style="color: #990000">||</span> <span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span>
+
+app<span style="color: #990000">.</span>test<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #0000FF">prototype</span></span> <span style="color: #990000">=</span> <span style="color: #FF0000">{</span>
+    val<span style="color: #990000">:</span> <span style="color: #993399">1</span><span style="color: #990000">,</span>
+
+    constructor<span style="color: #990000">:</span> app<span style="color: #990000">.</span>test<span style="color: #990000">,</span>
+
+    print<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+        <span style="font-weight: bold"><span style="color: #000000">alert</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">this</span></span><span style="color: #990000">.</span>val<span style="color: #990000">);</span>
+    <span style="color: #FF0000">}</span><span style="color: #990000">,</span>
+<span style="color: #FF0000">}</span><span style="color: #990000">;</span>
+
+t1 <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> app<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">test</span></span><span style="color: #990000">(</span><span style="color: #993399">10</span><span style="color: #990000">);</span>
+t1<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">print</span></span><span style="color: #990000">()</span>          <span style="font-style: italic"><span style="color: #9A1900">// <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span>
+
+t2 <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> app<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">test</span></span><span style="color: #990000">();</span>
+t2<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">print</span></span><span style="color: #990000">()</span>          <span style="font-style: italic"><span style="color: #9A1900">// <img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+&#8594; 10
+</td></tr>
+<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></td><td>
+&#8594; -1 (Default value)
+</td></tr>
+</table></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
 Version 3.1415926<br />
-Last updated 2013-08-27 22:10:26 CEST
+Last updated 2013-08-27 22:55:01 CEST
 </div>
 </div>
 </body>

@@ -21,7 +21,7 @@ TODO
 
 [source]
 --------------------------
-(function() {
+(function () {
     alert(test)
 })();
 --------------------------
@@ -30,7 +30,7 @@ or
 
 [source]
 --------------------------
-(function(window, document, undefined) {
+(function (window, document, undefined) {
     alert(test)
 })(this, window); // this refers to the global object -> in global scope the window
 --------------------------
@@ -38,21 +38,27 @@ or
 
 == Don't use setInterval (it's bad)
 
+.Bad example
 [source]
 --------------------------
-setInterval(function() {
+setInterval(function () {
     doStuff();
 }, 100);
+--------------------------
 
-// better do this:
-(function mainloop() {
+
+.Better this way
+[source]
+--------------------------
+(function mainloop() {          // <1>
 
     doStuff();
 
-    setTimeout(mainloop, 100); // wait until doStuff is finished
+    setTimeout(mainloop, 100);  // wait until doStuff is finished
 
 })();
 --------------------------
+<1> Here `mainloop` function name is important to enable recursive calling.
 
 
 == Use || operator to fill in a default value. 
@@ -82,7 +88,7 @@ test['foo'] === 'bar'   // true
 
 
 
-== Attempting retrieve value from undefined throws TypeError exception
+== Attempts retrieving a value from `undefined` throws TypeError exception
 
 [source]
 --------------------------
@@ -135,7 +141,7 @@ MYAPP.print();
 --------------------------
 
 
-== Adding object to global Object literal
+=== Adding object to global Object literal
 
 NOTE: Can be distributed to multiple files.
 
@@ -188,6 +194,9 @@ MYAPP.myObject.print(); // -> 6
 
 
 == Example of traversing the DOM tree by means of a recursive function
+
+TIP: JavaScript: The Good Parts
+
 
 [source]
 --------------------------
@@ -254,8 +263,7 @@ str.replace(/david/gi, "Darren"); // global replacement which is not case sensit
 .Normal sorting
 [source]
 --------------------------
-[1, 3, 9, 2].sort();
-    // Returns: [1, 2, 3, 9]
+[1, 3, 9, 2].sort();    // Returns: [1, 2, 3, 9]
 --------------------------
 
 .Powerful sorting
@@ -319,6 +327,39 @@ if("geolocation" in navigator) {    // <2>
 --------------------------
 <1> This often causes memroy leaks
 <2> Better way to check property!
+
+
+
+== Prototype 
+
+
+[source]
+--------------------------
+var app = {};
+
+
+app.test = function (a) {
+    this.val = a || -1;
+}
+
+app.test.prototype = {
+    val: 1,
+
+    constructor: app.test,
+
+    print: function () {
+        alert(this.val);
+    },
+};
+
+t1 = new app.test(10);
+t1.print()          // <1>
+
+t2 = new app.test();
+t2.print()          // <2>
+--------------------------
+<1> -> 10
+<2> -> -1 (Default value)
 
 
 
