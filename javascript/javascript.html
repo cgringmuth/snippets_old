@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.7" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
 <title>A List of JavaScript Tips, Tricks and Idioms</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -349,7 +349,7 @@ div.colist td img {
   margin-bottom: 0.1em;
 }
 
-div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -407,8 +407,6 @@ span.underline { text-decoration: underline; }
 span.overline { text-decoration: overline; }
 span.line-through { text-decoration: line-through; }
 
-div.unbreakable { page-break-inside: avoid; }
-
 
 /*
  * xhtml11 specific
@@ -416,7 +414,7 @@ div.unbreakable { page-break-inside: avoid; }
  * */
 
 tt {
-  font-family: "Courier New", Courier, monospace;
+  font-family: monospace;
   font-size: inherit;
   color: navy;
 }
@@ -455,7 +453,7 @@ div.tableblock > table[frame="vsides"] {
  * */
 
 .monospaced {
-  font-family: "Courier New", Courier, monospace;
+  font-family: monospace;
   font-size: inherit;
   color: navy;
 }
@@ -583,7 +581,7 @@ toc: function (toclevels) {
 
   function tocEntries(el, toclevels) {
     var result = new Array;
-    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
     // Function that scans the DOM tree for header elements (the DOM2
     // nodeIterator API would be a better technique but not supported by all
     // browsers).
@@ -612,7 +610,7 @@ toc: function (toclevels) {
   var i;
   for (i = 0; i < toc.childNodes.length; i++) {
     var entry = toc.childNodes[i];
-    if (entry.nodeName.toLowerCase() == 'div'
+    if (entry.nodeName == 'div'
      && entry.getAttribute("class")
      && entry.getAttribute("class").match(/^toclevel/))
       tocEntriesToRemove.push(entry);
@@ -658,7 +656,7 @@ footnotes: function () {
   var entriesToRemove = [];
   for (i = 0; i < noteholder.childNodes.length; i++) {
     var entry = noteholder.childNodes[i];
-    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+    if (entry.nodeName == 'div' && entry.getAttribute("class") == "footnote")
       entriesToRemove.push(entry);
   }
   for (i = 0; i < entriesToRemove.length; i++) {
@@ -757,7 +755,7 @@ asciidoc.install(2);
 <h2 id="_self_executing_invoking_anonymous_function">2. Self executing/invoking anonymous function</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -766,7 +764,7 @@ http://www.gnu.org/software/src-highlite -->
 <span style="color: #FF0000">}</span><span style="color: #990000">)();</span></tt></pre></div></div>
 <div class="paragraph"><p>or</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -780,7 +778,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="sectionbody">
 <div class="listingblock">
 <div class="title">Bad example</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -789,7 +787,7 @@ http://www.gnu.org/software/src-highlite -->
 <span style="color: #FF0000">}</span><span style="color: #990000">,</span> <span style="color: #993399">100</span><span style="color: #990000">);</span></tt></pre></div></div>
 <div class="listingblock">
 <div class="title">Better this way</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -819,7 +817,7 @@ Here <tt>mainloop</tt> function name is important to enable recursive calling.
 </tr></table>
 </div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -835,7 +833,7 @@ http://www.gnu.org/software/src-highlite -->
 <h2 id="_object_propertie_retreival_by_or_by">5. Object propertie retreival by . or by []</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -849,7 +847,7 @@ test<span style="color: #990000">[</span><span style="color: #FF0000">'foo'</spa
 <h2 id="_attempts_retrieving_a_value_from_tt_undefined_tt_throws_typeerror_exception">6. Attempts retrieving a value from <tt>undefined</tt> throws TypeError exception</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -873,7 +871,7 @@ obj<span style="color: #990000">.</span>person <span style="color: #990000">&amp
 <h2 id="_object_always_used_as_reference">7. Object always used as reference</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -886,7 +884,7 @@ http://www.gnu.org/software/src-highlite -->
 <h2 id="_minimize_number_of_global_variables_creating_one_global_object_which_holds_all_content">8. Minimize number of global variables creating one global Object which holds all content</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -916,7 +914,7 @@ MYAPP<span style="color: #990000">.</span><span style="font-weight: bold"><span 
 </tr></table>
 </div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -942,7 +940,7 @@ MYAPP<span style="color: #990000">.</span>myObject<span style="color: #990000">.
 <div class="sectionbody">
 <div class="listingblock">
 <div class="title">Problem</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -950,7 +948,7 @@ http://www.gnu.org/software/src-highlite -->
 <span style="font-style: italic"><span style="color: #9A1900">// Thus no inner function has access to object</span></span></tt></pre></div></div>
 <div class="listingblock">
 <div class="title">Workaround</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -982,7 +980,7 @@ MYAPP<span style="color: #990000">.</span>myObject<span style="color: #990000">.
 </tr></table>
 </div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1044,7 +1042,7 @@ http://www.gnu.org/software/src-highlite -->
 </tr></table>
 </div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1062,14 +1060,14 @@ str<span style="color: #990000">.</span><span style="font-weight: bold"><span st
 <div class="sectionbody">
 <div class="listingblock">
 <div class="title">Normal sorting</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">3</span><span style="color: #990000">,</span> <span style="color: #993399">9</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">sort</span></span><span style="color: #990000">();</span>    <span style="font-style: italic"><span style="color: #9A1900">// Returns: [1, 2, 3, 9]</span></span></tt></pre></div></div>
 <div class="listingblock">
 <div class="title">Powerful sorting</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1093,7 +1091,7 @@ http://www.gnu.org/software/src-highlite -->
 <h2 id="_pass_objects_by_reference_correct_deletion_of_array">13. Pass-objects-by-reference (Correct deletion of array)</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1110,7 +1108,7 @@ myArray<span style="color: #990000">.</span>length <span style="color: #990000">
 <h2 id="_array_merging_with_push">14. Array Merging with push</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1126,7 +1124,7 @@ mergeTo<span style="color: #990000">;</span> <span style="font-style: italic"><s
 <h2 id="_efficient_feature_object_property_detection">15. Efficient Feature/Object Property Detection</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1151,7 +1149,7 @@ Better way to check property!
 <h2 id="_prototype">16. Prototype</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1207,7 +1205,7 @@ t2<span style="color: #990000">.</span><span style="font-weight: bold"><span sty
 </tr></table>
 </div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1221,7 +1219,7 @@ Initialization for the return function
 </td></tr>
 </table></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1258,7 +1256,7 @@ http://www.gnu.org/software/src-highlite -->
 </tr></table>
 </div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1272,12 +1270,74 @@ http://www.gnu.org/software/src-highlite -->
 </table></div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_use_closure_to_create_modules_data_hiding">19. Use Closure to create modules (Data hiding)</h2>
+<div class="sectionbody">
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="../asciidoc/images/icons/tip.png" alt="Tip" />
+</td>
+<td class="content">JavaScript: The Good Parts</td>
+</tr></table>
+</div>
+<div class="listingblock">
+<div class="title">serial_marker module</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">var</span></span> serial_marker <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">var</span></span> prefix <span style="color: #990000">=</span> <span style="color: #FF0000">''</span><span style="color: #990000">;</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">var</span></span> seq <span style="color: #990000">=</span> <span style="color: #993399">0</span><span style="color: #990000">;</span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="color: #FF0000">{</span>
+        set_prefix<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="color: #990000">(</span>p<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+            prefix <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">String</span></span><span style="color: #990000">(</span>p<span style="color: #990000">);</span>
+        <span style="color: #FF0000">}</span><span style="color: #990000">,</span>
+        set_seq<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="color: #990000">(</span>s<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+            seq <span style="color: #990000">=</span> s<span style="color: #990000">;</span>
+        <span style="color: #FF0000">}</span><span style="color: #990000">,</span>
+        gensym<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+            <span style="font-weight: bold"><span style="color: #0000FF">var</span></span> result <span style="color: #990000">=</span> prefix <span style="color: #990000">+</span> <span style="font-weight: bold"><span style="color: #000000">String</span></span><span style="color: #990000">(</span>seq<span style="color: #990000">);</span>
+            seq <span style="color: #990000">+=</span> <span style="color: #993399">1</span><span style="color: #990000">;</span>
+            <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> result<span style="color: #990000">;</span>
+        <span style="color: #FF0000">}</span>
+    <span style="color: #FF0000">}</span><span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span><span style="color: #990000">;</span></tt></pre></div></div>
+<div class="listingblock">
+<div class="title">Example how to use it</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">var</span></span> seqer <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">serial_marker</span></span><span style="color: #990000">();</span>
+seqer<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">set_prefix</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Q"</span><span style="color: #990000">);</span>
+seqer<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">set_seq</span></span><span style="color: #990000">(</span><span style="color: #993399">1000</span><span style="color: #990000">);</span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">var</span></span> uniqnumbergen <span style="color: #990000">=</span> seqer<span style="color: #990000">.</span>gensym<span style="color: #990000">;</span>   <span style="font-style: italic"><span style="color: #9A1900">// <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span>
+
+<span style="font-weight: bold"><span style="color: #000000">alert</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">uniqnumbergen</span></span><span style="color: #990000">())</span>              <span style="font-style: italic"><span style="color: #9A1900">// <img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></span></span>
+<span style="font-weight: bold"><span style="color: #000000">alert</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">uniqnumbergen</span></span><span style="color: #990000">())</span>              <span style="font-style: italic"><span style="color: #9A1900">// <img src="../asciidoc/images/icons/callouts/3.png" alt="3" /></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+&#8594; providing <tt>uniqnumbergen</tt> to a third party function; <tt>uniqnumbergen</tt> is only the function <tt>seqer.gensym</tt> which prevers any changes of prefix and seq and generates valid sequneces through <tt>uniqnumbergen</tt>.
+</td></tr>
+<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></td><td>
+&#8594; Q1000
+</td></tr>
+<tr><td><img src="../asciidoc/images/icons/callouts/3.png" alt="3" /></td><td>
+&#8594; Q1001
+</td></tr>
+</table></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
 Version 3.1415926<br />
-Last updated 2013-08-29 09:17:16 CEST
+Last updated 2013-08-29 22:58:17 CEST
 </div>
 </div>
 </body>
