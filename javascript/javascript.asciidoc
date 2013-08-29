@@ -1,4 +1,4 @@
-= A List of python Tips, Tricks and Idioms
+= A List of JavaScript Tips, Tricks and Idioms
 :Author:                Christoph Hoffmann
 :Email:                 choffmann1983@gmail.com
 :Revision:              3.1415926
@@ -362,6 +362,48 @@ t2.print()          // <2>
 <2> -> -1 (Default value)
 
 
+:google_io_2011_js: http://youtu.be/seX7jYI96GE[Google I/O 2011: Learning to Love JavaScript]
+== Closure (Functional? Objectbase?)
+
+[TIP]
+==========================
+* {google_io_2011_js}
+==========================
+
+
+[source]
+--------------------------
+function getCtr() {
+    var ctr = 0;    // <1>
+    return function () { alert(++ctr); }
+}
+--------------------------
+<1> Initialization for the return function
+
+[source]
+--------------------------
+var ctr = getCtr();
+ctr();      // <1>
+ctr();      // <2>
+--------------------------
+<1> -> 1
+<2> -> 2
+
+
+== Everything's an Object and every object is also a map
+
+[TIP]
+==========================
+* {google_io_2011_js}
+==========================
+
+[source]
+--------------------------
+{} instanceof Object                // <1>
+[] instanceof Object                // <1>
+(function(){}) instanceof Object    // <1>
+--------------------------
+<1> -> True
 
 //////////////////////////
 CommentBlock:     //////////////////////////
