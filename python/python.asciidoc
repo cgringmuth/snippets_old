@@ -336,6 +336,36 @@ for k, v in knights.iteritems():
 --------------------------
 
 
+== How to determine type of variable
+
+[source, python]
+--------------------------
+type([]]) is list   # <1>
+--------------------------
+<1> -> `True`
+
+.Examples
+[source, python]
+--------------------------
+i = 123
+type(i)             # <1>
+type(i) is int      # <2>
+i = 123456789L
+type(i)             # <3>
+type(i) is long     # <4>
+i = 123.456
+type(i)             # <5>
+type(i) is float    # <6>
+--------------------------
+<1> -> `<type 'int'>`
+<2> -> `True`
+<3> -> `<type 'long'>`
+<4> -> `True`
+<5> -> `<type 'float'>`
+<6> -> `True`
+
+
+
 //////////////////////////
 CommentBlock:     //////////////////////////
 PassthroughBlock: ++++++++++++++++++++++++++

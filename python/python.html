@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.6" />
+<meta name="generator" content="AsciiDoc 8.6.7" />
 <title>A List of python Tips, Tricks and Idioms</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -349,7 +349,7 @@ div.colist td img {
   margin-bottom: 0.1em;
 }
 
-div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -407,6 +407,8 @@ span.underline { text-decoration: underline; }
 span.overline { text-decoration: overline; }
 span.line-through { text-decoration: line-through; }
 
+div.unbreakable { page-break-inside: avoid; }
+
 
 /*
  * xhtml11 specific
@@ -414,7 +416,7 @@ span.line-through { text-decoration: line-through; }
  * */
 
 tt {
-  font-family: monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: inherit;
   color: navy;
 }
@@ -453,7 +455,7 @@ div.tableblock > table[frame="vsides"] {
  * */
 
 .monospaced {
-  font-family: monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: inherit;
   color: navy;
 }
@@ -581,7 +583,7 @@ toc: function (toclevels) {
 
   function tocEntries(el, toclevels) {
     var result = new Array;
-    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
     // Function that scans the DOM tree for header elements (the DOM2
     // nodeIterator API would be a better technique but not supported by all
     // browsers).
@@ -610,7 +612,7 @@ toc: function (toclevels) {
   var i;
   for (i = 0; i < toc.childNodes.length; i++) {
     var entry = toc.childNodes[i];
-    if (entry.nodeName == 'div'
+    if (entry.nodeName.toLowerCase() == 'div'
      && entry.getAttribute("class")
      && entry.getAttribute("class").match(/^toclevel/))
       tocEntriesToRemove.push(entry);
@@ -656,7 +658,7 @@ footnotes: function () {
   var entriesToRemove = [];
   for (i = 0; i < noteholder.childNodes.length; i++) {
     var entry = noteholder.childNodes[i];
-    if (entry.nodeName == 'div' && entry.getAttribute("class") == "footnote")
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
       entriesToRemove.push(entry);
   }
   for (i = 0; i < entriesToRemove.length; i++) {
@@ -764,7 +766,7 @@ asciidoc.install(2);
 </div>
 <div class="paragraph"><p>Shebang ist used let the operation system know how to interpret the given script. Such shebang hast be placed at the top of each file.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -775,7 +777,7 @@ http://www.gnu.org/software/src-highlite -->
 <h2 id="_enum_in_python">3. Enum in python</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -804,7 +806,7 @@ http://www.gnu.org/software/src-highlite -->
 &#8212; anonymous
 </div></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -819,7 +821,7 @@ ln -s /usr/lib/x86_64-linux-gnu/libz<span style="color: #990000">.</span>so /usr
 <div class="sectionbody">
 <div class="paragraph"><p>Sometimes libs are only needed if a lib is called as main process. Thus, it is meaningful to import such libs only if this module is called as main process.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -828,7 +830,7 @@ http://www.gnu.org/software/src-highlite -->
     httpserver<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">serve</span></span><span style="color: #990000">(</span>app<span style="color: #990000">,</span> host<span style="color: #990000">=</span><span style="color: #FF0000">'127.0.0.1'</span><span style="color: #990000">,</span> port<span style="color: #990000">=</span><span style="color: #993399">8080</span><span style="color: #990000">)</span></tt></pre></div></div>
 <div class="paragraph"><p>or</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -850,7 +852,7 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 <div class="paragraph"><p>It is good practice to use the with keyword when dealing with file objects. This has the advantage that the file is properly closed after its suite finishes, even if an exception is raised on the way. It is also much shorter than writing equivalent try-finally blocks:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -865,7 +867,7 @@ f is closed here automatically even if  an exception raised
 </table></div>
 <div class="paragraph"><p>or with multiple files</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -887,7 +889,7 @@ a and b are closed here automatically even if  an exception raised
 <div class="paragraph"><p>Use __all__ mechanism to prevent name clashes if you import a module by <em>from M import *</em> [Source: <a href="http://www.python.org/dev/peps/pep-0008/#global-variable-names">#</a>]</p></div>
 <div class="listingblock">
 <div class="title">foobar.py</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -900,7 +902,7 @@ foobar <span style="color: #990000">=</span> <span style="color: #FF0000">'hey'<
 foobarprivate <span style="color: #990000">=</span> <span style="color: #FF0000">'should not be seen'</span></tt></pre></div></div>
 <div class="listingblock">
 <div class="title">main.py</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -930,7 +932,7 @@ Error
 </tr></table>
 </div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -968,7 +970,7 @@ This has the added benefit that it can directly be printed and it shows its cont
 </tr></table>
 </div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -985,7 +987,7 @@ d<span style="color: #990000">[</span><span style="color: #FF0000">'key'</span><
 <h2 id="_how_to_write_binary_bits_to_a_file">10. How to write binary bits to a file</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1016,7 +1018,7 @@ Link: <a href="http://docs.python.org/2/library/struct.html#struct.pack">struct.
 <div class="sectionbody">
 <div class="paragraph"><p>Sometimes it is useful to have arguments which are mandatory while others are not necessary because they can be predicted, inferred by other values or they have some default values.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1041,7 +1043,7 @@ http://www.gnu.org/software/src-highlite -->
 <h2 id="_list_all_folders">12. List all Folders</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1075,7 +1077,7 @@ More general case
 </div>
 <div class="paragraph"><p>Compact way to generate specific lists.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1088,7 +1090,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="sect2">
 <h3 id="_unpacking_list_in_list">13.1. Unpacking list in list</h3>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1103,7 +1105,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="sect2">
 <h3 id="_nested_list_comprehension">13.2. Nested list comprehension</h3>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1126,7 +1128,7 @@ matrix_trans <span style="color: #990000">=</span> <span style="color: #990000">
 <h3 id="_slice_copy_when_changing_a_list_while_iterate_over_same_list">13.3. Slice copy when changing a list while iterate over same list</h3>
 <div class="paragraph"><p>To change a sequence you are iterating over while inside the loop (for example to duplicate certain items), it is recommended that you first make a copy. Looping over a sequence does not implicitly make a copy. The slice notation makes this especially convenient [<a href="http://docs.python.org/2.7/tutorial/datastructures.html#looping-techniques">#</a>]:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1172,7 +1174,7 @@ todo
 <h3 id="_list">14.1. List</h3>
 <div class="paragraph"><p>To retreive index and value use <tt>enumerate()</tt>.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1183,7 +1185,7 @@ http://www.gnu.org/software/src-highlite -->
 <h3 id="_dictionary">14.2. Dictionary</h3>
 <div class="paragraph"><p>Iterate over the complete dictionary.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1193,12 +1195,63 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_how_to_determine_type_of_variable">15. How to determine type of variable</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">([]])</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> list   <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+&#8594; <tt>True</tt>
+</td></tr>
+</table></div>
+<div class="listingblock">
+<div class="title">Examples</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>i <span style="color: #990000">=</span> <span style="color: #993399">123</span>
+<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span>             <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span>
+<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> int      <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></span></span>
+i <span style="color: #990000">=</span> <span style="color: #993399">123456789L</span>
+<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span>             <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/3.png" alt="3" /></span></span>
+<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> long     <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/4.png" alt="4" /></span></span>
+i <span style="color: #990000">=</span> <span style="color: #993399">123.456</span>
+<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span>             <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/5.png" alt="5" /></span></span>
+<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> float    <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/6.png" alt="6" /></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+&#8594; <tt>&lt;type 'int'&gt;</tt>
+</td></tr>
+<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></td><td>
+&#8594; <tt>True</tt>
+</td></tr>
+<tr><td><img src="../asciidoc/images/icons/callouts/3.png" alt="3" /></td><td>
+&#8594; <tt>&lt;type 'long'&gt;</tt>
+</td></tr>
+<tr><td><img src="../asciidoc/images/icons/callouts/4.png" alt="4" /></td><td>
+&#8594; <tt>True</tt>
+</td></tr>
+<tr><td><img src="../asciidoc/images/icons/callouts/5.png" alt="5" /></td><td>
+&#8594; <tt>&lt;type 'float'&gt;</tt>
+</td></tr>
+<tr><td><img src="../asciidoc/images/icons/callouts/6.png" alt="6" /></td><td>
+&#8594; <tt>True</tt>
+</td></tr>
+</table></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
 Version 3.1415926<br />
-Last updated 2013-08-25 19:37:00 CEST
+Last updated 2013-08-30 17:41:00 CEST
 </div>
 </div>
 </body>
