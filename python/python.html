@@ -1,9 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.7" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="AsciiDoc 8.6.7">
 <title>A List of python Tips, Tricks and Idioms</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -738,8 +737,8 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>A List of python Tips, Tricks and Idioms</h1>
-<span id="author">Christoph Hoffmann</span><br />
-<span id="email"><tt>&lt;<a href="mailto:choffmann1983@gmail.com">choffmann1983@gmail.com</a>&gt;</tt></span><br />
+<span id="author">Christoph Hoffmann</span><br>
+<span id="email" class="monospaced">&lt;<a href="mailto:choffmann1983@gmail.com">choffmann1983@gmail.com</a>&gt;</span><br>
 <span id="revnumber">version 3.1415926</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
@@ -759,7 +758,7 @@ asciidoc.install(2);
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<img src="../asciidoc/images/icons/tip.png" alt="Tip" />
+<img src="../asciidoc/images/icons/tip.png" alt="Tip">
 </td>
 <td class="content">Detailed description at source: <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">wikipedia.org</a></td>
 </tr></table>
@@ -845,7 +844,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<img src="../asciidoc/images/icons/tip.png" alt="Tip" />
+<img src="../asciidoc/images/icons/tip.png" alt="Tip">
 </td>
 <td class="content">Detailed description at source: <a href="http://docs.python.org/2/tutorial/inputoutput.html#methods-of-file-objects">docs.python.org</a></td>
 </tr></table>
@@ -859,9 +858,9 @@ http://www.gnu.org/software/src-highlite -->
 <pre><tt>with <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'workfile'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'r'</span><span style="color: #990000">)</span> as f<span style="color: #990000">:</span>
     read_data <span style="color: #990000">=</span> f<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">()</span>
 
-<span style="font-weight: bold"><span style="color: #000000">doOtherStuff</span></span><span style="color: #990000">()</span>  <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span></tt></pre></div></div>
+<span style="font-weight: bold"><span style="color: #000000">doOtherStuff</span></span><span style="color: #990000">()</span>  <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span></tt></pre></div></div>
 <div class="colist arabic"><table>
-<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
 f is closed here automatically even if  an exception raised
 </td></tr>
 </table></div>
@@ -875,9 +874,9 @@ http://www.gnu.org/software/src-highlite -->
     data_a <span style="color: #990000">=</span> a<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">()</span>
     data_b <span style="color: #990000">=</span> b<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">()</span>
 
-<span style="font-weight: bold"><span style="color: #000000">doOtherStuff</span></span><span style="color: #990000">()</span>  <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span></tt></pre></div></div>
+<span style="font-weight: bold"><span style="color: #000000">doOtherStuff</span></span><span style="color: #990000">()</span>  <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span></tt></pre></div></div>
 <div class="colist arabic"><table>
-<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
 a and b are closed here automatically even if  an exception raised
 </td></tr>
 </table></div>
@@ -908,13 +907,13 @@ http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-weight: bold"><span style="color: #000080">from</span></span> foobar <span style="font-weight: bold"><span style="color: #000080">import</span></span> <span style="color: #990000">*</span>
 
-foobar          <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span>
-foobarprivate   <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></span></span></tt></pre></div></div>
+foobar          <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span>
+foobarprivate   <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2"></span></span></tt></pre></div></div>
 <div class="colist arabic"><table>
-<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
 Ok
 </td></tr>
-<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></td><td>
+<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2"></td><td>
 Error
 </td></tr>
 </table></div>
@@ -926,7 +925,7 @@ Error
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<img src="../asciidoc/images/icons/tip.png" alt="Tip" />
+<img src="../asciidoc/images/icons/tip.png" alt="Tip">
 </td>
 <td class="content">Detailed description at source: <a href="http://code.activestate.com/recipes/52308-the-simple-but-handy-collector-of-a-bunch-of-named/?in=user-97991">code.activestate.com</a></td>
 </tr></table>
@@ -938,7 +937,7 @@ http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="font-weight: bold"><span style="color: #000000">Bunch</span></span><span style="color: #990000">(</span>dict<span style="color: #990000">):</span>
     <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> <span style="color: #990000">**</span>kw<span style="color: #990000">):</span>
-        dict<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> kw<span style="color: #990000">)</span>     <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span>
+        dict<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> kw<span style="color: #990000">)</span>     <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span>
         self<span style="color: #990000">.</span>__dict__<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">update</span></span><span style="color: #990000">(</span>kw<span style="color: #990000">)</span>
 
 <span style="font-style: italic"><span style="color: #9A1900"># that's it!  Now, you can create a Bunch</span></span>
@@ -952,7 +951,7 @@ point <span style="color: #990000">=</span> <span style="font-weight: bold"><spa
 <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> point<span style="color: #990000">.</span>squared <span style="color: #990000">&gt;</span> threshold<span style="color: #990000">:</span>
     point<span style="color: #990000">.</span>isok <span style="color: #990000">=</span> <span style="color: #993399">1</span></tt></pre></div></div>
 <div class="colist arabic"><table>
-<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
 This has the added benefit that it can directly be printed and it shows its contents in interactive environments like ipython.
 </td></tr>
 </table></div>
@@ -964,7 +963,7 @@ This has the added benefit that it can directly be printed and it shows its cont
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<img src="../asciidoc/images/icons/tip.png" alt="Tip" />
+<img src="../asciidoc/images/icons/tip.png" alt="Tip">
 </td>
 <td class="content">Detailed description at source: <a href="http://stackoverflow.com/questions/101268/hidden-features-of-python">stackoverflow.com</a></td>
 </tr></table>
@@ -991,23 +990,23 @@ d<span style="color: #990000">[</span><span style="color: #FF0000">'key'</span><
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> struct                               <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span>
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> struct                               <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span>
 
 num <span style="color: #990000">=</span> <span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">,</span><span style="color: #993399">2</span><span style="color: #990000">,</span><span style="color: #993399">3</span><span style="color: #990000">,</span><span style="color: #993399">4</span><span style="color: #990000">]</span>
 
 <span style="font-style: italic"><span style="color: #9A1900"># 'B' : unsigned byte -&gt; 0..255</span></span>
-data <span style="color: #990000">=</span> struct<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">pack</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'BBBB'</span><span style="color: #990000">,</span> <span style="color: #990000">*</span>num<span style="color: #990000">)</span>            <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></span></span>
+data <span style="color: #990000">=</span> struct<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">pack</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'BBBB'</span><span style="color: #990000">,</span> <span style="color: #990000">*</span>num<span style="color: #990000">)</span>            <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2"></span></span>
 <span style="font-style: italic"><span style="color: #9A1900"># more general:</span></span>
-data <span style="color: #990000">=</span> struct<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">pack</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'B'</span> <span style="color: #990000">*</span> <span style="font-weight: bold"><span style="color: #000000">len</span></span><span style="color: #990000">(</span>num<span style="color: #990000">),</span> <span style="color: #990000">*</span>num<span style="color: #990000">)</span>    <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></span></span>
+data <span style="color: #990000">=</span> struct<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">pack</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'B'</span> <span style="color: #990000">*</span> <span style="font-weight: bold"><span style="color: #000000">len</span></span><span style="color: #990000">(</span>num<span style="color: #990000">),</span> <span style="color: #990000">*</span>num<span style="color: #990000">)</span>    <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2"></span></span>
 
 filename <span style="color: #990000">=</span> <span style="color: #FF0000">'test.bin'</span>
 with <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span>filename<span style="color: #990000">,</span> <span style="color: #FF0000">'wb'</span><span style="color: #990000">)</span> as f<span style="color: #990000">:</span>
     f<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">write</span></span><span style="color: #990000">(</span>data<span style="color: #990000">)</span></tt></pre></div></div>
 <div class="colist arabic"><table>
-<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
 Link: <a href="http://docs.python.org/2/library/struct.html">struct</a>
 </td></tr>
-<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></td><td>
+<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2"></td><td>
 Link: <a href="http://docs.python.org/2/library/struct.html#struct.pack">struct.pack</a>
 </td></tr>
 </table></div>
@@ -1027,13 +1026,13 @@ http://www.gnu.org/software/src-highlite -->
     v3 <span style="color: #990000">=</span> args<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'v3'</span><span style="color: #990000">,</span> defaultV3<span style="color: #990000">)</span>
     <span style="font-weight: bold"><span style="color: #0000FF">print</span></span> v1<span style="color: #990000">,</span> v2<span style="color: #990000">,</span> v3
 
-<span style="font-weight: bold"><span style="color: #000000">func</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">,</span> v3<span style="color: #990000">=</span><span style="color: #993399">22</span><span style="color: #990000">)</span>       <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span>
-<span style="font-weight: bold"><span style="color: #000000">func</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">)</span>              <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></span></span></tt></pre></div></div>
+<span style="font-weight: bold"><span style="color: #000000">func</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">,</span> v3<span style="color: #990000">=</span><span style="color: #993399">22</span><span style="color: #990000">)</span>       <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span>
+<span style="font-weight: bold"><span style="color: #000000">func</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">)</span>              <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2"></span></span></tt></pre></div></div>
 <div class="colist arabic"><table>
-<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
 &gt;&gt;&gt; 1  2 22
 </td></tr>
-<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></td><td>
+<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2"></td><td>
 &gt;&gt;&gt; 1 2 -1
 </td></tr>
 </table></div>
@@ -1050,15 +1049,15 @@ http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> os
 
 
-folder <span style="color: #990000">=</span> <span style="color: #990000">[</span>f <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> f <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">listdir</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'.'</span><span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdir</span></span><span style="color: #990000">(</span>f<span style="color: #990000">)]</span>                       <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span>
+folder <span style="color: #990000">=</span> <span style="color: #990000">[</span>f <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> f <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">listdir</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'.'</span><span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdir</span></span><span style="color: #990000">(</span>f<span style="color: #990000">)]</span>                       <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span>
 
 of <span style="color: #990000">=</span> <span style="color: #FF0000">'/path/to/other/folder'</span>         <span style="font-style: italic"><span style="color: #9A1900"># working folder</span></span>
-folder <span style="color: #990000">=</span> <span style="color: #990000">[</span>f <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> f <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">listdir</span></span><span style="color: #990000">(</span>of<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdir</span></span><span style="color: #990000">(</span>os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span>of<span style="color: #990000">,</span> f<span style="color: #990000">))]</span>      <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></span></span></tt></pre></div></div>
+folder <span style="color: #990000">=</span> <span style="color: #990000">[</span>f <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> f <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">listdir</span></span><span style="color: #990000">(</span>of<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdir</span></span><span style="color: #990000">(</span>os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span>of<span style="color: #990000">,</span> f<span style="color: #990000">))]</span>      <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2"></span></span></tt></pre></div></div>
 <div class="colist arabic"><table>
-<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
 Only works if one is looking for folders in the current folder
 </td></tr>
-<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></td><td>
+<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2"></td><td>
 More general case
 </td></tr>
 </table></div>
@@ -1070,7 +1069,7 @@ More general case
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<img src="../asciidoc/images/icons/tip.png" alt="Tip" />
+<img src="../asciidoc/images/icons/tip.png" alt="Tip">
 </td>
 <td class="content">Detailed description at source: <a href="http://docs.python.org/2.7/tutorial/datastructures.html#list-comprehensions">docs.python.org</a></td>
 </tr></table>
@@ -1081,9 +1080,9 @@ More general case
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="color: #990000">[(</span>x<span style="color: #990000">,</span> y<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> x <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">,</span> <span style="color: #993399">3</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> y <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="color: #990000">[</span><span style="color: #993399">3</span><span style="color: #990000">,</span> <span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">5</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> x<span style="color: #990000">!=</span>z<span style="color: #990000">]</span>  <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span></tt></pre></div></div>
+<pre><tt><span style="color: #990000">[(</span>x<span style="color: #990000">,</span> y<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> x <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">,</span> <span style="color: #993399">3</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> y <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="color: #990000">[</span><span style="color: #993399">3</span><span style="color: #990000">,</span> <span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">5</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> x<span style="color: #990000">!=</span>z<span style="color: #990000">]</span>  <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span></tt></pre></div></div>
 <div class="colist arabic"><table>
-<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
 &gt;&gt;&gt; [(1, 3), (1, 5), (2, 3), (2, 1), (2, 5), (3, 1), (3, 5)]
 </td></tr>
 </table></div>
@@ -1095,9 +1094,9 @@ by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt>vec <span style="color: #990000">=</span> <span style="color: #990000">[[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">,</span> <span style="color: #993399">3</span><span style="color: #990000">],</span> <span style="color: #990000">[</span><span style="color: #993399">4</span><span style="color: #990000">,</span> <span style="color: #993399">5</span><span style="color: #990000">,</span> <span style="color: #993399">6</span><span style="color: #990000">],</span> <span style="color: #990000">[</span><span style="color: #993399">7</span><span style="color: #990000">,</span> <span style="color: #993399">8</span><span style="color: #990000">,</span> <span style="color: #993399">9</span><span style="color: #990000">]]</span>
-<span style="color: #990000">[</span>num <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> elem <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> vec <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> num <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> elem<span style="color: #990000">]</span>   <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span></tt></pre></div></div>
+<span style="color: #990000">[</span>num <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> elem <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> vec <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> num <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> elem<span style="color: #990000">]</span>   <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span></tt></pre></div></div>
 <div class="colist arabic"><table>
-<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
 &gt;&gt;&gt; [1, 2, 3, 4, 5, 6, 7, 9]
 </td></tr>
 </table></div>
@@ -1117,9 +1116,9 @@ http://www.gnu.org/software/src-highlite -->
 <span style="color: #990000">]</span>
 
 matrix_trans <span style="color: #990000">=</span> <span style="color: #990000">[[</span>row<span style="color: #990000">[</span>n<span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> row <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> matrix<span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> n <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">range</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">len</span></span><span style="color: #990000">(</span>matrix<span style="color: #990000">))]</span>
-<span style="font-weight: bold"><span style="color: #0000FF">print</span></span> matrix_trans      <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span></tt></pre></div></div>
+<span style="font-weight: bold"><span style="color: #0000FF">print</span></span> matrix_trans      <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span></tt></pre></div></div>
 <div class="colist arabic"><table>
-<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
 &gt;&gt;&gt; [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
 </td></tr>
 </table></div>
@@ -1137,9 +1136,9 @@ http://www.gnu.org/software/src-highlite -->
     <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="font-weight: bold"><span style="color: #000000">len</span></span><span style="color: #990000">(</span>w<span style="color: #990000">)</span> <span style="color: #990000">&gt;</span> <span style="color: #993399">6</span><span style="color: #990000">:</span>
         words<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">insert</span></span><span style="color: #990000">(</span><span style="color: #993399">0</span><span style="color: #990000">,</span> w<span style="color: #990000">)</span>
 
-words       <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span></tt></pre></div></div>
+words       <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span></tt></pre></div></div>
 <div class="colist arabic"><table>
-<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
 &gt;&gt;&gt; [<em>defenestrate</em>, <em>cat</em>, <em>window</em>, <em>defenestrate</em>]
 </td></tr>
 </table></div>
@@ -1152,7 +1151,7 @@ words       <span style="font-style: italic"><span style="color: #9A1900"># <img
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<img src="../asciidoc/images/icons/tip.png" alt="Tip" />
+<img src="../asciidoc/images/icons/tip.png" alt="Tip">
 </td>
 <td class="content">
 <div class="ulist"><ul>
@@ -1172,7 +1171,7 @@ todo
 </div>
 <div class="sect2">
 <h3 id="_list">14.1. List</h3>
-<div class="paragraph"><p>To retreive index and value use <tt>enumerate()</tt>.</p></div>
+<div class="paragraph"><p>To retreive index and value use <span class="monospaced">enumerate()</span>.</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
@@ -1203,10 +1202,10 @@ http://www.gnu.org/software/src-highlite -->
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">([]])</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> list   <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span></tt></pre></div></div>
+<pre><tt><span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">([]])</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> list   <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span></tt></pre></div></div>
 <div class="colist arabic"><table>
-<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
-&#8594; <tt>True</tt>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
+&#8594; <span class="monospaced">True</span>
 </td></tr>
 </table></div>
 <div class="listingblock">
@@ -1216,42 +1215,103 @@ by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt>i <span style="color: #990000">=</span> <span style="color: #993399">123</span>
-<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span>             <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span>
-<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> int      <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></span></span>
+<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span>             <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span>
+<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> int      <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2"></span></span>
 i <span style="color: #990000">=</span> <span style="color: #993399">123456789L</span>
-<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span>             <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/3.png" alt="3" /></span></span>
-<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> long     <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/4.png" alt="4" /></span></span>
+<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span>             <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/3.png" alt="3"></span></span>
+<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> long     <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/4.png" alt="4"></span></span>
 i <span style="color: #990000">=</span> <span style="color: #993399">123.456</span>
-<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span>             <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/5.png" alt="5" /></span></span>
-<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> float    <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/6.png" alt="6" /></span></span></tt></pre></div></div>
+<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span>             <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/5.png" alt="5"></span></span>
+<span style="font-weight: bold"><span style="color: #000000">type</span></span><span style="color: #990000">(</span>i<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> float    <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/6.png" alt="6"></span></span></tt></pre></div></div>
 <div class="colist arabic"><table>
-<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
-&#8594; <tt>&lt;type 'int'&gt;</tt>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
+&#8594; <span class="monospaced">&lt;type 'int'&gt;</span>
 </td></tr>
-<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></td><td>
-&#8594; <tt>True</tt>
+<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2"></td><td>
+&#8594; <span class="monospaced">True</span>
 </td></tr>
-<tr><td><img src="../asciidoc/images/icons/callouts/3.png" alt="3" /></td><td>
-&#8594; <tt>&lt;type 'long'&gt;</tt>
+<tr><td><img src="../asciidoc/images/icons/callouts/3.png" alt="3"></td><td>
+&#8594; <span class="monospaced">&lt;type 'long'&gt;</span>
 </td></tr>
-<tr><td><img src="../asciidoc/images/icons/callouts/4.png" alt="4" /></td><td>
-&#8594; <tt>True</tt>
+<tr><td><img src="../asciidoc/images/icons/callouts/4.png" alt="4"></td><td>
+&#8594; <span class="monospaced">True</span>
 </td></tr>
-<tr><td><img src="../asciidoc/images/icons/callouts/5.png" alt="5" /></td><td>
-&#8594; <tt>&lt;type 'float'&gt;</tt>
+<tr><td><img src="../asciidoc/images/icons/callouts/5.png" alt="5"></td><td>
+&#8594; <span class="monospaced">&lt;type 'float'&gt;</span>
 </td></tr>
-<tr><td><img src="../asciidoc/images/icons/callouts/6.png" alt="6" /></td><td>
-&#8594; <tt>True</tt>
+<tr><td><img src="../asciidoc/images/icons/callouts/6.png" alt="6"></td><td>
+&#8594; <span class="monospaced">True</span>
+</td></tr>
+</table></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_string_formatting">16. String formatting</h2>
+<div class="sectionbody">
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="../asciidoc/images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+<div class="paragraph"><p><a href="http://docs.python.org/2.7/tutorial/inputoutput.html">inputoutput.html</a></p></div>
+</td>
+</tr></table>
+</div>
+<div class="listingblock">
+<div class="title">Using .format()</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">print</span></span> <span style="color: #FF0000">'We are the {} who say "{}!"'</span><span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">format</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'knights'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'Ni'</span><span style="color: #990000">)</span>     <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
+&#8594; <span class="monospaced">We are the knights who say "Ni!"</span>
+</td></tr>
+</table></div>
+<div class="paragraph"><p>or</p></div>
+<div class="sect2">
+<h3 id="_positioning_of_format_fields">16.1. Positioning of format fields</h3>
+<div class="paragraph"><p>The brackets and characters within them (called format fields) are replaced with the objects passed into the <span class="monospaced">str.format()</span> method. A number in the brackets refers to the position of the object passed into the <span class="monospaced">str.format()</span> method.</p></div>
+<div class="listingblock">
+<div class="title">With numbers</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">print</span></span> <span style="color: #FF0000">'{0} and {1}'</span><span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">format</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'spam'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'eggs'</span><span style="color: #990000">)</span>      <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">print</span></span> <span style="color: #FF0000">'{1} and {0}'</span><span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">format</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'spam'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'eggs'</span><span style="color: #990000">)</span>      <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/2.png" alt="2"></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
+&#8594; <span class="monospaced">spam and eggs</span>
+</td></tr>
+<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2"></td><td>
+&#8594; <span class="monospaced">eggs and spam</span>
+</td></tr>
+</table></div>
+<div class="listingblock">
+<div class="title">With keys</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">print</span></span> <span style="color: #FF0000">'This {food} is {adjective}.'</span><span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">format</span></span><span style="color: #990000">(</span>food<span style="color: #990000">=</span><span style="color: #FF0000">'spam'</span><span style="color: #990000">,</span> adjective<span style="color: #990000">=</span><span style="color: #FF0000">'absolutely horrible'</span><span style="color: #990000">)</span>    <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
+&#8594; <span class="monospaced">This spam is absolutely horrible.</span>
 </td></tr>
 </table></div>
 </div>
 </div>
 </div>
-<div id="footnotes"><hr /></div>
+</div>
+<div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
-Version 3.1415926<br />
-Last updated 2013-08-30 17:41:00 CEST
+Version 3.1415926<br>
+Last updated 2013-09-02 15:44:07 CEST
 </div>
 </div>
 </body>

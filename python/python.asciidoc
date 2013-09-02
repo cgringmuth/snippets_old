@@ -365,6 +365,43 @@ type(i) is float    # <6>
 <6> -> `True`
 
 
+== String formatting
+
+[TIP]
+==========================
+http://docs.python.org/2.7/tutorial/inputoutput.html[inputoutput.html]
+==========================
+
+.Using .format()
+[source, python]
+--------------------------
+print 'We are the {} who say "{}!"'.format('knights', 'Ni')     # <1>
+--------------------------
+<1> -> `We are the knights who say "Ni!"`
+
+or
+
+=== Positioning of format fields
+
+The brackets and characters within them (called format fields) are replaced with the objects passed into the `str.format()` method. A number in the brackets refers to the position of the object passed into the `str.format()` method.
+
+.With numbers
+[source, python]
+--------------------------
+print '{0} and {1}'.format('spam', 'eggs')      # <1>
+
+print '{1} and {0}'.format('spam', 'eggs')      # <2>
+--------------------------
+<1> -> `spam and eggs`
+<2> -> `eggs and spam`
+
+.With keys
+[source, python]
+--------------------------
+print 'This {food} is {adjective}.'.format(food='spam', adjective='absolutely horrible')    # <1>
+--------------------------
+<1> -> `This spam is absolutely horrible.`
+
 
 //////////////////////////
 CommentBlock:     //////////////////////////
