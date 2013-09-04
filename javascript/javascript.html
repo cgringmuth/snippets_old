@@ -1332,12 +1332,62 @@ seqer<span style="color: #990000">.</span><span style="font-weight: bold"><span 
 </table></div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_call_vs_apply">20. .call() vs. .apply()</h2>
+<div class="sectionbody">
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="../asciidoc/images/icons/tip.png" alt="Tip" />
+</td>
+<td class="content">
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply?redirectlocale=en-US&amp;redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FFunction%2Fapply">.apply()</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call?redirectlocale=en-US&amp;redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FFunction%2Fcall">.call()</a>
+</p>
+</li>
+</ul></div>
+</td>
+</tr></table>
+</div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">add</span></span><span style="color: #990000">(</span>a<span style="color: #990000">,</span> b<span style="color: #990000">)</span><span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> a <span style="color: #990000">+</span> b<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span>
+add<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">call</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">this</span></span><span style="color: #990000">,</span> <span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">)</span> <span style="color: #990000">==</span> <span style="color: #993399">3</span>       <span style="font-style: italic"><span style="color: #9A1900">// <img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></span></span>
+add<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">apply</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">this</span></span><span style="color: #990000">,</span> <span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">])</span> <span style="color: #990000">==</span> <span style="color: #993399">3</span>    <span style="font-style: italic"><span style="color: #9A1900">// <img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></span></span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
+&#8594; <tt>True</tt>: .call() takes individual arguments
+</td></tr>
+<tr><td><img src="../asciidoc/images/icons/callouts/2.png" alt="2" /></td><td>
+&#8594; <tt>True</tt>: .apply() takes an array of arguments
+</td></tr>
+</table></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt></tt></pre></div></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
 Version 3.1415926<br />
-Last updated 2013-08-29 22:58:17 CEST
+Last updated 2013-08-30 21:44:29 CEST
 </div>
 </div>
 </body>
