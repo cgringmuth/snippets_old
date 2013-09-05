@@ -1,0 +1,85 @@
+= A List of `java` Tips, Tricks and Idioms
+:Author:                Christoph Hoffmann
+:Email:                 choffmann1983@gmail.com
+:Revision:              3.1415926
+:source-highlighter:    highlight
+:numbered:
+:toc:                   // set table of content
+:icons:                 // search for icons in :inconsdir: (default: ./images/icons.)
+:iconsdir:              ../asciidoc/images/icons
+:imagesdir:             ../asciidoc/images/
+// :scriptsdir:            ../asciidoc/js
+// :linkcss:
+
+:language:  java
+
+== Introduction
+
+TODO
+
+
+
+== Multiple inheritance with Mixins (Delegation etc.)
+
+[TIP]
+==========================
+* http://csis.pace.edu/~bergin/patterns/multipleinheritance.html
+==========================
+
+
+You should favor composition (and delegation) over inheritance
+
+[source]
+--------------------------
+public interface TaggedInterface {
+    void foo();
+}
+
+public interface XMLElementInterface {
+    void bar();
+}
+
+public class Tagged implements TaggedInterface {
+    // ...
+}
+
+public class XMLElement implements XMLElementInterface {
+    // ...
+}
+
+public class TaggedXmlElement implements TaggedInterface, XMLElementInterface {
+    private TaggedInterface tagged;
+    private XMLElementInterface xmlElement;
+
+    public TaggedXmlElement(TaggedInterface tagged, XMLElementInterface xmlElement) {
+        this.tagged = tagged;
+        this.xmlElement = xmlElement;
+    }
+
+    public void foo() {
+        this.tagged.foo();
+    }
+
+    public void bar() {
+        this.xmlElement.bar();
+    }
+
+    public static void main(String[] args) {
+        TaggedXmlElement t = new TaggedXmlElement(new Tagged(), new XMLElement());
+        t.foo();
+        t.bar();
+    }
+}
+--------------------------
+
+
+//////////////////////////
+CommentBlock:     //////////////////////////
+PassthroughBlock: ++++++++++++++++++++++++++
+ListingBlock:     --------------------------
+LiteralBlock:     ..........................
+SidebarBlock:     **************************
+QuoteBlock:       __________________________
+ExampleBlock:     ==========================
+OpenBlock:        --
+//////////////////////////
