@@ -450,6 +450,33 @@ alert(uniqnumbergen())              // <3>
 <3> -> Q1001
 
 
+
+== .call() vs. .apply()
+
+[TIP]
+==========================
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply?redirectlocale=en-US&redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FFunction%2Fapply[.apply()]
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call?redirectlocale=en-US&redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FFunction%2Fcall[.call()]
+==========================
+
+[source]
+--------------------------
+function add(a, b){ 
+  return a + b; 
+} 
+add.call(this, 1, 2) == 3       // <1>
+add.apply(this, [1, 2]) == 3    // <2>
+--------------------------
+<1> -> `True`: .call() takes individual arguments
+<2> -> `True`: .apply() takes an array of arguments
+
+
+
+[source, python]
+--------------------------
+--------------------------
+
+
 //////////////////////////
 CommentBlock:     //////////////////////////
 PassthroughBlock: ++++++++++++++++++++++++++
