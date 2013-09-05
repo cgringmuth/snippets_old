@@ -1,4 +1,4 @@
-= A List of python Tips, Tricks and Idioms
+= A List of +python+ Tips, Tricks and Idioms
 :Author:                Christoph Hoffmann
 :Email:                 choffmann1983@gmail.com
 :Revision:              3.1415926
@@ -11,6 +11,8 @@
 // :scriptsdir:            ../asciidoc/js
 // :linkcss:
 
+:language:              python
+
 == Introduction
 
 TODO
@@ -18,9 +20,11 @@ TODO
 == Shebang 
 
 [TIP]
+==========================
 Detailed description at source: https://en.wikipedia.org/wiki/Shebang_(Unix)[wikipedia.org]
+==========================
 
-Shebang ist used let the operation system know how to interpret the given script. Such shebang hast be placed at the top of each file.
+Shebang is used to let the operation system know how to interpret the given script. Shebangs have to be place on the first line of code.
 
 [source,python]
 ----
@@ -28,8 +32,30 @@ Shebang ist used let the operation system know how to interpret the given script
 ----
 
 
+== Docstrings
+
+[TIP]
+==========================
+* https://en.wikipedia.org/wiki/Docstring#Python[python wiki]
+* http://tovid.wikia.com/wiki/Python_tips/Docstrings[Docstring]
+* http://www.onlamp.com/lpt/a/python/2001/05/17/docstrings.html[tips and tricks]
+==========================
+
+
+=== Docstring convention
+
+[TIP]
+==========================
+* http://www.python.org/dev/peps/pep-0257/[convention]
+* https://code.google.com/p/google-styleguide/[google-styleguide]
+* http://google-styleguide.googlecode.com/svn/trunk/pyguide.html[pyguide]
+==========================
+
 == Enum in python
 
+In python exists no Enum type. So, it has to be created manually. This example demonstrates a way of creating Enums with dictionaries.
+
+.Workaround to create Enums in python
 [source,python]
 ----
 def enum(*sequential, **named):
@@ -342,7 +368,7 @@ for k, v in knights.iteritems():
 --------------------------
 type([]]) is list   # <1>
 --------------------------
-<1> -> `True`
+<1> `>>> True`
 
 .Examples
 [source, python]
@@ -357,19 +383,19 @@ i = 123.456
 type(i)             # <5>
 type(i) is float    # <6>
 --------------------------
-<1> -> `<type 'int'>`
-<2> -> `True`
-<3> -> `<type 'long'>`
-<4> -> `True`
-<5> -> `<type 'float'>`
-<6> -> `True`
+<1> `>>> <type 'int'>`
+<2> `>>> True`
+<3> `>>> <type 'long'>`
+<4> `>>> True`
+<5> `>>> <type 'float'>`
+<6> `>>> True`
 
 
 == String formatting
 
 [TIP]
 ==========================
-http://docs.python.org/2.7/tutorial/inputoutput.html[inputoutput.html]
+* http://docs.python.org/2.7/tutorial/inputoutput.html[inputoutput.html]
 ==========================
 
 .Using .format()
@@ -377,7 +403,7 @@ http://docs.python.org/2.7/tutorial/inputoutput.html[inputoutput.html]
 --------------------------
 print 'We are the {} who say "{}!"'.format('knights', 'Ni')     # <1>
 --------------------------
-<1> -> `We are the knights who say "Ni!"`
+<1> `>>> We are the knights who say "Ni!"`
 
 or
 
@@ -392,15 +418,112 @@ print '{0} and {1}'.format('spam', 'eggs')      # <1>
 
 print '{1} and {0}'.format('spam', 'eggs')      # <2>
 --------------------------
-<1> -> `spam and eggs`
-<2> -> `eggs and spam`
+<1> `>>> spam and eggs`
+<2> `>>> eggs and spam`
 
 .With keys
 [source, python]
 --------------------------
 print 'This {food} is {adjective}.'.format(food='spam', adjective='absolutely horrible')    # <1>
 --------------------------
-<1> -> `This spam is absolutely horrible.`
+<1> `>>> This spam is absolutely horrible.`
+
+
+== Variable number of arguments
+
+[TIP]
+==========================
+* http://www.saltycrane.com/blog/2008/01/how-to-use-args-and-kwargs-in-python/[how-to-use-args-and-kwargs-in-python]
+==========================
+
+.Multiple key-value arguments
+[source]
+--------------------------
+def myfunc(**kwargs):
+    # kwargs is a dictionary.
+    for k,v in kwargs.iteritems():
+         print "%s = %s" % (k, v)
+
+myfunc(abc=123, efh=456)        # <1>
+
+keywords = {'abc': 123, 'efh': 456}
+myfunc(**keywords)              # <2>
+--------------------------
+<1> `>>> abc = 123`
++
+`>>> efh = 456`
+
+<2> <1> and <2> are equivalent
+
+
+.Mix of list an key-value arguments
+[source]
+--------------------------
+def myfunc2(*args, **kwargs):   # <1>
+   for a in args:
+       print a
+   for k,v in kwargs.iteritems():
+       print "%s = %s" % (k, v)
+
+myfunc2(1, 2, 3, banan=123)     # <2>
+
+keywords = {'banan': 123}
+listargs = [1,2,3]
+myfunc2(*listargs, **keywords)     # <3>
+--------------------------
+<1> `*args` = list arguments; `**kwargs` = keyword arguments
+<2> `>>> 1` 
++
+`>>> 2`
++
+`>>> 3` 
++
+`>>> banan = 123`
+
+<3> -> <2> and <3> are equivalent
+
+=== Mixins with default values
+
+[TIP]
+==========================
+* http://www.network-theory.co.uk/docs/pytut/DefaultArgumentValues.html[DefaultArgumentValues]
+==========================
+
+[WARNING]
+==========================
+*Important warning*: The default value is evaluated only once. This makes a difference when the default is a mutable object such as a list, dictionary, or instances of most classes. Thus, it is often better to have a default value of `None` and create the default object inside the function.
+==========================
+
+Often it is useful to provide default values for the arguments which haven't been provided to the function.
+
+The following source code is an example of function with two variables which are mandatory and following optional argument list and dictionary. Note: the dictionary optional values has to be at end since it is not allowed to have a non-keyword argument after a keyword argument. This raises a +*[red]#SyntaxError:# non-keyword arg after keyword arg*+ exception.
+
+.Example code for mix of mandatory args and optional list and keyword args
+[source]
+--------------------------
+def func(mandatoryArg1, mandatoryArg2, *optionalList=None, **optionalDict=None):
+    someList = [1,2,3]
+
+    default = [
+        {'key': foo', 'default': '123'}
+        {'key': foobar', 'default': '3.14'}
+    ]
+
+    if (not optionalList is None and len(optionalList) > 0):
+        someList = optionalList
+
+    if (optionalDict is None):
+        optionalDict = {}
+
+    # get default value if not provide by callee and save it in dictionary
+    foo = optionalDict.get(default[0]['key'], default[0]['default'])
+    optionalDict[default[0]['key']] = foo
+
+    foobar = optionalDict.get(default[1]['key'], default[1]['default'])
+    optionalDict[default[1]['key']] = foobar
+
+    doSomething(mandatoryArg1, mandatoryArg2, *someList, **optionalDict)
+--------------------------
 
 
 //////////////////////////
