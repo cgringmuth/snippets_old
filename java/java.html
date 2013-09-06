@@ -818,12 +818,60 @@ http://www.gnu.org/software/src-highlite -->
 <span style="color: #FF0000">}</span></tt></pre></div></div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_use_java_io_file_instead_of_string_for_file_names">3. Use java.io.File instead of String for File names</h2>
+<div class="sectionbody">
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="../asciidoc/images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://commons.apache.org/proper/commons-io/bestpractices.html">bestpractices.html</a>
+</p>
+</li>
+</ul></div>
+</td>
+</tr></table>
+</div>
+<div class="quoteblock">
+<div class="content">
+<div class="paragraph"><p>These are good reasons not to work with filenames as Strings. Using java.io.File instead handles many of the above cases nicely. Thus, our best practice recommendation is to use java.io.File instead of String for filenames to avoid platform dependencies.</p></div>
+</div>
+<div class="attribution">
+<em><a href="https://commons.apache.org/proper/commons-io/bestpractices.html">bestpractices.html</a></em><br>
+&#8212; anonymous
+</div></div>
+<div class="listingblock">
+<div class="title">Bad example</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #008080">String</span> tmpdir <span style="color: #990000">=</span> <span style="color: #FF0000">"/var/tmp"</span><span style="color: #990000">;</span>
+<span style="color: #008080">String</span> tmpfile <span style="color: #990000">=</span> tmpdir <span style="color: #990000">+</span> System<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">getProperty</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"file.separator"</span><span style="color: #990000">)</span> <span style="color: #990000">+</span> <span style="color: #FF0000">"test.tmp"</span><span style="color: #990000">;</span>
+<span style="color: #008080">InputStream</span> in <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> java<span style="color: #990000">.</span>io<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">FileInputStream</span></span><span style="color: #990000">(</span>tmpfile<span style="color: #990000">);</span></tt></pre></div></div>
+<div class="paragraph"><p>&#8230;write:</p></div>
+<div class="listingblock">
+<div class="title">Best practice working with files</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #008080">File</span> tmpdir <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">File</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"/var/tmp"</span><span style="color: #990000">);</span>
+<span style="color: #008080">File</span> tmpfile <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">File</span></span><span style="color: #990000">(</span>tmpdir<span style="color: #990000">,</span> <span style="color: #FF0000">"test.tmp"</span><span style="color: #990000">);</span>
+<span style="color: #008080">InputStream</span> in <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> java<span style="color: #990000">.</span>io<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">FileInputStream</span></span><span style="color: #990000">(</span>tmpfile<span style="color: #990000">);</span></tt></pre></div></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
 Version 3.1415926<br>
-Last updated 2013-09-03 14:26:17 CEST
+Last updated 2013-09-06 11:35:57 CEST
 </div>
 </div>
 </body>

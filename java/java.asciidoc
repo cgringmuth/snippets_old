@@ -73,6 +73,38 @@ public class TaggedXmlElement implements TaggedInterface, XMLElementInterface {
 --------------------------
 
 
+== Use java.io.File instead of String for File names
+
+[TIP]
+==========================
+* https://commons.apache.org/proper/commons-io/bestpractices.html[bestpractices.html]
+==========================
+
+
+[quote, anonymous, 'https://commons.apache.org/proper/commons-io/bestpractices.html[bestpractices.html]']
+__________________________
+These are good reasons not to work with filenames as Strings. Using java.io.File instead handles many of the above cases nicely. Thus, our best practice recommendation is to use java.io.File instead of String for filenames to avoid platform dependencies.
+__________________________
+
+.Bad example
+[source]
+--------------------------
+String tmpdir = "/var/tmp";
+String tmpfile = tmpdir + System.getProperty("file.separator") + "test.tmp";
+InputStream in = new java.io.FileInputStream(tmpfile);
+--------------------------
+
+...write:
+
+.Best practice working with files
+[source]
+--------------------------
+File tmpdir = new File("/var/tmp");
+File tmpfile = new File(tmpdir, "test.tmp");
+InputStream in = new java.io.FileInputStream(tmpfile);
+--------------------------
+
+
 //////////////////////////
 CommentBlock:     //////////////////////////
 PassthroughBlock: ++++++++++++++++++++++++++
