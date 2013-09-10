@@ -1,0 +1,68 @@
+= A List of +git+ Tips, Tricks and Idioms
+:Author:                Christoph Hoffmann
+:Email:                 choffmann1983@gmail.com
+:Revision:              3.1415926
+:source-highlighter:    highlight
+:numbered:
+:toc:                   // set table of content
+:icons:                 // search for icons in :inconsdir: (default: ./images/icons.)
+:iconsdir:              ../asciidoc/images/icons
+:imagesdir:             ../asciidoc/images/
+// :scriptsdir:            ../asciidoc/js
+// :linkcss:
+
+:language:              python
+
+== Introduction
+
+TODO
+
+== Creating a bare repository
+
+It's not possible to push to a repository which is not a bare repository since there might be a working 
+branch and a `push` to this repository can end up in a total mess.
+
+The normal procedure in this case would be that the one how wants to push changes to the other repository
+issues a pull request and the admin of the other repository pullls then all changes from the other peer. 
+
+However, if you want to a common repository where you can push and pull from, there are a couple of ways 
+to do so. This can be done locally or a network location.
+
+To create a bare repository (like that ones on github) you can either execute following commands:
+
+.Creating a new bare repository 
+[source,shell]
+--------------------------
+mkdir myrepo.git
+cd myrepo.git
+git init --bare
+--------------------------
+
+or if you want to transform a working repository into a remote repository where you can push something
+to you can issue the following commands:
+
+.Convert a working repository into a bare repository
+[source,shell]
+--------------------------
+cd myrepo.git
+git config --bool core.bare true
+ls | grep -v .git  | xargs rm -rf    # <1>
+--------------------------
+<1> remove everything expect the `.git` folder
+
+one other resort could be to create a specific branch to the remote repository which is not checkedout
+at the remote repository. Then it is possible to push to this branch.
+
+
+
+
+//////////////////////////
+CommentBlock:     //////////////////////////
+PassthroughBlock: ++++++++++++++++++++++++++
+ListingBlock:     --------------------------
+LiteralBlock:     ..........................
+SidebarBlock:     **************************
+QuoteBlock:       __________________________
+ExampleBlock:     ==========================
+OpenBlock:        --
+//////////////////////////
