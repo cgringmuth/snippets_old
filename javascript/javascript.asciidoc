@@ -38,6 +38,8 @@ or
 
 == Don't use setInterval (it's bad)
 
+Use https://developer.mozilla.org/en-US/docs/Web/API/window.setTimeout[window.setTimeout] instead.
+
 .Bad example
 [source]
 --------------------------
@@ -54,11 +56,11 @@ setInterval(function () {
 
     doStuff();
 
-    setTimeout(mainloop, 100);  // wait until doStuff is finished
+    var timeoutID = setTimeout(mainloop, 100);  // wait until doStuff is finished
 
 })();
 --------------------------
-<1> Here `mainloop` function name is important to enable recursive calling.
+<1> Here `mainloop` function name is important to enable recursive calling. `timeoutID` is the numerical ID of the timeout, which can be used later with `window.clearTimeout()`.
 
 
 == Use || operator to fill in a default value. 
@@ -266,7 +268,7 @@ str.replace(/david/gi, "Darren"); // global replacement which is not case sensit
 [1, 3, 9, 2].sort();    // Returns: [1, 2, 3, 9]
 --------------------------
 
-.Powerful sorting
+.Powerful sorting of objects
 [source]
 --------------------------
 [

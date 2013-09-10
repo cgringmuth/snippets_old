@@ -776,6 +776,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="sect1">
 <h2 id="_don_8217_t_use_setinterval_it_8217_s_bad">3. Don&#8217;t use setInterval (it&#8217;s bad)</h2>
 <div class="sectionbody">
+<div class="paragraph"><p>Use <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.setTimeout">window.setTimeout</a> instead.</p></div>
 <div class="listingblock">
 <div class="title">Bad example</div>
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
@@ -795,12 +796,12 @@ http://www.gnu.org/software/src-highlite -->
 
     <span style="font-weight: bold"><span style="color: #000000">doStuff</span></span><span style="color: #990000">();</span>
 
-    <span style="font-weight: bold"><span style="color: #000000">setTimeout</span></span><span style="color: #990000">(</span>mainloop<span style="color: #990000">,</span> <span style="color: #993399">100</span><span style="color: #990000">);</span>  <span style="font-style: italic"><span style="color: #9A1900">// wait until doStuff is finished</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">var</span></span> timeoutID <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">setTimeout</span></span><span style="color: #990000">(</span>mainloop<span style="color: #990000">,</span> <span style="color: #993399">100</span><span style="color: #990000">);</span>  <span style="font-style: italic"><span style="color: #9A1900">// wait until doStuff is finished</span></span>
 
 <span style="color: #FF0000">}</span><span style="color: #990000">)();</span></tt></pre></div></div>
 <div class="colist arabic"><table>
 <tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1" /></td><td>
-Here <tt>mainloop</tt> function name is important to enable recursive calling.
+Here <tt>mainloop</tt> function name is important to enable recursive calling. <tt>timeoutID</tt> is the numerical ID of the timeout, which can be used later with <tt>window.clearTimeout()</tt>.
 </td></tr>
 </table></div>
 </div>
@@ -1066,7 +1067,7 @@ http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">3</span><span style="color: #990000">,</span> <span style="color: #993399">9</span><span style="color: #990000">,</span> <span style="color: #993399">2</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">sort</span></span><span style="color: #990000">();</span>    <span style="font-style: italic"><span style="color: #9A1900">// Returns: [1, 2, 3, 9]</span></span></tt></pre></div></div>
 <div class="listingblock">
-<div class="title">Powerful sorting</div>
+<div class="title">Powerful sorting of objects</div>
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
@@ -1387,7 +1388,7 @@ http://www.gnu.org/software/src-highlite -->
 <div id="footer">
 <div id="footer-text">
 Version 3.1415926<br />
-Last updated 2013-08-30 21:44:29 CEST
+Last updated 2013-09-07 15:37:19 CEST
 </div>
 </div>
 </body>
