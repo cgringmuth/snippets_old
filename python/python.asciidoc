@@ -525,6 +525,23 @@ def func(mandatoryArg1, mandatoryArg2, *optionalList=None, **optionalDict=None):
     doSomething(mandatoryArg1, mandatoryArg2, *someList, **optionalDict)
 --------------------------
 
+== Relative path from source file
+
+If you want to call a program relative to the current source file it is not possible to just use `../bin/foobar` since `Popen()` or its equivalent `subprocess.call()` needs the absolute of the program.
+
+.Example
+[source]
+--------------------------
+#/usr/bin/env python
+from subprocess import Popen, PIPE
+from os.path import abspath, dirname, join
+
+path = abspath(join(dirname(__file__), '../bin/foobar'))
+spam, eggs = Popen(path, stdout=PIPE, stderr=PIPE).communicate()
+--------------------------
+
+
+
 
 //////////////////////////
 CommentBlock:     //////////////////////////

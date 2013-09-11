@@ -789,6 +789,16 @@ http://www.gnu.org/software/src-highlite -->
 <a href="https://en.wikipedia.org/wiki/Docstring#Python">python wiki</a>
 </p>
 </li>
+<li>
+<p>
+<a href="http://tovid.wikia.com/wiki/Python_tips/Docstrings">Docstring</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.onlamp.com/lpt/a/python/2001/05/17/docstrings.html">tips and tricks</a>
+</p>
+</li>
 </ul></div>
 </td>
 </tr></table>
@@ -1501,12 +1511,30 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_relative_path_from_source_file">19. Relative path from source file</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>If you want to call a program relative to the current source file it is not possible to just use <span class="monospaced">../bin/foobar</span> since <span class="monospaced">Popen()</span> or its equivalent <span class="monospaced">subprocess.call()</span> needs the absolute of the program.</p></div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">#/usr/bin/env python</span></span>
+<span style="font-weight: bold"><span style="color: #000080">from</span></span> subprocess <span style="font-weight: bold"><span style="color: #000080">import</span></span> Popen<span style="color: #990000">,</span> PIPE
+<span style="font-weight: bold"><span style="color: #000080">from</span></span> os<span style="color: #990000">.</span>path <span style="font-weight: bold"><span style="color: #000080">import</span></span> abspath<span style="color: #990000">,</span> dirname<span style="color: #990000">,</span> join
+
+path <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">abspath</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">dirname</span></span><span style="color: #990000">(</span>__file__<span style="color: #990000">),</span> <span style="color: #FF0000">'../bin/foobar'</span><span style="color: #990000">))</span>
+spam<span style="color: #990000">,</span> eggs <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">Popen</span></span><span style="color: #990000">(</span>path<span style="color: #990000">,</span> stdout<span style="color: #990000">=</span>PIPE<span style="color: #990000">,</span> stderr<span style="color: #990000">=</span>PIPE<span style="color: #990000">).</span><span style="font-weight: bold"><span style="color: #000000">communicate</span></span><span style="color: #990000">()</span></tt></pre></div></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
 Version 3.1415926<br>
-Last updated 2013-09-05 14:48:16 CEST
+Last updated 2013-09-11 17:26:30 CEST
 </div>
 </div>
 </body>
