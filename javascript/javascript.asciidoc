@@ -473,10 +473,52 @@ add.apply(this, [1, 2]) == 3    // <2>
 <2> -> `True`: .apply() takes an array of arguments
 
 
+== Cascading
 
-[source, python]
+To allow cascading of function calls it is good practiseee to return the `this` operator for functions which only change the state of an object or do other stuff but don't return anything.
+
+
+== Memoization
+
+TIP: JavaScript: The Good Parts
+
+In order to reduce computational cost it is often promising to cache already calculated values. This can lead to signification reduction in computational cost, especially for recursive functions like fibonacci. For this purpose closure can be used to encapsulate the module:
+
+
+[source]
 --------------------------
+var fibonacci = (function (){
+    var memo = [0, 1];
+    var fib = function (n) {
+        var result = memo[n]
+        if (typeof result !== 'number') {
+            result = fib(n-1) + fib(n-2);
+            memo[n] = result;
+        }
+        return result;
+    };
+    return fib;
+}());
 --------------------------
+
+
+== Optional arguments
+
+Sometimes it is important to have a variable number of arguments given to a function. The following sample code is an example of how to implement a function with a variable number of arguments.
+
+.Example
+[source]
+--------------------------
+function test(arg1) {
+    var args = [].slice.call(arguments, 1); 
+    console.log('arg1: ' + arg1 + ' other: ' + args); 
+}
+--------------------------
+
+In this example the arg1 variable is in principle not different to the other arguments, despite it will be used directly while the other arguments will be used by the `arguments` array. 
+
+While it makes no difference it is good practice to have the mandatory arguments listed in the function header to show which arguments should be given to the function.
+
 
 
 //////////////////////////

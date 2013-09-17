@@ -1375,12 +1375,61 @@ add<span style="color: #990000">.</span><span style="font-weight: bold"><span st
 &#8594; <tt>True</tt>: .apply() takes an array of arguments
 </td></tr>
 </table></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cascading">21. Cascading</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>To allow cascading of function calls it is good practiseee to return the <tt>this</tt> operator for functions which only change the state of an object or do other stuff but don&#8217;t return anything.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_memoization">22. Memoization</h2>
+<div class="sectionbody">
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="../asciidoc/images/icons/tip.png" alt="Tip" />
+</td>
+<td class="content">JavaScript: The Good Parts</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>In order to reduce computational cost it is often promising to cache already calculated values. This can lead to signification reduction in computational cost, especially for recursive functions like fibonacci. For this purpose closure can be used to encapsulate the module:</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt></tt></pre></div></div>
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">var</span></span> fibonacci <span style="color: #990000">=</span> <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="color: #990000">()</span><span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">var</span></span> memo <span style="color: #990000">=</span> <span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">1</span><span style="color: #990000">];</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">var</span></span> fib <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="color: #990000">(</span>n<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">var</span></span> result <span style="color: #990000">=</span> memo<span style="color: #990000">[</span>n<span style="color: #990000">]</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">typeof</span></span> result <span style="color: #990000">!==</span> <span style="color: #FF0000">'number'</span><span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+            result <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">fib</span></span><span style="color: #990000">(</span>n<span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">)</span> <span style="color: #990000">+</span> <span style="font-weight: bold"><span style="color: #000000">fib</span></span><span style="color: #990000">(</span>n<span style="color: #990000">-</span><span style="color: #993399">2</span><span style="color: #990000">);</span>
+            memo<span style="color: #990000">[</span>n<span style="color: #990000">]</span> <span style="color: #990000">=</span> result<span style="color: #990000">;</span>
+        <span style="color: #FF0000">}</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> result<span style="color: #990000">;</span>
+    <span style="color: #FF0000">}</span><span style="color: #990000">;</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> fib<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span><span style="color: #990000">());</span></tt></pre></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_optional_arguments">23. Optional arguments</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Sometimes it is important to have a variable number of arguments given to a function. The following sample code is an example of how to implement a function with a variable number of arguments.</p></div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">test</span></span><span style="color: #990000">(</span>arg1<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">var</span></span> args <span style="color: #990000">=</span> <span style="color: #990000">[].</span>slice<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">call</span></span><span style="color: #990000">(</span>arguments<span style="color: #990000">,</span> <span style="color: #993399">1</span><span style="color: #990000">);</span>
+    console<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">log</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'arg1: '</span> <span style="color: #990000">+</span> arg1 <span style="color: #990000">+</span> <span style="color: #FF0000">' other: '</span> <span style="color: #990000">+</span> args<span style="color: #990000">);</span>
+<span style="color: #FF0000">}</span></tt></pre></div></div>
+<div class="paragraph"><p>In this example the arg1 variable is in principle not different to the other arguments, despite it will be used directly while the other arguments will be used by the <tt>arguments</tt> array.</p></div>
+<div class="paragraph"><p>While it makes no difference it is good practice to have the mandatory arguments listed in the function header to show which arguments should be given to the function.</p></div>
 </div>
 </div>
 </div>
@@ -1388,7 +1437,7 @@ http://www.gnu.org/software/src-highlite -->
 <div id="footer">
 <div id="footer-text">
 Version 3.1415926<br />
-Last updated 2013-09-07 15:37:19 CEST
+Last updated 2013-09-17 21:41:58 CEST
 </div>
 </div>
 </body>
