@@ -1,7 +1,7 @@
 = A List of +python+ Tips, Tricks and Idioms
 :Author:                Christoph Hoffmann
 :Email:                 choffmann1983@gmail.com
-:Revision:              3.1415926
+:Revision:              0.0.1 'http://semver.org/[(semver)]'
 :source-highlighter:    highlight
 :numbered:
 :toc:                   // set table of content
@@ -541,6 +541,21 @@ spam, eggs = Popen(path, stdout=PIPE, stderr=PIPE).communicate()
 --------------------------
 
 
+== Duck-typing
+
+[quote, 'http://docs.python.org/2/glossary.html#term-duck-typing[term-duck-typing]', python docs]
+__________________________
+A programming style which does not look at an object’s type to determine if it has the right interface; instead, the method or attribute is simply called or used (“If it looks like a duck and quacks like a duck, it must be a duck.”) By emphasizing interfaces rather than specific types, well-designed code improves its flexibility by allowing polymorphic substitution. Duck-typing avoids tests using type() or isinstance(). (Note, however, that duck-typing can be complemented with abstract base classes.) Instead, it typically employs hasattr() tests or EAFP programming.
+__________________________
+
+.Example https://en.wikipedia.org/wiki/Duck_typing#In_Python[wiki]
+[source]
+--------------------------
+try:
+    mallard.quack()
+except (AttributeError, TypeError):
+    print("mallard can't quack()")
+--------------------------    
 
 
 //////////////////////////
