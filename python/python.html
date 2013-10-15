@@ -1550,12 +1550,37 @@ http://www.gnu.org/software/src-highlite -->
     <span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"mallard can't quack()"</span><span style="color: #990000">)</span></tt></pre></div></div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_testing_python_code">21. Testing python code</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>In general there exists two main testing mechanisms one is <a href="http://docs.python.org/2/library/unittest.html">unittest</a> and the other is <a href="http://docs.python.org/2/library/doctest.html">doctest</a>. Both are good ways to verify that the code is correct. However both testing mechanisms have their drawbacks.</p></div>
+<div class="paragraph"><p>While doctest clutters the docstring, it is a good way to give examples and to see if the docstring is consistent with the actual source code.</p></div>
+<div class="paragraph"><p>Unitest keeps the actual testing separate from the source code, which helps to not blow up the source code, but it does not check if docstring and source code are consistent.</p></div>
+<div class="paragraph"><p>Nevertheless I find it a good practice to combine both methods, but to reverse the usage of docsttest. Thus, the docstring is used as a way to provide examples how to use the method and to see if the docstring is consistent with the source code. The actual and comprehensive testing is done by a unittest.</p></div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Summary</div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://docs.python.org/2/library/unittest.html">unittest</a>: comprehensive testing
+</p>
+</li>
+<li>
+<p>
+<a href="http://docs.python.org/2/library/doctest.html">doctest</a>: provide examples in docstring and check if docstring is consistent with source code.
+</p>
+</li>
+</ul></div>
+</div></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2013-09-24 10:12:11 CEST
+Last updated 2013-10-15 14:37:09 CEST
 </div>
 </div>
 </body>

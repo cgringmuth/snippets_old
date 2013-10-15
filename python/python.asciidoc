@@ -558,6 +558,23 @@ except (AttributeError, TypeError):
 --------------------------    
 
 
+== Testing python code
+In general there exists two main testing mechanisms one is http://docs.python.org/2/library/unittest.html[unittest] and the other is http://docs.python.org/2/library/doctest.html[doctest]. Both are good ways to verify that the code is correct. However both testing mechanisms have their drawbacks. 
+
+While doctest clutters the docstring, it is a good way to give examples and to see if the docstring is consistent with the actual source code.
+
+Unitest keeps the actual testing separate from the source code, which helps to not blow up the source code, but it does not check if docstring and source code are consistent.
+
+Nevertheless I find it a good practice to combine both methods, but to reverse the usage of docsttest. Thus, the docstring is used as a way to provide examples how to use the method and to see if the docstring is consistent with the source code. The actual and comprehensive testing is done by a unittest.
+
+.Summary
+**************************
+* http://docs.python.org/2/library/unittest.html[unittest]: comprehensive testing
+* http://docs.python.org/2/library/doctest.html[doctest]: provide examples in docstring and check if docstring is consistent with source code.
+**************************
+
+
+
 //////////////////////////
 CommentBlock:     //////////////////////////
 PassthroughBlock: ++++++++++++++++++++++++++
