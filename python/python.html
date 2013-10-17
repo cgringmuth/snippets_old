@@ -1539,7 +1539,7 @@ spam<span style="color: #990000">,</span> eggs <span style="color: #990000">=</s
 &#8212; <a href="http://docs.python.org/2/glossary.html#term-duck-typing">term-duck-typing</a>
 </div></div>
 <div class="listingblock">
-<div class="title">Example <a href="https://en.wikipedia.org/wiki/Duck_typing#In_Python">wiki</a></div>
+<div class="title">Example with exception [<a href="https://en.wikipedia.org/wiki/Duck_typing#In_Python">wiki</a>]</div>
 <div class="content"><!-- Generator: GNU source-highlight 3.1.5
 by Lorenzo Bettini
 http://www.lorenzobettini.it
@@ -1547,6 +1547,17 @@ http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-weight: bold"><span style="color: #0000FF">try</span></span><span style="color: #990000">:</span>
     mallard<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">quack</span></span><span style="color: #990000">()</span>
 <span style="font-weight: bold"><span style="color: #0000FF">except</span></span> <span style="color: #990000">(</span>AttributeError<span style="color: #990000">,</span> TypeError<span style="color: #990000">):</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"mallard can't quack()"</span><span style="color: #990000">)</span></tt></pre></div></div>
+<div class="paragraph"><p>Since <span class="monospaced">hasattr(object, name)</span> does almost the same job and is well optimized it should be preferred where applicable.</p></div>
+<div class="listingblock">
+<div class="title">Example same example with <span class="monospaced">hasattr</span></div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">hasattr</span></span><span style="color: #990000">(</span>mallard<span style="color: #990000">,</span> <span style="color: #FF0000">'quack'</span><span style="color: #990000">)):</span>
+    mallard<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">quack</span></span><span style="color: #990000">()</span>
+<span style="font-weight: bold"><span style="color: #0000FF">else</span></span><span style="color: #990000">:</span>
     <span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"mallard can't quack()"</span><span style="color: #990000">)</span></tt></pre></div></div>
 </div>
 </div>
@@ -1617,7 +1628,7 @@ If the current module is loaded from another module, which is called as main, th
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2013-10-15 17:43:57 CEST
+Last updated 2013-10-17 12:15:55 CEST
 </div>
 </div>
 </body>
