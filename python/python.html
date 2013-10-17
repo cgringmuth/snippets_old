@@ -1575,12 +1575,49 @@ http://www.gnu.org/software/src-highlite -->
 </div></div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_relative_imports_for_non_package_modules">22. Relative imports for non-package modules</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>In order to allow relative import for non-package modules or for package modules which are called as main (important for testing mechanisms), you have to add code to your script.</p></div>
+<div class="paragraph"><p>Assuming the module is in <span class="monospaced">httpserver.lib</span> and the main package is <span class="monospaced">httpserver</span>. Then you can add the following code to enable the module to be called as main script (read <a href="http://www.python.org/dev/peps/pep-0366/">pep-366</a> for more detailes).</p></div>
+<div class="listingblock">
+<div class="title">This code has to be place above any relative import</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># enable relative import if this script is called as main</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># see: http://www.python.org/dev/peps/pep-0366/</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># if __name__ == "__main__" and __package__ is None:</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#    __package__ = "expected.package.name"</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># Note that this boilerplate is sufficient only if the top level package</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># is already accessible via sys.path. Additional code that manipulates</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># sys.path would be needed in order for direct execution to work without</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># the top level package already being importable."</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">if</span></span> __name__ <span style="color: #990000">==</span> <span style="color: #FF0000">"__main__"</span><span style="color: #990000">:</span>       <span style="font-style: italic"><span style="color: #9A1900"># <img src="../asciidoc/images/icons/callouts/1.png" alt="1"></span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> __package__ <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> None<span style="color: #990000">:</span>
+        <span style="font-weight: bold"><span style="color: #000080">import</span></span> sys
+        <span style="font-weight: bold"><span style="color: #000080">import</span></span> os
+        <span style="font-style: italic"><span style="color: #9A1900"># add "./../../" to sys.path to enable import of package httpserver</span></span>
+        sys<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">append</span></span><span style="color: #990000">(</span>
+            os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">abspath</span></span><span style="color: #990000">(</span>
+                os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span>
+                     os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span>os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">dirname</span></span><span style="color: #990000">(</span>__file__<span style="color: #990000">),</span> <span style="color: #FF0000">".."</span><span style="color: #990000">),</span> <span style="color: #FF0000">".."</span><span style="color: #990000">)))</span>
+        <span style="font-weight: bold"><span style="color: #000080">import</span></span> httpserver    <span style="font-style: italic"><span style="color: #9A1900"># load main package to enable relative module import</span></span>
+        __package__ <span style="color: #990000">=</span> <span style="color: #FF0000">"httpserver.lib"</span></tt></pre></div></div>
+<div class="colist arabic"><table>
+<tr><td><img src="../asciidoc/images/icons/callouts/1.png" alt="1"></td><td>
+If the current module is loaded from another module, which is called as main, this <span class="monospaced">if</span> has to be omitted.
+</td></tr>
+</table></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2013-10-15 14:37:09 CEST
+Last updated 2013-10-15 17:43:57 CEST
 </div>
 </div>
 </body>

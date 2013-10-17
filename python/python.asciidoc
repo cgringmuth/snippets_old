@@ -573,6 +573,36 @@ Nevertheless I find it a good practice to combine both methods, but to reverse t
 * http://docs.python.org/2/library/doctest.html[doctest]: provide examples in docstring and check if docstring is consistent with source code.
 **************************
 
+== Relative imports for non-package modules
+
+In order to allow relative import for non-package modules or for package modules which are called as main (important for testing mechanisms), you have to add code to your script.
+
+Assuming the module is in `httpserver.lib` and the main package is `httpserver`. Then you can add the following code to enable the module to be called as main script (read http://www.python.org/dev/peps/pep-0366/[pep-366] for more detailes).
+
+.This code has to be place above any relative import
+[source]
+--------------------------
+# enable relative import if this script is called as main
+# see: http://www.python.org/dev/peps/pep-0366/
+# if __name__ == "__main__" and __package__ is None:
+#    __package__ = "expected.package.name"
+# Note that this boilerplate is sufficient only if the top level package
+# is already accessible via sys.path. Additional code that manipulates
+# sys.path would be needed in order for direct execution to work without
+# the top level package already being importable."
+if __name__ == "__main__":       # <1>
+    if __package__ is None:
+        import sys
+        import os
+        # add "./../../" to sys.path to enable import of package httpserver
+        sys.path.append(
+            os.path.abspath(
+                os.path.join(
+                     os.path.join(os.path.dirname(__file__), ".."), "..")))
+        import httpserver    # load main package to enable relative module import
+        __package__ = "httpserver.lib"
+--------------------------    
+<1> If the current module is loaded from another module, which is called as main, this `if` has to be omitted.
 
 
 //////////////////////////
