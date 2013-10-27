@@ -520,6 +520,61 @@ In this example the arg1 variable is in principle not different to the other arg
 While it makes no difference it is good practice to have the mandatory arguments listed in the function header to show which arguments should be given to the function.
 
 
+== Mixins
+In oder to extend a given obejct with a new method/varible, you can create a mixin function like
+
+.Mixin
+[source]
+--------------------------
+function mixin(receiver, supplier) {
+    if (Object.keys) {  // ECMAScript 5
+        var keys = Object.keys( supplier );
+
+        for (var i = 0, il = keys.length; i < il; i++) {
+
+            var prop = keys[i];
+            Object.defineProperty(receiver, prop, Object.getOwnPropertyDescriptor(supplier, prop));
+
+        }
+    } else {
+        for (var prop in supplier) {
+            if (supplier.hasOwnProperty(prop)) {
+                receiver[prop] = supplier[prop]
+            }
+        }
+    }
+}
+--------------------------
+
+How to use the `mixin` function
+
+.Example
+[source]
+--------------------------
+var object = {};
+
+var test = function() {
+    // to be filled in later
+    var name;
+
+    mixin(object, {
+
+        get name() {
+            return name;
+        }
+
+    });
+
+    // let's just say this is later
+    name = "Chris";
+};
+
+test();       
+        
+console.log(object.name);
+--------------------------
+
+
 
 //////////////////////////
 CommentBlock:     //////////////////////////
