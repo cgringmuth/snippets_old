@@ -1,7 +1,7 @@
 = A List of +git+ Tips, Tricks and Idioms
 :Author:                Christoph Hoffmann
 :Email:                 choffmann1983@gmail.com
-:Revision:              3.1415926
+:Revision:              0.0.1 'http://semver.org/[(semver)]
 :source-highlighter:    highlight
 :numbered:
 :toc:                   // set table of content
@@ -52,6 +52,12 @@ ls | grep -v .git  | xargs rm -rf    # <1>
 
 one other resort could be to create a specific branch to the remote repository which is not checkedout
 at the remote repository. Then it is possible to push to this branch.
+
+== Commit template
+
+To ensure that every https://www.kernel.org/pub/software/scm/git/docs/git-commit.html[commit] message has the same structure and to meet widely accepted and approved committing messages structure and formatting it should be configure a default commit message by creating a commit template.
+
+See http://www.layt.net/john/blog/odysseus/git_commit_template[git_commit_template] for further readings
 
 
 

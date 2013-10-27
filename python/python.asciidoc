@@ -1,7 +1,7 @@
 = A List of +python+ Tips, Tricks and Idioms
 :Author:                Christoph Hoffmann
 :Email:                 choffmann1983@gmail.com
-:Revision:              3.1415926
+:Revision:              0.0.1 'http://semver.org/[(semver)]'
 :source-highlighter:    highlight
 :numbered:
 :toc:                   // set table of content
@@ -541,6 +541,79 @@ spam, eggs = Popen(path, stdout=PIPE, stderr=PIPE).communicate()
 --------------------------
 
 
+== Duck-typing
+
+[quote, 'http://docs.python.org/2/glossary.html#term-duck-typing[term-duck-typing]', python docs]
+__________________________
+A programming style which does not look at an object’s type to determine if it has the right interface; instead, the method or attribute is simply called or used (“If it looks like a duck and quacks like a duck, it must be a duck.”) By emphasizing interfaces rather than specific types, well-designed code improves its flexibility by allowing polymorphic substitution. Duck-typing avoids tests using type() or isinstance(). (Note, however, that duck-typing can be complemented with abstract base classes.) Instead, it typically employs hasattr() tests or EAFP programming.
+__________________________
+
+.Example with exception [https://en.wikipedia.org/wiki/Duck_typing#In_Python[wiki]]
+[source]
+--------------------------
+try:
+    mallard.quack()
+except (AttributeError, TypeError):
+    print("mallard can't quack()")
+--------------------------    
+
+Since `hasattr(object, name)` does almost the same job and is well optimized it should be preferred where applicable.
+
+.Example same example with `hasattr`
+[source]
+--------------------------
+if (hasattr(mallard, 'quack')):
+    mallard.quack()
+else:
+    print("mallard can't quack()")
+-------------------------- 
+
+
+== Testing python code
+In general there exists two main testing mechanisms one is http://docs.python.org/2/library/unittest.html[unittest] and the other is http://docs.python.org/2/library/doctest.html[doctest]. Both are good ways to verify that the code is correct. However both testing mechanisms have their drawbacks. 
+
+While doctest clutters the docstring, it is a good way to give examples and to see if the docstring is consistent with the actual source code.
+
+Unitest keeps the actual testing separate from the source code, which helps to not blow up the source code, but it does not check if docstring and source code are consistent.
+
+Nevertheless I find it a good practice to combine both methods, but to reverse the usage of docsttest. Thus, the docstring is used as a way to provide examples how to use the method and to see if the docstring is consistent with the source code. The actual and comprehensive testing is done by a unittest.
+
+.Summary
+**************************
+* http://docs.python.org/2/library/unittest.html[unittest]: comprehensive testing
+* http://docs.python.org/2/library/doctest.html[doctest]: provide examples in docstring and check if docstring is consistent with source code.
+**************************
+
+== Relative imports for non-package modules
+
+In order to allow relative import for non-package modules or for package modules which are called as main (important for testing mechanisms), you have to add code to your script.
+
+Assuming the module is in `httpserver.lib` and the main package is `httpserver`. Then you can add the following code to enable the module to be called as main script (read http://www.python.org/dev/peps/pep-0366/[pep-366] for more detailes).
+
+.This code has to be place above any relative import
+[source]
+--------------------------
+# enable relative import if this script is called as main
+# see: http://www.python.org/dev/peps/pep-0366/
+# if __name__ == "__main__" and __package__ is None:
+#    __package__ = "expected.package.name"
+# Note that this boilerplate is sufficient only if the top level package
+# is already accessible via sys.path. Additional code that manipulates
+# sys.path would be needed in order for direct execution to work without
+# the top level package already being importable."
+if __name__ == "__main__":       # <1>
+    if __package__ is None:
+        import sys
+        import os
+        # add "./../../" to sys.path to enable import of package httpserver
+        sys.path.append(
+            os.path.abspath(
+                os.path.join(
+                     os.path.join(os.path.dirname(__file__), ".."), "..")))
+        import httpserver    # load main package to enable relative module import
+        __package__ = "httpserver.lib"
+--------------------------    
+<1> If the current module is loaded from another module, which is called as main, this `if` has to be omitted.
 
 
 //////////////////////////
