@@ -61,6 +61,30 @@ See http://www.layt.net/john/blog/odysseus/git_commit_template[git_commit_templa
 
 
 
+== Workflow: creating repository with remote
+
+.Creating git repository on remote
+--------------------------
+ssh user@host
+cd <path/to/project/folder>
+mkdir <repo.git>
+cd <repo.git>
+git init --bare
+--------------------------
+
+Using on local machine: Either clone from remote or create local git repository and add remote as origin.
+
+.Cloning from remote
+--------------------------
+git clone ssh://user@host/path/to/repo.git
+--------------------------
+
+.Existing project (useful if there are already some files to commit)
+--------------------------
+cd path/to/project/
+git init
+git remote add origin host/path/to/repo.git
+--------------------------
 
 //////////////////////////
 CommentBlock:     //////////////////////////

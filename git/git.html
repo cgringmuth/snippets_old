@@ -796,12 +796,39 @@ at the remote repository. Then it is possible to push to this branch.</p></div>
 <div class="paragraph"><p>See <a href="http://www.layt.net/john/blog/odysseus/git_commit_template">git_commit_template</a> for further readings</p></div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_workflow_creating_repository_with_remote">4. Workflow: creating repository with remote</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">Creating git repository on remote</div>
+<div class="content monospaced">
+<pre>ssh user@host
+cd &lt;path/to/project/folder&gt;
+mkdir &lt;repo.git&gt;
+cd &lt;repo.git&gt;
+git init --bare</pre>
+</div></div>
+<div class="paragraph"><p>Using on local machine: Either clone from remote or create local git repository and add remote as origin.</p></div>
+<div class="listingblock">
+<div class="title">Cloning from remote</div>
+<div class="content monospaced">
+<pre>git clone ssh://user@host/path/to/repo.git</pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Existing project (useful if there are already some files to commit)</div>
+<div class="content monospaced">
+<pre>cd path/to/project/
+git init
+git remote add origin host/path/to/repo.git</pre>
+</div></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]<br>
-Last updated 2013-09-27 17:22:20 CEST
+Last updated 2013-11-27 11:33:54 CET
 </div>
 </div>
 </body>
