@@ -1432,12 +1432,92 @@ http://www.gnu.org/software/src-highlite -->
 <div class="paragraph"><p>While it makes no difference it is good practice to have the mandatory arguments listed in the function header to show which arguments should be given to the function.</p></div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_mixins">24. Mixins</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>In oder to extend a given obejct with a new method/varible, you can create a mixin function like</p></div>
+<div class="listingblock">
+<div class="title">Mixin</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">mixin</span></span><span style="color: #990000">(</span>receiver<span style="color: #990000">,</span> supplier<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>Object<span style="color: #990000">.</span>keys<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>  <span style="font-style: italic"><span style="color: #9A1900">// ECMAScript 5</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">var</span></span> keys <span style="color: #990000">=</span> Object<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">keys</span></span><span style="color: #990000">(</span> supplier <span style="color: #990000">);</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">var</span></span> i <span style="color: #990000">=</span> <span style="color: #993399">0</span><span style="color: #990000">,</span> il <span style="color: #990000">=</span> keys<span style="color: #990000">.</span>length<span style="color: #990000">;</span> i <span style="color: #990000">&lt;</span> il<span style="color: #990000">;</span> i<span style="color: #990000">++)</span> <span style="color: #FF0000">{</span>
+
+            <span style="font-weight: bold"><span style="color: #0000FF">var</span></span> prop <span style="color: #990000">=</span> keys<span style="color: #990000">[</span>i<span style="color: #990000">];</span>
+            Object<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">defineProperty</span></span><span style="color: #990000">(</span>receiver<span style="color: #990000">,</span> prop<span style="color: #990000">,</span> Object<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">getOwnPropertyDescriptor</span></span><span style="color: #990000">(</span>supplier<span style="color: #990000">,</span> prop<span style="color: #990000">));</span>
+
+        <span style="color: #FF0000">}</span>
+    <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">var</span></span> prop <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> supplier<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+            <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>supplier<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">hasOwnProperty</span></span><span style="color: #990000">(</span>prop<span style="color: #990000">))</span> <span style="color: #FF0000">{</span>
+                receiver<span style="color: #990000">[</span>prop<span style="color: #990000">]</span> <span style="color: #990000">=</span> supplier<span style="color: #990000">[</span>prop<span style="color: #990000">]</span>
+            <span style="color: #FF0000">}</span>
+        <span style="color: #FF0000">}</span>
+    <span style="color: #FF0000">}</span>
+<span style="color: #FF0000">}</span></tt></pre></div></div>
+<div class="paragraph"><p>How to use the <tt>mixin</tt> function</p></div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">var</span></span> object <span style="color: #990000">=</span> <span style="color: #FF0000">{}</span><span style="color: #990000">;</span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">var</span></span> test <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+    <span style="font-style: italic"><span style="color: #9A1900">// to be filled in later</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">var</span></span> name<span style="color: #990000">;</span>
+
+    <span style="font-weight: bold"><span style="color: #000000">mixin</span></span><span style="color: #990000">(</span>object<span style="color: #990000">,</span> <span style="color: #FF0000">{</span>
+
+        get <span style="font-weight: bold"><span style="color: #000000">name</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+            <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> name<span style="color: #990000">;</span>
+        <span style="color: #FF0000">}</span>
+
+    <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+
+    <span style="font-style: italic"><span style="color: #9A1900">// let's just say this is later</span></span>
+    name <span style="color: #990000">=</span> <span style="color: #FF0000">"Chris"</span><span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span><span style="color: #990000">;</span>
+
+<span style="font-weight: bold"><span style="color: #000000">test</span></span><span style="color: #990000">();</span>
+
+console<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">log</span></span><span style="color: #990000">(</span>object<span style="color: #990000">.</span>name<span style="color: #990000">);</span></tt></pre></div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="../asciidoc/images/icons/tip.png" alt="Tip" />
+</td>
+<td class="content">
+<div class="paragraph"><p>Further readings:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://github.com/documentcloud/underscore/blob/bf657be243a075b5e72acc8a83e6f12a564d8f55/underscore.js#L767">underscore.js#extend</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.nczonline.net/blog/2012/12/11/are-your-mixins-ecmascript-5-compatible/">ECMAScript5 compatibility</a>
+</p>
+</li>
+</ul></div>
+</td>
+</tr></table>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
 Version 3.1415926<br />
-Last updated 2013-09-17 21:41:58 CEST
+Last updated 2013-10-27 19:25:24 CET
 </div>
 </div>
 </body>
