@@ -61,7 +61,7 @@ See http://www.layt.net/john/blog/odysseus/git_commit_template[git_commit_templa
 
 
 
-== Workflow: creating repository with remote
+== Workflow: creating repository on remote
 
 .Creating git repository on remote
 --------------------------
@@ -85,6 +85,19 @@ cd path/to/project/
 git init
 git remote add origin host/path/to/repo.git
 --------------------------
+
+
+== Adding remote addresses
+
+`git remote add $REMOTE_NAME $ADDRESS`
+
+$ADDRESS can be one of the following:
+
+* http://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git
+* ssh://user@host.com/var/git/project.git
+* git://git.debian.org/collab-maint/usplash.git
+* file:///var/git/project.git
+
 
 //////////////////////////
 CommentBlock:     //////////////////////////

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="generator" content="AsciiDoc 8.6.6">
+<meta name="generator" content="AsciiDoc 8.6.7">
 <title>A List of <span class="monospaced">git</span> Tips, Tricks and Idioms</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -348,7 +348,7 @@ div.colist td img {
   margin-bottom: 0.1em;
 }
 
-div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -406,6 +406,8 @@ span.underline { text-decoration: underline; }
 span.overline { text-decoration: overline; }
 span.line-through { text-decoration: line-through; }
 
+div.unbreakable { page-break-inside: avoid; }
+
 
 /*
  * xhtml11 specific
@@ -413,7 +415,7 @@ span.line-through { text-decoration: line-through; }
  * */
 
 tt {
-  font-family: monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: inherit;
   color: navy;
 }
@@ -452,7 +454,7 @@ div.tableblock > table[frame="vsides"] {
  * */
 
 .monospaced {
-  font-family: monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: inherit;
   color: navy;
 }
@@ -580,7 +582,7 @@ toc: function (toclevels) {
 
   function tocEntries(el, toclevels) {
     var result = new Array;
-    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
     // Function that scans the DOM tree for header elements (the DOM2
     // nodeIterator API would be a better technique but not supported by all
     // browsers).
@@ -609,7 +611,7 @@ toc: function (toclevels) {
   var i;
   for (i = 0; i < toc.childNodes.length; i++) {
     var entry = toc.childNodes[i];
-    if (entry.nodeName == 'div'
+    if (entry.nodeName.toLowerCase() == 'div'
      && entry.getAttribute("class")
      && entry.getAttribute("class").match(/^toclevel/))
       tocEntriesToRemove.push(entry);
@@ -655,7 +657,7 @@ footnotes: function () {
   var entriesToRemove = [];
   for (i = 0; i < noteholder.childNodes.length; i++) {
     var entry = noteholder.childNodes[i];
-    if (entry.nodeName == 'div' && entry.getAttribute("class") == "footnote")
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
       entriesToRemove.push(entry);
   }
   for (i = 0; i < entriesToRemove.length; i++) {
@@ -762,7 +764,7 @@ to do so. This can be done locally or a network location.</p></div>
 <div class="paragraph"><p>To create a bare repository (like that ones on github) you can either execute following commands:</p></div>
 <div class="listingblock">
 <div class="title">Creating a new bare repository</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -773,7 +775,7 @@ git init --bare</tt></pre></div></div>
 to you can issue the following commands:</p></div>
 <div class="listingblock">
 <div class="title">Convert a working repository into a bare repository</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -797,7 +799,7 @@ at the remote repository. Then it is possible to push to this branch.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_workflow_creating_repository_with_remote">4. Workflow: creating repository with remote</h2>
+<h2 id="_workflow_creating_repository_on_remote">4. Workflow: creating repository on remote</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="title">Creating git repository on remote</div>
@@ -823,12 +825,41 @@ git remote add origin host/path/to/repo.git</pre>
 </div></div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_adding_remote_addresses">5. Adding remote addresses</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><span class="monospaced">git remote add $REMOTE_NAME $ADDRESS</span></p></div>
+<div class="paragraph"><p>$ADDRESS can be one of the following:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git">http://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git</a>
+</p>
+</li>
+<li>
+<p>
+ssh://user@host.com/var/git/project.git
+</p>
+</li>
+<li>
+<p>
+git://git.debian.org/collab-maint/usplash.git
+</p>
+</li>
+<li>
+<p>
+<a href="file:///var/git/project.git">file:///var/git/project.git</a>
+</p>
+</li>
+</ul></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]<br>
-Last updated 2013-11-27 11:33:54 CET
+Last updated 2014-02-01 15:06:23 CET
 </div>
 </div>
 </body>
