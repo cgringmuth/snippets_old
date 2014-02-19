@@ -482,6 +482,85 @@ myfunc2(*listargs, **keywords)     # <3>
 
 <3> -> <2> and <3> are equivalent
 
+
+== **kwargs vs. named arguments (keywords)
+In many cases it is useful to provide a variable number of arguments. Often many arguments 
+can be inferred or set to a default value. This can be done
+by `def func1(*args, **kwargs)` or `def func2(x, *args, plot=True, debug=True)`.
+So, when to use which idiom? 
+
+While the fromer version has the main advantage that the
+list of named arguments is more arbitrary than the latter, it's readability is much
+worse. For example one caller has to read the docstring assuming their exists one and
+it is consistent with the source code or, worse, he has to read the source code. 
+Also, the latter version provides a fast grasp of the possible arguments and assuming
+the arguments are given appropriate names, the user understands its meaning without
+reading the docstring or source code at all. 
+
+Furthermore, the latter version could be called with positional
+arguments like `func2(x, y, True, False)` while the latter version always has to be called
+like `func1(x, y, plot=True, debug=False)`. A good example is the 
+http://docs.python.org/2/library/subprocess.html#popen-constructor[subprocess.Popen]
+Construrctor:
+
+.Example
+[source]
+--------------------------
+class Popen(object):
+    def __init__(self, args, bufsize=0, executable=None,
+                 stdin=None, stdout=None, stderr=None,
+                 preexec_fn=None, close_fds=False, shell=False,
+                 cwd=None, env=None, universal_newlines=False,
+                 startupinfo=None, creationflags=0):
+        """Create new Popen instance."""
+        ...
+--------------------------
+
+While there exist reasons to use the former version, my suggestion would be 
+to use the latter version `def func2(x, *args, plot=True, debug=True)` in most cases.
+
+If you want, for some reason, ensure that some arguments are "keyword-only" arguments 
+and thus will never be automatically filled in by positional argument, the 
+http://www.python.org/dev/peps/pep-3102/[pep3102] is the way to go.
+
+.2 Positional arguments and keywords arguments
+[source]
+--------------------------
+def compare(a, b, *ignore, key=None):
+    if ignore:  # If ignore is not empty
+        raise TypeError
+    ...
+--------------------------
+
+In this case `compare(1,2,'key')` will result in an error while `compare(1,2,key='key')`
+or `compare(1,2)` will give the intended behaviour.
+
+The fromer version should be used if the number and/or names of the arguments is
+not known in advanced. For example for writing a wrapper function which mainly calls
+another function and where the parameter only should be passed on to the other 
+function. A good example is the `subprocess.call` function which is in
+principle only a wrapper funtion which creates a `Popen` object and waits until
+the process has been finished.
+
+.Example call of subprocess package
+[source]
+--------------------------
+def call(*popenargs, **kwargs):
+    """Run command with arguments.  Wait for command to complete, then
+    return the returncode attribute.
+
+    The arguments are the same as for the Popen constructor.  Example:
+
+    retcode = call(["ls", "-l"])
+    """
+    return Popen(*popenargs, **kwargs).wait()
+--------------------------
+
+The main advantage here is that, suppose the argument list in the `Popen` 
+constructure changed, the `call` function does not have to be changed at all. Thus
+there is no additional maintenance here as it would be in the other case.
+
+
 === Mixins with default values
 
 [TIP]

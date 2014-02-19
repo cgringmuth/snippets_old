@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="generator" content="AsciiDoc 8.6.6">
+<meta name="generator" content="AsciiDoc 8.6.7">
 <title>A List of <span class="monospaced">python</span> Tips, Tricks and Idioms</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -348,7 +348,7 @@ div.colist td img {
   margin-bottom: 0.1em;
 }
 
-div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -406,6 +406,8 @@ span.underline { text-decoration: underline; }
 span.overline { text-decoration: overline; }
 span.line-through { text-decoration: line-through; }
 
+div.unbreakable { page-break-inside: avoid; }
+
 
 /*
  * xhtml11 specific
@@ -413,7 +415,7 @@ span.line-through { text-decoration: line-through; }
  * */
 
 tt {
-  font-family: monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: inherit;
   color: navy;
 }
@@ -452,7 +454,7 @@ div.tableblock > table[frame="vsides"] {
  * */
 
 .monospaced {
-  font-family: monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: inherit;
   color: navy;
 }
@@ -580,7 +582,7 @@ toc: function (toclevels) {
 
   function tocEntries(el, toclevels) {
     var result = new Array;
-    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
     // Function that scans the DOM tree for header elements (the DOM2
     // nodeIterator API would be a better technique but not supported by all
     // browsers).
@@ -609,7 +611,7 @@ toc: function (toclevels) {
   var i;
   for (i = 0; i < toc.childNodes.length; i++) {
     var entry = toc.childNodes[i];
-    if (entry.nodeName == 'div'
+    if (entry.nodeName.toLowerCase() == 'div'
      && entry.getAttribute("class")
      && entry.getAttribute("class").match(/^toclevel/))
       tocEntriesToRemove.push(entry);
@@ -655,7 +657,7 @@ footnotes: function () {
   var entriesToRemove = [];
   for (i = 0; i < noteholder.childNodes.length; i++) {
     var entry = noteholder.childNodes[i];
-    if (entry.nodeName == 'div' && entry.getAttribute("class") == "footnote")
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
       entriesToRemove.push(entry);
   }
   for (i = 0; i < entriesToRemove.length; i++) {
@@ -765,7 +767,7 @@ asciidoc.install(2);
 </div>
 <div class="paragraph"><p>Shebang is used to let the operation system know how to interpret the given script. Shebangs have to be place on the first line of code.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -838,7 +840,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="paragraph"><p>In python exists no Enum type. So, it has to be created manually. This example demonstrates a way of creating Enums with dictionaries.</p></div>
 <div class="listingblock">
 <div class="title">Workaround to create Enums in python</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -867,7 +869,7 @@ http://www.gnu.org/software/src-highlite -->
 &#8212; anonymous
 </div></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -882,7 +884,7 @@ ln -s /usr/lib/x86_64-linux-gnu/libz<span style="color: #990000">.</span>so /usr
 <div class="sectionbody">
 <div class="paragraph"><p>Sometimes libs are only needed if a lib is called as main process. Thus, it is meaningful to import such libs only if this module is called as main process.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -891,7 +893,7 @@ http://www.gnu.org/software/src-highlite -->
     httpserver<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">serve</span></span><span style="color: #990000">(</span>app<span style="color: #990000">,</span> host<span style="color: #990000">=</span><span style="color: #FF0000">'127.0.0.1'</span><span style="color: #990000">,</span> port<span style="color: #990000">=</span><span style="color: #993399">8080</span><span style="color: #990000">)</span></tt></pre></div></div>
 <div class="paragraph"><p>or</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -913,7 +915,7 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 <div class="paragraph"><p>It is good practice to use the with keyword when dealing with file objects. This has the advantage that the file is properly closed after its suite finishes, even if an exception is raised on the way. It is also much shorter than writing equivalent try-finally blocks:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -928,7 +930,7 @@ f is closed here automatically even if  an exception raised
 </table></div>
 <div class="paragraph"><p>or with multiple files</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -950,7 +952,7 @@ a and b are closed here automatically even if  an exception raised
 <div class="paragraph"><p>Use __all__ mechanism to prevent name clashes if you import a module by <em>from M import *</em> [Source: <a href="http://www.python.org/dev/peps/pep-0008/#global-variable-names">#</a>]</p></div>
 <div class="listingblock">
 <div class="title">foobar.py</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -963,7 +965,7 @@ foobar <span style="color: #990000">=</span> <span style="color: #FF0000">'hey'<
 foobarprivate <span style="color: #990000">=</span> <span style="color: #FF0000">'should not be seen'</span></tt></pre></div></div>
 <div class="listingblock">
 <div class="title">main.py</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -993,7 +995,7 @@ Error
 </tr></table>
 </div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1031,7 +1033,7 @@ This has the added benefit that it can directly be printed and it shows its cont
 </tr></table>
 </div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1048,7 +1050,7 @@ d<span style="color: #990000">[</span><span style="color: #FF0000">'key'</span><
 <h2 id="_how_to_write_binary_bits_to_a_file">11. How to write binary bits to a file</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1079,7 +1081,7 @@ Link: <a href="http://docs.python.org/2/library/struct.html#struct.pack">struct.
 <div class="sectionbody">
 <div class="paragraph"><p>Sometimes it is useful to have arguments which are mandatory while others are not necessary because they can be predicted, inferred by other values or they have some default values.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1104,7 +1106,7 @@ http://www.gnu.org/software/src-highlite -->
 <h2 id="_list_all_folders">13. List all Folders</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1138,7 +1140,7 @@ More general case
 </div>
 <div class="paragraph"><p>Compact way to generate specific lists.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1151,7 +1153,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="sect2">
 <h3 id="_unpacking_list_in_list">14.1. Unpacking list in list</h3>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1166,7 +1168,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="sect2">
 <h3 id="_nested_list_comprehension">14.2. Nested list comprehension</h3>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1189,7 +1191,7 @@ matrix_trans <span style="color: #990000">=</span> <span style="color: #990000">
 <h3 id="_slice_copy_when_changing_a_list_while_iterate_over_same_list">14.3. Slice copy when changing a list while iterate over same list</h3>
 <div class="paragraph"><p>To change a sequence you are iterating over while inside the loop (for example to duplicate certain items), it is recommended that you first make a copy. Looping over a sequence does not implicitly make a copy. The slice notation makes this especially convenient [<a href="http://docs.python.org/2.7/tutorial/datastructures.html#looping-techniques">#</a>]:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1235,7 +1237,7 @@ todo
 <h3 id="_list">15.1. List</h3>
 <div class="paragraph"><p>To retreive index and value use <span class="monospaced">enumerate()</span>.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1246,7 +1248,7 @@ http://www.gnu.org/software/src-highlite -->
 <h3 id="_dictionary">15.2. Dictionary</h3>
 <div class="paragraph"><p>Iterate over the complete dictionary.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1260,7 +1262,7 @@ http://www.gnu.org/software/src-highlite -->
 <h2 id="_how_to_determine_type_of_variable">16. How to determine type of variable</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1272,7 +1274,7 @@ http://www.gnu.org/software/src-highlite -->
 </table></div>
 <div class="listingblock">
 <div class="title">Examples</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1328,7 +1330,7 @@ i <span style="color: #990000">=</span> <span style="color: #993399">123.456</sp
 </div>
 <div class="listingblock">
 <div class="title">Using .format()</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1344,7 +1346,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="paragraph"><p>The brackets and characters within them (called format fields) are replaced with the objects passed into the <span class="monospaced">str.format()</span> method. A number in the brackets refers to the position of the object passed into the <span class="monospaced">str.format()</span> method.</p></div>
 <div class="listingblock">
 <div class="title">With numbers</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1361,7 +1363,7 @@ http://www.gnu.org/software/src-highlite -->
 </table></div>
 <div class="listingblock">
 <div class="title">With keys</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1395,7 +1397,7 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 <div class="listingblock">
 <div class="title">Multiple key-value arguments</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1419,7 +1421,7 @@ keywords <span style="color: #990000">=</span> <span style="color: #990000">{</s
 </table></div>
 <div class="listingblock">
 <div class="title">Mix of list an key-value arguments</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1448,8 +1450,84 @@ listargs <span style="color: #990000">=</span> <span style="color: #990000">[</s
 &#8594; &lt;2&gt; and &lt;3&gt; are equivalent
 </td></tr>
 </table></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kwargs_vs_named_arguments_keywords">19. **kwargs vs. named arguments (keywords)</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>In many cases it is useful to provide a variable number of arguments. Often many arguments
+can be inferred or set to a default value. This can be done
+by <span class="monospaced">def func1(*args, **kwargs)</span> or <span class="monospaced">def func2(x, *args, plot=True, debug=True)</span>.
+So, when to use which idiom?</p></div>
+<div class="paragraph"><p>While the fromer version has the main advantage that the
+list of named arguments is more arbitrary than the later, it&#8217;s readability is much
+worse. For example one caller has to read the docstring assuming their exists one and
+and it is consistent with the source code or, worse, he has to read the source code.
+Also, the later version provides a fast grasp of the possible arguments and assuming
+the arguments are given appropriate names, the user understands its meaning without
+reading the docstring or source code at all.</p></div>
+<div class="paragraph"><p>Furthermore, the latter version could be called with positional
+arguments like <span class="monospaced">func2(x, y, True, False)</span> while the latter version always has to be called
+<span class="monospaced">func1(x, y, plot=True, debug=False)</span>. A good example is the
+<a href="http://docs.python.org/2/library/subprocess.html#popen-constructor">subprocess.Popen</a>
+Construrctor:</p></div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="font-weight: bold"><span style="color: #000000">Popen</span></span><span style="color: #990000">(</span>object<span style="color: #990000">):</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> args<span style="color: #990000">,</span> bufsize<span style="color: #990000">=</span><span style="color: #993399">0</span><span style="color: #990000">,</span> executable<span style="color: #990000">=</span>None<span style="color: #990000">,</span>
+                 stdin<span style="color: #990000">=</span>None<span style="color: #990000">,</span> stdout<span style="color: #990000">=</span>None<span style="color: #990000">,</span> stderr<span style="color: #990000">=</span>None<span style="color: #990000">,</span>
+                 preexec_fn<span style="color: #990000">=</span>None<span style="color: #990000">,</span> close_fds<span style="color: #990000">=</span>False<span style="color: #990000">,</span> shell<span style="color: #990000">=</span>False<span style="color: #990000">,</span>
+                 cwd<span style="color: #990000">=</span>None<span style="color: #990000">,</span> env<span style="color: #990000">=</span>None<span style="color: #990000">,</span> universal_newlines<span style="color: #990000">=</span>False<span style="color: #990000">,</span>
+                 startupinfo<span style="color: #990000">=</span>None<span style="color: #990000">,</span> creationflags<span style="color: #990000">=</span><span style="color: #993399">0</span><span style="color: #990000">):</span>
+<span style="font-style: italic"><span style="color: #9A1900">        """Create new Popen instance."""</span></span>
+    <span style="color: #990000">...</span></tt></pre></div></div>
+<div class="paragraph"><p>While there exist reasons to use the former version, my suggestion would be
+to use the latter version <span class="monospaced">def func2(x, *args, plot=True, debug=True)</span> in most cases.</p></div>
+<div class="paragraph"><p>If you want, for some reason, ensure that some arguments are "keyword-only" arguments
+and thus will never be automatically filled in by positional argument, the
+<a href="http://www.python.org/dev/peps/pep-3102/">pep3102</a> is the way to go.</p></div>
+<div class="listingblock">
+<div class="title">2 Positional arguments and keywords arguments</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">compare</span></span><span style="color: #990000">(</span>a<span style="color: #990000">,</span> b<span style="color: #990000">,</span> <span style="color: #990000">*</span>ignore<span style="color: #990000">,</span> key<span style="color: #990000">=</span>None<span style="color: #990000">):</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> ignore<span style="color: #990000">:</span>  <span style="font-style: italic"><span style="color: #9A1900"># If ignore is not empty</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">raise</span></span> TypeError
+    <span style="color: #990000">...</span></tt></pre></div></div>
+<div class="paragraph"><p>In this case <span class="monospaced">compare(1,2,'key')</span> will result in an error while <span class="monospaced">compare(1,2,key='key')</span>
+or <span class="monospaced">compare(1,2)</span> will give the intended behaviour.</p></div>
+<div class="paragraph"><p>The fromer version should be used if the number and/or names of the arguments is
+not known in advanced. For example for writing a wrapper function which mainly calls
+another function and where the parameter only should be passed on to the other
+function. A good example is the <span class="monospaced">subprocess.call</span> function which is in
+principle only a wrapper funtion which creates a <span class="monospaced">Popen</span> object and waits until
+the process has been finished.</p></div>
+<div class="listingblock">
+<div class="title">Example call of subprocess package</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">call</span></span><span style="color: #990000">(*</span>popenargs<span style="color: #990000">,</span> <span style="color: #990000">**</span>kwargs<span style="color: #990000">):</span>
+<span style="font-style: italic"><span style="color: #9A1900">    """Run command with arguments.  Wait for command to complete, then</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">    return the returncode attribute.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">    The arguments are the same as for the Popen constructor.  Example:</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">    retcode = call(["ls", "-l"])</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">    """</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #000000">Popen</span></span><span style="color: #990000">(*</span>popenargs<span style="color: #990000">,</span> <span style="color: #990000">**</span>kwargs<span style="color: #990000">).</span><span style="font-weight: bold"><span style="color: #000000">wait</span></span><span style="color: #990000">()</span></tt></pre></div></div>
+<div class="paragraph"><p>The main advantage here is that, suppose the argument list in the <span class="monospaced">Popen</span>
+constructure changed, the <span class="monospaced">call</span> function does not have to be changed at all. Thus
+there is no additional maintenance here as it would be in the other case.</p></div>
 <div class="sect2">
-<h3 id="_mixins_with_default_values">18.1. Mixins with default values</h3>
+<h3 id="_mixins_with_default_values">19.1. Mixins with default values</h3>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -1480,7 +1558,7 @@ listargs <span style="color: #990000">=</span> <span style="color: #990000">[</s
 <div class="paragraph"><p>The following source code is an example of function with two variables which are mandatory and following optional argument list and dictionary. Note: the dictionary optional values has to be at end since it is not allowed to have a non-keyword argument after a keyword argument. This raises a <span class="monospaced"><strong><span class="red">SyntaxError:</span> non-keyword arg after keyword arg</strong></span> exception.</p></div>
 <div class="listingblock">
 <div class="title">Example code for mix of mandatory args and optional list and keyword args</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1510,12 +1588,12 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_relative_path_from_source_file">19. Relative path from source file</h2>
+<h2 id="_relative_path_from_source_file">20. Relative path from source file</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>If you want to call a program relative to the current source file it is not possible to just use <span class="monospaced">../bin/foobar</span> since <span class="monospaced">Popen()</span> or its equivalent <span class="monospaced">subprocess.call()</span> needs the absolute of the program.</p></div>
 <div class="listingblock">
 <div class="title">Example</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1528,7 +1606,7 @@ spam<span style="color: #990000">,</span> eggs <span style="color: #990000">=</s
 </div>
 </div>
 <div class="sect1">
-<h2 id="_duck_typing">20. Duck-typing</h2>
+<h2 id="_duck_typing">21. Duck-typing</h2>
 <div class="sectionbody">
 <div class="quoteblock">
 <div class="content">
@@ -1540,7 +1618,7 @@ spam<span style="color: #990000">,</span> eggs <span style="color: #990000">=</s
 </div></div>
 <div class="listingblock">
 <div class="title">Example with exception [<a href="https://en.wikipedia.org/wiki/Duck_typing#In_Python">wiki</a>]</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1551,7 +1629,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="paragraph"><p>Since <span class="monospaced">hasattr(object, name)</span> does almost the same job and is well optimized it should be preferred where applicable.</p></div>
 <div class="listingblock">
 <div class="title">Example same example with <span class="monospaced">hasattr</span></div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1562,7 +1640,7 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_testing_python_code">21. Testing python code</h2>
+<h2 id="_testing_python_code">22. Testing python code</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>In general there exists two main testing mechanisms one is <a href="http://docs.python.org/2/library/unittest.html">unittest</a> and the other is <a href="http://docs.python.org/2/library/doctest.html">doctest</a>. Both are good ways to verify that the code is correct. However both testing mechanisms have their drawbacks.</p></div>
 <div class="paragraph"><p>While doctest clutters the docstring, it is a good way to give examples and to see if the docstring is consistent with the actual source code.</p></div>
@@ -1587,13 +1665,13 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_relative_imports_for_non_package_modules">22. Relative imports for non-package modules</h2>
+<h2 id="_relative_imports_for_non_package_modules">23. Relative imports for non-package modules</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>In order to allow relative import for non-package modules or for package modules which are called as main (important for testing mechanisms), you have to add code to your script.</p></div>
 <div class="paragraph"><p>Assuming the module is in <span class="monospaced">httpserver.lib</span> and the main package is <span class="monospaced">httpserver</span>. Then you can add the following code to enable the module to be called as main script (read <a href="http://www.python.org/dev/peps/pep-0366/">pep-366</a> for more detailes).</p></div>
 <div class="listingblock">
 <div class="title">This code has to be place above any relative import</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1628,7 +1706,7 @@ If the current module is loaded from another module, which is called as main, th
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2013-10-17 12:15:55 CEST
+Last updated 2014-02-19 14:04:25 CET
 </div>
 </div>
 </body>
