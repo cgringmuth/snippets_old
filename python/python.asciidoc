@@ -122,7 +122,7 @@ It is good practice to use the with keyword when dealing with file objects. This
 
 [source,python]
 ----
-with open('workfile', 'r') as f:
+with open('workefile', 'r') as f:
     read_data = f.read()
 
 doOtherStuff()  # <1>
@@ -533,13 +533,13 @@ def compare(a, b, *ignore, key=None):
 --------------------------
 
 In this case `compare(1,2,'key')` will result in an error while `compare(1,2,key='key')`
-or `compare(1,2)` will give the intended behaviour.
+or `compare(1,2)` will give the intended behavior.
 
-The fromer version should be used if the number and/or names of the arguments is
+The former version should be used if the number and/or names of the arguments is
 not known in advanced. For example for writing a wrapper function which mainly calls
 another function and where the parameter only should be passed on to the other 
 function. A good example is the `subprocess.call` function which is in
-principle only a wrapper funtion which creates a `Popen` object and waits until
+principle only a wrapper function which creates a `Popen` object and waits until
 the process has been finished.
 
 .Example call of subprocess package
@@ -557,7 +557,7 @@ def call(*popenargs, **kwargs):
 --------------------------
 
 The main advantage here is that, suppose the argument list in the `Popen` 
-constructure changed, the `call` function does not have to be changed at all. Thus
+constructor changed, the `call` function does not have to be changed at all. Thus
 there is no additional maintenance here as it would be in the other case.
 
 
@@ -653,7 +653,7 @@ In general there exists two main testing mechanisms one is http://docs.python.or
 
 While doctest clutters the docstring, it is a good way to give examples and to see if the docstring is consistent with the actual source code.
 
-Unitest keeps the actual testing separate from the source code, which helps to not blow up the source code, but it does not check if docstring and source code are consistent.
+Unitetest keeps the actual testing separate from the source code, which helps to not blow up the source code, but it does not check if docstring and source code are consistent.
 
 Nevertheless I find it a good practice to combine both methods, but to reverse the usage of docsttest. Thus, the docstring is used as a way to provide examples how to use the method and to see if the docstring is consistent with the source code. The actual and comprehensive testing is done by a unittest.
 
@@ -694,6 +694,40 @@ if __name__ == "__main__":       # <1>
 --------------------------    
 <1> If the current module is loaded from another module, which is called as main, this `if` has to be omitted.
 
+
+== Check if assertion turned off
+Assertions are useful for several things such as:
+* Design by contract (pre-/post condition test)
+* Early recognition of bugs
+* etc.
+
+They should be used only for checking the code and not for flow control or other
+things. For this case `if ... else` or `try ... except ... finally` are made for.
+
+If you want to deploy the software you always should turn `DEBUG` to `0` and shall
+either write wrapper script which calls the script with the python command `-O` or
+you should highlight that the script shall be called with this command.
+
+In some cases assertions can slow down the code, this is why you should use the 
+optimization mode of python. To ensure this, you can insert following code
+snippet in your main file or setting file which checks if python ignores all 
+assertions otherwise it throws an assertion with a description.
+
+[source]
+--------------------------
+DEBUG = 0
+if not DEBUG:
+    import sys
+    import os
+    as_msg = """This script has been configured such it runs in release mode. 
+    Since the scripts makes excessive use of assertion for development you should 
+    run this script with "python -O {script_name}" to neglect assertions or 
+    switch back to debug mode by setting setting.DEBUG = 1.
+""".format(script_name=os.path.basename(sys.argv[0]))
+    assert False, as_msg
+--------------------------
+
+For a more detailed description of assertions and how to use them read https://mail.python.org/pipermail/python-list/2013-November/660401.html[When to use assert].
 
 //////////////////////////
 CommentBlock:     //////////////////////////

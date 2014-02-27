@@ -1460,15 +1460,15 @@ can be inferred or set to a default value. This can be done
 by <span class="monospaced">def func1(*args, **kwargs)</span> or <span class="monospaced">def func2(x, *args, plot=True, debug=True)</span>.
 So, when to use which idiom?</p></div>
 <div class="paragraph"><p>While the fromer version has the main advantage that the
-list of named arguments is more arbitrary than the later, it&#8217;s readability is much
+list of named arguments is more arbitrary than the latter, it&#8217;s readability is much
 worse. For example one caller has to read the docstring assuming their exists one and
-and it is consistent with the source code or, worse, he has to read the source code.
-Also, the later version provides a fast grasp of the possible arguments and assuming
+it is consistent with the source code or, worse, he has to read the source code.
+Also, the latter version provides a fast grasp of the possible arguments and assuming
 the arguments are given appropriate names, the user understands its meaning without
 reading the docstring or source code at all.</p></div>
 <div class="paragraph"><p>Furthermore, the latter version could be called with positional
 arguments like <span class="monospaced">func2(x, y, True, False)</span> while the latter version always has to be called
-<span class="monospaced">func1(x, y, plot=True, debug=False)</span>. A good example is the
+like <span class="monospaced">func1(x, y, plot=True, debug=False)</span>. A good example is the
 <a href="http://docs.python.org/2/library/subprocess.html#popen-constructor">subprocess.Popen</a>
 Construrctor:</p></div>
 <div class="listingblock">
@@ -1484,7 +1484,7 @@ http://www.gnu.org/software/src-highlite -->
                  cwd<span style="color: #990000">=</span>None<span style="color: #990000">,</span> env<span style="color: #990000">=</span>None<span style="color: #990000">,</span> universal_newlines<span style="color: #990000">=</span>False<span style="color: #990000">,</span>
                  startupinfo<span style="color: #990000">=</span>None<span style="color: #990000">,</span> creationflags<span style="color: #990000">=</span><span style="color: #993399">0</span><span style="color: #990000">):</span>
 <span style="font-style: italic"><span style="color: #9A1900">        """Create new Popen instance."""</span></span>
-    <span style="color: #990000">...</span></tt></pre></div></div>
+        <span style="color: #990000">...</span></tt></pre></div></div>
 <div class="paragraph"><p>While there exist reasons to use the former version, my suggestion would be
 to use the latter version <span class="monospaced">def func2(x, *args, plot=True, debug=True)</span> in most cases.</p></div>
 <div class="paragraph"><p>If you want, for some reason, ensure that some arguments are "keyword-only" arguments
@@ -1701,12 +1701,46 @@ If the current module is loaded from another module, which is called as main, th
 </table></div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_check_if_assertion_turned_off">24. Check if assertion turned off</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Assertions are useful for several things such as:
+* Design by contract (pre-/post condition test)
+* Early recognition of bugs
+* etc.</p></div>
+<div class="paragraph"><p>They should be used only for checking the code and not for flow control or other
+things. For this case <span class="monospaced">if ... else</span> or <span class="monospaced">try ... except ... finnally</span> are made for.</p></div>
+<div class="paragraph"><p>If you want to deploy the software you always should turn <span class="monospaced">DEBUG</span> to <span class="monospaced">0</span> and shall
+either write wrapper script which calls the script with the python command <span class="monospaced">-O</span> or
+you should highlight that the script shall be called with this command.</p></div>
+<div class="paragraph"><p>In some cases assertions can slow down the code, this is why you should use the
+optimization mode of python. To ensure this, you can insert following code
+snippet in your main file or setting file which checks if python ignores all
+assertions otherwise it throws an assertion with a description.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>DEBUG <span style="color: #990000">=</span> <span style="color: #993399">0</span>
+<span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="font-weight: bold"><span style="color: #0000FF">not</span></span> DEBUG<span style="color: #990000">:</span>
+    <span style="font-weight: bold"><span style="color: #000080">import</span></span> sys
+    <span style="font-weight: bold"><span style="color: #000080">import</span></span> os
+    as_msg <span style="color: #990000">=</span><span style="color: #FF0000"> """This script has been configured such it runs in release mode.</span>
+<span style="color: #FF0000">    Since the scripts makes excessive use of assertion for development you should</span>
+<span style="color: #FF0000">    run this script with "python -O {script_name}" to neglect assertions or</span>
+<span style="color: #FF0000">    switch back to debug mode by setting setting.DEBUG = 1.</span>
+<span style="color: #FF0000">"""</span><span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">format</span></span><span style="color: #990000">(</span>script_name<span style="color: #990000">=</span>os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">basename</span></span><span style="color: #990000">(</span>sys<span style="color: #990000">.</span>argv<span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">]))</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">assert</span></span> False<span style="color: #990000">,</span> as_msg</tt></pre></div></div>
+<div class="paragraph"><p>For a more detailed description of assertions and how to use them read <a href="https://mail.python.org/pipermail/python-list/2013-November/660401.html">When to use assert</a>.</p></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2014-02-19 14:04:25 CET
+Last updated 2014-02-27 13:58:55 CET
 </div>
 </div>
 </body>
