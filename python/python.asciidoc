@@ -787,6 +787,9 @@ radius getter is used
 2
 --------------------------
 
+Convention for private variables http://docs.python.org/3/tutorial/classes.html#private-variables[private-variables].
+Another good link to why to use http://stackoverflow.com/a/6618176/1959528[stackoverflow.com]
+
 //////////////////////////
 CommentBlock:     //////////////////////////
 PassthroughBlock: ++++++++++++++++++++++++++
