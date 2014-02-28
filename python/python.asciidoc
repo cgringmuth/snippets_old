@@ -729,6 +729,64 @@ if not DEBUG:
 
 For a more detailed description of assertions and how to use them read https://mail.python.org/pipermail/python-list/2013-November/660401.html[When to use assert].
 
+
+== Getter / Setter with property
+A big advantage of using property decorator for setting/getting is to have 
+control of how variables should be read from or written to. For example you want
+want to prevent a variable to be positive (validating) or before you returning a variable
+you want to recompute something etc. This can be ensured by ordinary getter/setter
+methods or by the `@property` decorator. The property decorator is superior when
+code should be more flexible. For instance if you have written a Library which has
+been deployed already and you decided to instead of just returning a value you want
+to recompute or refetch from remote a new value which shall be returned. Thus you
+can hide this behavior behind the property decorator without braking code which 
+uses your library. Additionally if you decided to recompute or update something
+when a variable changes you can also hide this in property setter method without
+braking existing code.
+
+One disadvantage is the reduced performance which, in most cases, can be neglected.
+
+Another area where the property is useful is design-by-contract where you always
+can check pro/post condition and class invariants in the development stage and when
+it comes to the release mode you can just roll back and rename all variables and 
+comment the property decorator to be as efficient as possible.
+
+.Syntactic sugar
+[NOTE]
+This concept is in general syntactic sugar which allows method calls to like 
+variable access or assignment.
+
+.Example code
+[source]
+--------------------------
+class Sphere(object):
+    def __init__(self, radius, center):
+        self.__radius = radius
+        self.__center = center
+    
+    @property
+    def radius(self):
+        print "radius getter is used"
+        return self.__radius
+        
+    @radius.setter
+    def radius(self, radius):
+        if radius < 0:
+            raise TypeError("Radius should never be negative")
+        self.__radius = radius
+        
+>>> s = Sphere(1, [1,1,1])
+>>> s.radius = 2
+>>> print s.radius
+radius getter is used
+2
+>>> s.radius = -1
+TypeError: Radius should never be negative
+>>> print s.radius
+radius getter is used
+2
+--------------------------
+
 //////////////////////////
 CommentBlock:     //////////////////////////
 PassthroughBlock: ++++++++++++++++++++++++++
