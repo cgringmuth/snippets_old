@@ -768,6 +768,10 @@ case which would change all access to this variable also.
 This concept is in general syntactic sugar which allows method calls to like 
 variable access or assignment.
 
+=== Decorator
+
+Decorate each function with purpose. `@property` has to start each property.
+
 .Example code
 [source]
 --------------------------
@@ -801,7 +805,13 @@ radius getter is used
 
 * Convention for private variables http://docs.python.org/3/tutorial/classes.html#private-variables[private-variables].
 * Another good link to why to use http://stackoverflow.com/a/6618176/1959528[stackoverflow.com]
-* Another good article: http://tomayko.com/writings/getters-setters-fuxors
+
+
+=== Using constructor
+
+Source: article: http://tomayko.com/writings/getters-setters-fuxors
+
+Calling `property` constructor for each property.
 
 .Example code
 [source]
@@ -838,6 +848,8 @@ contact = Contact()
 contact.email = "x@x.com"   # ok
 contact.email = "xx.com"    # Exception
 --------------------------
+
+=== Private variables
 
 "Any identifier of the form \__spam (at least two leading underscores, at most one trailing underscore) is textually replaced with _classname\__spam, where classname is the current class name with leading underscore(s) stripped." 
 This prevents a sublcass from using self.__spam!
