@@ -1736,7 +1736,7 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_getter_setter_with_property">25. Getter / Setter with property</h2>
+<h2 id="_python_property">25. Python property</h2>
 <div class="sectionbody">
 <div class="admonitionblock">
 <table><tr>
@@ -1789,8 +1789,8 @@ http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="font-weight: bold"><span style="color: #000000">Sphere</span></span><span style="color: #990000">(</span>object<span style="color: #990000">):</span>
     <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> radius<span style="color: #990000">,</span> center<span style="color: #990000">):</span>
-        self<span style="color: #990000">.</span>__radius <span style="color: #990000">=</span> radius
-        self<span style="color: #990000">.</span>__center <span style="color: #990000">=</span> center
+        self<span style="color: #990000">.</span>_radius <span style="color: #990000">=</span> radius
+        self<span style="color: #990000">.</span>_center <span style="color: #990000">=</span> center
 
     @property
     <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">radius</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
@@ -1867,6 +1867,41 @@ http://www.gnu.org/software/src-highlite -->
 <pre><tt>contact <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">Contact</span></span><span style="color: #990000">()</span>
 contact<span style="color: #990000">.</span>email <span style="color: #990000">=</span> <span style="color: #FF0000">"x@x.com"</span>   <span style="font-style: italic"><span style="color: #9A1900"># ok</span></span>
 contact<span style="color: #990000">.</span>email <span style="color: #990000">=</span> <span style="color: #FF0000">"xx.com"</span>    <span style="font-style: italic"><span style="color: #9A1900"># Exception</span></span></tt></pre></div></div>
+<div class="paragraph"><p>"Any identifier of the form __spam (at least two leading underscores, at most one trailing underscore) is textually replaced with _classname__spam, where classname is the current class name with leading underscore(s) stripped."
+This prevents a sublcass from using self.__spam!</p></div>
+<div class="listingblock">
+<div class="title">Example code</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="font-weight: bold"><span style="color: #000000">C</span></span><span style="color: #990000">(</span>object<span style="color: #990000">):</span>
+    __name <span style="color: #990000">=</span> None
+    _name2 <span style="color: #990000">=</span> None
+
+<span style="color: #990000">&gt;&gt;&gt;</span> c <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">C</span></span><span style="color: #990000">()</span>
+<span style="color: #990000">&gt;&gt;&gt;</span> <span style="font-weight: bold"><span style="color: #000000">dir</span></span><span style="color: #990000">(</span>c<span style="color: #990000">)</span>
+<span style="color: #990000">[</span><span style="color: #FF0000">'_C__name'</span><span style="color: #990000">,</span>        <span style="font-style: italic"><span style="color: #9A1900"># &lt;&lt;&lt; notice _C in front of name</span></span>
+ <span style="color: #FF0000">'__class__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__delattr__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__dict__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__doc__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__format__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__getattribute__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__hash__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__init__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__module__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__new__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__reduce__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__reduce_ex__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__repr__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__setattr__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__sizeof__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__str__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__subclasshook__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'__weakref__'</span><span style="color: #990000">,</span>
+ <span style="color: #FF0000">'_name2'</span><span style="color: #990000">]</span>          <span style="font-style: italic"><span style="color: #9A1900"># &lt;&lt;&lt; has not been changed</span></span>
+</tt></pre></div></div>
 </div>
 </div>
 </div>
@@ -1874,7 +1909,7 @@ contact<span style="color: #990000">.</span>email <span style="color: #990000">=
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2014-02-28 11:27:42 CET
+Last updated 2014-02-28 12:44:25 CET
 </div>
 </div>
 </body>

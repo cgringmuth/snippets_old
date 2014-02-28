@@ -730,7 +730,7 @@ if not DEBUG:
 For a more detailed description of assertions and how to use them read https://mail.python.org/pipermail/python-list/2013-November/660401.html[When to use assert].
 
 
-== Getter / Setter with property
+== Properties
 [IMPORTANT]
 Python is not Java or C/C++ -> There are no private member variables which shall
 be accessed by getter/setter functions. Thus, don't write getter/setter functions
@@ -773,8 +773,8 @@ variable access or assignment.
 --------------------------
 class Sphere(object):
     def __init__(self, radius, center):
-        self.__radius = radius
-        self.__center = center
+        self._radius = radius
+        self._center = center
     
     @property
     def radius(self):
@@ -837,6 +837,41 @@ The following code will still run properly but now checks if email contains a '@
 contact = Contact()
 contact.email = "x@x.com"   # ok
 contact.email = "xx.com"    # Exception
+--------------------------
+
+"Any identifier of the form \__spam (at least two leading underscores, at most one trailing underscore) is textually replaced with _classname\__spam, where classname is the current class name with leading underscore(s) stripped." 
+This prevents a sublcass from using self.__spam!
+
+.Example code
+[source]
+--------------------------
+class C(object):
+    __name = None
+    _name2 = None
+    
+>>> c = C()
+>>> dir(c)
+['_C__name',        # <<< notice _C in front of name
+ '__class__',
+ '__delattr__',
+ '__dict__',
+ '__doc__',
+ '__format__',
+ '__getattribute__',
+ '__hash__',
+ '__init__',
+ '__module__',
+ '__new__',
+ '__reduce__',
+ '__reduce_ex__',
+ '__repr__',
+ '__setattr__',
+ '__sizeof__',
+ '__str__',
+ '__subclasshook__',
+ '__weakref__',
+ '_name2']          # <<< has not been changed
+
 --------------------------
 
 
