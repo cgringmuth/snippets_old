@@ -751,6 +751,12 @@ can check pro/post condition and class invariants in the development stage and w
 it comes to the release mode you can just roll back and rename all variables and 
 comment the property decorator to be as efficient as possible.
 
+In addition you don't have to write getter/setter just in case you want to have
+control. You can write a variable without the double underscores and if you 
+decide you want to have more control added properties for those variables and change
+the local variable to have leading underscores but not using refactoring in this 
+case which would change all access to this variable also.
+
 .Syntactic sugar
 [NOTE]
 This concept is in general syntactic sugar which allows method calls to like 
