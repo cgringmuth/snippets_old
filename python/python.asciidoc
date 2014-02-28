@@ -731,6 +731,12 @@ For a more detailed description of assertions and how to use them read https://m
 
 
 == Getter / Setter with property
+[IMPORTANT]
+Python is not Java or C/C++ -> There are no private member variables which shall
+be accessed by getter/setter functions. Thus, don't write getter/setter functions
+but access all variables directly unless not otherwise possible or meaningful. Then
+use properties!
+
 A big advantage of using property decorator for setting/getting is to have 
 control of how variables should be read from or written to. For example you want
 want to prevent a variable to be positive (validating) or before you returning a variable
@@ -793,8 +799,46 @@ radius getter is used
 2
 --------------------------
 
-Convention for private variables http://docs.python.org/3/tutorial/classes.html#private-variables[private-variables].
-Another good link to why to use http://stackoverflow.com/a/6618176/1959528[stackoverflow.com]
+* Convention for private variables http://docs.python.org/3/tutorial/classes.html#private-variables[private-variables].
+* Another good link to why to use http://stackoverflow.com/a/6618176/1959528[stackoverflow.com]
+* Another good article: http://tomayko.com/writings/getters-setters-fuxors
+
+.Example code
+[source]
+--------------------------
+class Contact(object):
+
+    def __init__(self, first_name=None, last_name=None, 
+                 display_name=None, email=None):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.display_name = display_name
+        self.email = email
+
+    def print_info(self):
+        print self.display_name, "<" + self.email + ">"            
+
+    def set_email(self, value):
+        if '@' not in value:
+            raise Exception("This doesn't look like an email address.")
+        self._email = value
+
+    def get_email(self):
+        return self._email
+
+    email = property(get_email, set_email)
+--------------------------
+
+The following code will still run properly but now checks if email contains a '@':
+
+.Example code
+[source]
+--------------------------
+contact = Contact()
+contact.email = "x@x.com"   # ok
+contact.email = "xx.com"    # Exception
+--------------------------
+
 
 //////////////////////////
 CommentBlock:     //////////////////////////

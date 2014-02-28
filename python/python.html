@@ -1738,6 +1738,17 @@ http://www.gnu.org/software/src-highlite -->
 <div class="sect1">
 <h2 id="_getter_setter_with_property">25. Getter / Setter with property</h2>
 <div class="sectionbody">
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="../asciidoc/images/icons/important.png" alt="Important">
+</td>
+<td class="content">Python is not Java or C/C++ &#8594; There are no private member variables which shall
+be accessed by getter/setter functions. Thus, don&#8217;t write getter/setter functions
+but access all variables directly unless not otherwise possible or meaningful. Then
+use properties!</td>
+</tr></table>
+</div>
 <div class="paragraph"><p>A big advantage of using property decorator for setting/getting is to have
 control of how variables should be read from or written to. For example you want
 want to prevent a variable to be positive (validating) or before you returning a variable
@@ -1802,8 +1813,60 @@ TypeError<span style="color: #990000">:</span> Radius should never be negative
 <span style="color: #990000">&gt;&gt;&gt;</span> <span style="font-weight: bold"><span style="color: #0000FF">print</span></span> s<span style="color: #990000">.</span>radius
 radius getter <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> used
 <span style="color: #993399">2</span></tt></pre></div></div>
-<div class="paragraph"><p>Convention for private variables <a href="http://docs.python.org/3/tutorial/classes.html#private-variables">private-variables</a>.
-Another good link to why to use <a href="http://stackoverflow.com/a/6618176/1959528">stackoverflow.com</a></p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Convention for private variables <a href="http://docs.python.org/3/tutorial/classes.html#private-variables">private-variables</a>.
+</p>
+</li>
+<li>
+<p>
+Another good link to why to use <a href="http://stackoverflow.com/a/6618176/1959528">stackoverflow.com</a>
+</p>
+</li>
+<li>
+<p>
+Another good article: <a href="http://tomayko.com/writings/getters-setters-fuxors">http://tomayko.com/writings/getters-setters-fuxors</a>
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="title">Example code</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="font-weight: bold"><span style="color: #000000">Contact</span></span><span style="color: #990000">(</span>object<span style="color: #990000">):</span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> first_name<span style="color: #990000">=</span>None<span style="color: #990000">,</span> last_name<span style="color: #990000">=</span>None<span style="color: #990000">,</span>
+                 display_name<span style="color: #990000">=</span>None<span style="color: #990000">,</span> email<span style="color: #990000">=</span>None<span style="color: #990000">):</span>
+        self<span style="color: #990000">.</span>first_name <span style="color: #990000">=</span> first_name
+        self<span style="color: #990000">.</span>last_name <span style="color: #990000">=</span> last_name
+        self<span style="color: #990000">.</span>display_name <span style="color: #990000">=</span> display_name
+        self<span style="color: #990000">.</span>email <span style="color: #990000">=</span> email
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">print_info</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">print</span></span> self<span style="color: #990000">.</span>display_name<span style="color: #990000">,</span> <span style="color: #FF0000">"&lt;"</span> <span style="color: #990000">+</span> self<span style="color: #990000">.</span>email <span style="color: #990000">+</span> <span style="color: #FF0000">"&gt;"</span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">set_email</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> value<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #FF0000">'@'</span> <span style="font-weight: bold"><span style="color: #0000FF">not</span></span> <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> value<span style="color: #990000">:</span>
+            <span style="font-weight: bold"><span style="color: #0000FF">raise</span></span> <span style="font-weight: bold"><span style="color: #000000">Exception</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"This doesn't look like an email address."</span><span style="color: #990000">)</span>
+        self<span style="color: #990000">.</span>_email <span style="color: #990000">=</span> value
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_email</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> self<span style="color: #990000">.</span>_email
+
+    email <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">property</span></span><span style="color: #990000">(</span>get_email<span style="color: #990000">,</span> set_email<span style="color: #990000">)</span></tt></pre></div></div>
+<div class="paragraph"><p>The following code will still run properly but now checks if email contains a <em>@</em>:</p></div>
+<div class="listingblock">
+<div class="title">Example code</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>contact <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">Contact</span></span><span style="color: #990000">()</span>
+contact<span style="color: #990000">.</span>email <span style="color: #990000">=</span> <span style="color: #FF0000">"x@x.com"</span>   <span style="font-style: italic"><span style="color: #9A1900"># ok</span></span>
+contact<span style="color: #990000">.</span>email <span style="color: #990000">=</span> <span style="color: #FF0000">"xx.com"</span>    <span style="font-style: italic"><span style="color: #9A1900"># Exception</span></span></tt></pre></div></div>
 </div>
 </div>
 </div>
@@ -1811,7 +1874,7 @@ Another good link to why to use <a href="http://stackoverflow.com/a/6618176/1959
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2014-02-28 11:15:48 CET
+Last updated 2014-02-28 11:27:42 CET
 </div>
 </div>
 </body>
