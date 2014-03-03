@@ -697,6 +697,7 @@ if __name__ == "__main__":       # <1>
 
 == Check if assertion turned off
 Assertions are useful for several things such as:
+
 * Design by contract (pre-/post condition test)
 * Early recognition of bugs
 * etc.
@@ -811,7 +812,7 @@ radius getter is used
 
 Source: article: http://tomayko.com/writings/getters-setters-fuxors
 
-Calling `property` constructor for each property.
+Calling http://docs.python.org/2/library/functions.html?highlight=property#property[property constructor] for each property.
 
 .Example code
 [source]

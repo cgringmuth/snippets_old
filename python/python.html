@@ -1704,10 +1704,24 @@ If the current module is loaded from another module, which is called as main, th
 <div class="sect1">
 <h2 id="_check_if_assertion_turned_off">24. Check if assertion turned off</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Assertions are useful for several things such as:
-* Design by contract (pre-/post condition test)
-* Early recognition of bugs
-* etc.</p></div>
+<div class="paragraph"><p>Assertions are useful for several things such as:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Design by contract (pre-/post condition test)
+</p>
+</li>
+<li>
+<p>
+Early recognition of bugs
+</p>
+</li>
+<li>
+<p>
+etc.
+</p>
+</li>
+</ul></div>
 <div class="paragraph"><p>They should be used only for checking the code and not for flow control or other
 things. For this case <span class="monospaced">if ... else</span> or <span class="monospaced">try ... except ... finally</span> are made for.</p></div>
 <div class="paragraph"><p>If you want to deploy the software you always should turn <span class="monospaced">DEBUG</span> to <span class="monospaced">0</span> and shall
@@ -1832,7 +1846,7 @@ Another good link to why to use <a href="http://stackoverflow.com/a/6618176/1959
 <div class="sect2">
 <h3 id="_using_constructor">25.2. Using constructor</h3>
 <div class="paragraph"><p>Source: article: <a href="http://tomayko.com/writings/getters-setters-fuxors">http://tomayko.com/writings/getters-setters-fuxors</a></p></div>
-<div class="paragraph"><p>Calling <span class="monospaced">property</span> constructor for each property.</p></div>
+<div class="paragraph"><p>Calling <a href="http://docs.python.org/2/library/functions.html?highlight=property#property">property constructor</a> for each property.</p></div>
 <div class="listingblock">
 <div class="title">Example code</div>
 <div class="content"><!-- Generator: GNU source-highlight 3.1.6
@@ -1916,7 +1930,7 @@ http://www.gnu.org/software/src-highlite -->
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2014-02-28 12:52:38 CET
+Last updated 2014-03-03 12:15:47 CET
 </div>
 </div>
 </body>
