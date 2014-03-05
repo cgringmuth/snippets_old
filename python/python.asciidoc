@@ -1,4 +1,4 @@
-= A List of +python+ Tips, Tricks and Idioms
+= A List of +python+ Tips, Tricks and recipes/idioms
 :Author:                Christoph Hoffmann
 :Email:                 choffmann1983@gmail.com
 :Revision:              0.0.1 'http://semver.org/[(semver)]'
@@ -15,7 +15,13 @@
 
 == Introduction
 
-TODO
+todo ...
+
+Here is a list of interesting links:
+
+* http://ivory.idyll.org/articles/advanced-swc/[Intermediate and Advanced Software Carpentry in Python]
+* http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html[Code Like a Pythonista: Idiomatic Python]
+* http://code.activestate.com/recipes/langs/python/[Popular Python recipes ]
 
 == Shebang 
 
