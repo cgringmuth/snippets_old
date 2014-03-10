@@ -1062,6 +1062,37 @@ d<span style="color: #990000">.</span><span style="font-weight: bold"><span styl
 d<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'key'</span><span style="color: #990000">,</span> dafaultKey<span style="color: #990000">)</span>    <span style="font-style: italic"><span style="color: #9A1900"># -&gt; defaultKey = 1234</span></span>
 <span style="font-style: italic"><span style="color: #9A1900"># Great for:</span></span>
 d<span style="color: #990000">[</span><span style="color: #FF0000">'key'</span><span style="color: #990000">]</span> <span style="color: #990000">=</span> d<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'key'</span><span style="color: #990000">,</span> dafaultKey<span style="color: #990000">)</span> <span style="color: #990000">+</span> <span style="color: #993399">1</span></tt></pre></div></div>
+<div class="sect2">
+<h3 id="_dictionary_and_default_v2">10.1. Dictionary and default v2</h3>
+<div class="paragraph"><p>Assuming you have an unknown number of parameters which have to be set to a default. For instance see following example:</p></div>
+<div class="listingblock">
+<div class="title">Example code</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="font-weight: bold"><span style="color: #000000">SomeClass</span></span><span style="color: #990000">(</span>object<span style="color: #990000">):</span>
+    <span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> x<span style="color: #990000">,</span> y<span style="color: #990000">,</span> <span style="color: #990000">*</span>args<span style="color: #990000">,</span> <span style="color: #990000">**</span>kwargs<span style="color: #990000">):</span>
+        self<span style="color: #990000">.</span>x <span style="color: #990000">=</span> x
+        self<span style="color: #990000">.</span>y <span style="color: #990000">=</span> y
+        self<span style="color: #990000">.</span>args <span style="color: #990000">=</span> args
+        self<span style="color: #990000">.</span>kwargs <span style="color: #990000">=</span> kwargs
+
+    <span style="font-weight: bold"><span style="color: #000000">run</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> <span style="color: #990000">**</span>kwargs<span style="color: #990000">):</span>
+        lskws <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">dict</span></span><span style="color: #990000">(</span>mandatory1<span style="color: #990000">=</span><span style="color: #993399">10</span><span style="color: #990000">,</span> mandatory2<span style="color: #990000">=</span><span style="color: #993399">2</span><span style="color: #990000">)</span>
+        lskws<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">update</span></span><span style="color: #990000">(</span>self<span style="color: #990000">.</span>kwargs<span style="color: #990000">)</span>
+        lskws<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">update</span></span><span style="color: #990000">(</span>kwargs<span style="color: #990000">)</span>
+        <span style="font-weight: bold"><span style="color: #000000">doCoolStuff</span></span><span style="color: #990000">(**</span>lskws<span style="color: #990000">)</span></tt></pre></div></div>
+<div class="paragraph"><p>In this example you can provide the parameter "globally" with the constructor or
+by the function <span class="monospaced">run</span>. Here <span class="monospaced">mandatory1</span> and <span class="monospaced">mandatory2</span> are variables which
+are required for the later function call and will be set locally in the function
+to default values. The values, along with other parameters, will be overwritten
+by the internal values in the property <span class="monospaced">self.kwargs</span> or by the provided parameters
+in <span class="monospaced">kwargs</span>.</p></div>
+<div class="paragraph"><p>The order here is, take the values provided by <span class="monospaced">kwarags</span>. If not provided, take
+the parameters provided by <span class="monospaced">self.kwargs</span>. If not provided, take default values
+of local parameters in <span class="monospaced">lskws</span>.</p></div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1948,7 +1979,7 @@ http://www.gnu.org/software/src-highlite -->
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2014-03-05 08:06:56 CET
+Last updated 2014-03-10 11:59:54 CET
 </div>
 </div>
 </body>

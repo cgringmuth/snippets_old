@@ -220,6 +220,36 @@ d.get('key', dafaultKey)    # -> defaultKey = 1234
 d['key'] = d.get('key', dafaultKey) + 1
 ----
 
+=== Dictionary and default v2
+Assuming you have an unknown number of parameters which have to be set to a default. For instance see following example:
+
+.Example code 
+[source]
+-------------------------
+class SomeClass(object):
+    __init__(self, x, y, *args, **kwargs):
+        self.x = x
+        self.y = y
+        self.args = args
+        self.kwargs = kwargs
+        
+    run(self, **kwargs):
+        lskws = dict(mandatory1=10, mandatory2=2)
+        lskws.update(self.kwargs)
+        lskws.update(kwargs)
+        doCoolStuff(**lskws)
+-------------------------
+In this example you can provide the parameter "globally" with the constructor or 
+by the function `run`. Here `mandatory1` and `mandatory2` are variables which 
+are required for the later function call and will be set locally in the function
+to default values. The values, along with other parameters, will be overwritten 
+by the internal values in the property `self.kwargs` or by the provided parameters
+in `kwargs`. 
+
+The order here is, take the values provided by `kwarags`. If not provided, take
+the parameters provided by `self.kwargs`. If not provided, take default values 
+of local parameters in `lskws`.
+
 
 == How to write binary bits to a file
 
@@ -892,7 +922,6 @@ class C(object):
  '_name2']          # <<< has not been changed
 
 --------------------------
-
 
 //////////////////////////
 CommentBlock:     //////////////////////////
