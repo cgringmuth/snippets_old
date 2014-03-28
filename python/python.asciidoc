@@ -119,12 +119,12 @@ if __name__ == '__main__':
 ----
 
 
-== Use "with" for files 
+== File handling 
 
 [TIP]
 Detailed description at source: http://docs.python.org/2/tutorial/inputoutput.html#methods-of-file-objects[docs.python.org]
 
-It is good practice to use the with keyword when dealing with file objects. This has the advantage that the file is properly closed after its suite finishes, even if an exception is raised on the way. It is also much shorter than writing equivalent try-finally blocks:
+It is good practice to use the `with` keyword when dealing with file objects. This has the advantage that the file is properly closed after its suite finishes, even if an exception is raised on the way. It is also much shorter than writing equivalent try-finally blocks:
 
 [source,python]
 ----
@@ -146,6 +146,14 @@ with open('a', 'w') as a, open('b', 'w') as b:
 doOtherStuff()  # <1>
 ----
 <1> a and b are closed here automatically even if  an exception raised
+
+=== Reading file in one line
+
+[source]
+----
+def _read(filename):
+    return [line.split() for line in open(filename)]
+----
 
 
 :test_link: http://www.python.org/dev/peps/pep-0008/#global-variable-names[#]

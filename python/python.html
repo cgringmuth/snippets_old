@@ -921,7 +921,7 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_use_with_for_files">7. Use "with" for files</h2>
+<h2 id="_file_handling">7. File handling</h2>
 <div class="sectionbody">
 <div class="admonitionblock">
 <table><tr>
@@ -931,7 +931,7 @@ http://www.gnu.org/software/src-highlite -->
 <td class="content">Detailed description at source: <a href="http://docs.python.org/2/tutorial/inputoutput.html#methods-of-file-objects">docs.python.org</a></td>
 </tr></table>
 </div>
-<div class="paragraph"><p>It is good practice to use the with keyword when dealing with file objects. This has the advantage that the file is properly closed after its suite finishes, even if an exception is raised on the way. It is also much shorter than writing equivalent try-finally blocks:</p></div>
+<div class="paragraph"><p>It is good practice to use the <span class="monospaced">with</span> keyword when dealing with file objects. This has the advantage that the file is properly closed after its suite finishes, even if an exception is raised on the way. It is also much shorter than writing equivalent try-finally blocks:</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
@@ -962,6 +962,16 @@ http://www.gnu.org/software/src-highlite -->
 a and b are closed here automatically even if  an exception raised
 </td></tr>
 </table></div>
+<div class="sect2">
+<h3 id="_reading_file_in_one_line">7.1. Reading file in one line</h3>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">_read</span></span><span style="color: #990000">(</span>filename<span style="color: #990000">):</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="color: #990000">[</span>line<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">split</span></span><span style="color: #990000">()</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> line <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span>filename<span style="color: #990000">)]</span></tt></pre></div></div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1979,7 +1989,7 @@ http://www.gnu.org/software/src-highlite -->
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2014-03-10 11:59:54 CET
+Last updated 2014-03-28 09:04:51 CET
 </div>
 </div>
 </body>
