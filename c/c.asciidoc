@@ -1,0 +1,160 @@
+= A List of +C+ Tips, Tricks and recipes/idioms
+:Author:                Christoph Hoffmann
+:Email:                 choffmann1983@gmail.com
+:Revision:              0.0.1 'http://semver.org/[(semver)]'
+:source-highlighter:    highlight
+:numbered:
+:toc:                   // set table of content
+:icons:                 // search for icons in :inconsdir: (default: ./images/icons.)
+:iconsdir:              ../asciidoc/images/icons
+:imagesdir:             ../asciidoc/images/
+// :scriptsdir:            ../asciidoc/js
+// :linkcss:
+
+:language:              c
+
+== Introduction
+
+todo ...
+
+Here is a list of interesting links:
+
+* http://ivory.idyll.org/articles/advanced-swc/[Intermediate and Advanced Software Carpentry in Python]
+* http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html[Code Like a Pythonista: Idiomatic Python]
+* http://code.activestate.com/recipes/langs/python/[Popular Python recipes ]
+
+== Tools (GNU)
+
+Before starting developing, you should read the https://www.gnu.org/prep/standards/[GNU coding standards] even though you are not intending to write GNU software.
+
+A list of https://www.gnu.org/manual/[GNU manuals].
+
+There is a package called https://www.gnu.org/software/hello/[hello] (https://www.gnu.org/software/hello/manual/[hello manual]) in the gnu project which serves as an example GNU package following good practice and the GNU coding standards. If one wants to write or maintain a GNU package, this package can be a starting point. It is based on `automake` and `autoconf` to be portable. To get the source of the package just invoke following command: `apt-get source hello`. If you just want to download that package invoke following command: `apt-get download hello`.
+
+=== gcc
+NOTE: *gcc* - GNU project C and C++ compiler
+
+=== cpp             
+NOTE: *cpp* - The C Preprocessor
+
+=== ldd             
+NOTE: *ldd* - print shared library dependencies
+
+=== ld              
+NOTE: *ld* - The GNU linker
+
+=== readelf         
+NOTE: *readelf* - Displays information about ELF file
+
+=== pkg-config      
+NOTE: *pkg-config* - Return metainformation about installed libraries
+
+=== ldconfig        
+NOTE: *ldconfig* - configure dynamic linker run-time bindings
+    
+=> ldconfig -p: list all installed/loaded libraries
+        -> ldonfig -p | grep -i opencv: find all libraries which contains opencv
+
+=== valgrind        
+NOTE: *valgrind* - a suite of tools for debugging and profiling programs
+
+=== Make
+[NOTE]
+==========================
+* https://www.gnu.org/software/make/[*gnu make*] - GNU make utility to maintain groups of  
+    programs 
+* https://www.gnu.org/software/make/[make manual]
+* http://c.learncodethehardway.org/book/ex2.html[Make Is Your Python Now]: for a nice introduction
+==========================
+
+Make knows how to build most of the source files. For example if you have a file named `foo.c` and invoke `make foo`. Make will call `cc foo.c -o foo`. If you want to set flags you can do this by invoking `CFLAGS="-Wall -g" make foo` which will result in `cc -Wall -g foo.c -o foo`. And if you want to to change the compiler you can do this by setting the `CC` flags like so: `CFLAGS="-Wall -g" CC=gcc make foo` which results in `gcc -Wall -g foo.c -o foo`.
+
+But is it more convenient to write makefiles which is a textfile which is loaded and interpreted by make if it is in the same folder and is called `makefile`.
+
+==== Makefile
+
+Some https://www.gnu.org/prep/standards/html_node/Makefile-Basics.html#Makefile-Basics[general conventions] from gnu.org.
+
+.Example of typical target
+[source, shell]
+--------------------------
+target: dependencies ..
+[tab]   commands
+        ...
+--------------------------
+
+Every Makefile should contain this line:
+
+    SHELL = /bin/sh
+
+to avoid trouble on systems where `SHELL` variable might inherited from the environment.
+
+Programs for building and compiling should be called by variables to enable users to substitute alternatives. For example following commands:
+
+    'ar bison cc flex install ld ldconfig lex make makeinfo ranlib texi2dvi yacc'
+
+should be called with following variables:
+
+    '$(AR) $(BISON) $(CC) $(FLEX) $(INSTALL) $(LD) $(LDCONFIG) $(LEX)
+    $(MAKE) $(MAKEINFO) $(RANLIB) $(TEXI2DVI) $(YACC)'
+
+
+
+=== Autoconf
+
+todo
+
+=== Automake
+
+todo
+
+
+=== Patching changes
+
+==== diff             
+NOTE: *diff* - compare files line by line
+
+compare files line by line
+    -> recommended way of using for patching: diff -Naur old new &> fix.patch
+    Example:
+        . ls => file1 newfile1
+        . diff -Naur file1 newfile1 &> fix.patch 
+            -> fix.patch conatins everything which has been changed in newfile1 compared to file1
+        . ls => file1 newfile1 fix.patch
+
+==== patch            
+NOTE: *patch* - apply a diff file to an original
+
+apply a diff file to an original
+
+    Example:
+        . patch -p0 -b < fix.patch
+        . file1 == newfile1
+        . -b: makes backup of the patched file > file1.orig
+
+== Workflow
+
+=== if
+
+--------------------------
+if(condition) {
+    statement
+} else if(condition) {
+    statement
+} else {
+    statement
+}
+--------------------------
+
+
+
+//////////////////////////
+CommentBlock:     //////////////////////////
+PassthroughBlock: ++++++++++++++++++++++++++
+ListingBlock:     --------------------------
+LiteralBlock:     ..........................
+SidebarBlock:     **************************
+QuoteBlock:       __________________________
+ExampleBlock:     ==========================
+OpenBlock:        --
+//////////////////////////
