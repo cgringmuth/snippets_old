@@ -73,7 +73,7 @@ But is it more convenient to write makefiles which is a textfile which is loaded
 
 ==== Makefile
 
-Some https://www.gnu.org/prep/standards/html_node/Makefile-Basics.html#Makefile-Basics[general conventions] from gnu.org.
+Some https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions[general conventions] from gnu.org.
 
 .Example of typical target
 [source, shell]
