@@ -97,7 +97,7 @@ Calling `make` results `prog1` and `prog2` assuming their exist `prog1.c` and `p
 
 ===== http://www.gnu.org/software/make/manual/make.html#Target_002dspecific[Target specific variables]
 
-If it is required to set additional variables you can use the targe specific variables which will be set only for the targe. For example if you have a macro `TEST` and want a traget which is called similar you can do the following:
+If it is required to set target specific variables you can use the targe specific variables. For example if you want a target which sets a macro `TEST`, following code will do the trick:
 
 --------------------------
 CFLAGS = -Wall -g
@@ -112,7 +112,7 @@ clean:
     rm -r $(SRC)
 --------------------------
 
-Here, when calling `make test` it will set the macro `TEST`.
+Calling `make test` will compile likewise the target `all` expect that the `TEST` macro will be set, which can be used in the source code.
 
 === gcc
 --------------------------
