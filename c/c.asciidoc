@@ -31,33 +31,6 @@ A list of https://www.gnu.org/manual/[GNU manuals].
 
 There is a package called https://www.gnu.org/software/hello/[hello] (https://www.gnu.org/software/hello/manual/[hello manual]) in the gnu project which serves as an example GNU package following good practice and the GNU coding standards. If one wants to write or maintain a GNU package, this package can be a starting point. It is based on `automake` and `autoconf` to be portable. To get the source of the package just invoke following command: `apt-get source hello`. If you just want to download that package invoke following command: `apt-get download hello`.
 
-=== gcc
-NOTE: *gcc* - GNU project C and C++ compiler
-
-=== cpp             
-NOTE: *cpp* - The C Preprocessor
-
-=== ldd             
-NOTE: *ldd* - print shared library dependencies
-
-=== ld              
-NOTE: *ld* - The GNU linker
-
-=== readelf         
-NOTE: *readelf* - Displays information about ELF file
-
-=== pkg-config      
-NOTE: *pkg-config* - Return metainformation about installed libraries
-
-=== ldconfig        
-NOTE: *ldconfig* - configure dynamic linker run-time bindings
-    
-=> ldconfig -p: list all installed/loaded libraries
-        -> ldonfig -p | grep -i opencv: find all libraries which contains opencv
-
-=== valgrind        
-NOTE: *valgrind* - a suite of tools for debugging and profiling programs
-
 === Make
 [NOTE]
 ==========================
@@ -99,8 +72,110 @@ should be called with following variables:
     $(MAKE) $(MAKEINFO) $(RANLIB) $(TEXI2DVI) $(YACC)'
 
 
+===== Using multiple targets
+
+WARNING: Is not correct. Has to be revised!
+
+If you want to compile multiple targets which should be compiled to the same name you can use `$<` which returns the depending filenames and `$@` which returns the target name.
+
+.Example of using $< and $@
+[source, shell]
+--------------------------
+CFLAGS = -Wall -g
+SRC = prog1 prog2
+
+all: $(SRC)
+
+$(SRC): $(SRC).c
+    $(CC) $(CFLAGS) $< -o $@ 
+
+clean: 
+    rm -r $(SRC)
+--------------------------
+Calling `make` results `prog1` and `prog2` assuming their exist `prog1.c` and `prog2.c`.
+
+
+===== http://www.gnu.org/software/make/manual/make.html#Target_002dspecific[Target specific variables]
+
+If it is required to set additional variables you can use the targe specific variables which will be set only for the targe. For example if you have a macro `TEST` and want a traget which is called similar you can do the following:
+
+--------------------------
+CFLAGS = -Wall -g
+SRC = prog1 prog2
+
+all: $(SRC)
+
+test: CFLAGS += -DTEST
+test: $(SRC) 
+
+clean: 
+    rm -r $(SRC)
+--------------------------
+
+Here, when calling `make test` it will set the macro `TEST`.
+
+=== gcc
+--------------------------
+GNU project C and C++ compiler
+--------------------------
+
+todo
+
+=== cpp             
+--------------------------
+The C Preprocessor
+--------------------------
+
+todo
+
+=== ldd             
+--------------------------
+Print shared library dependencies
+--------------------------
+
+=== ld              
+--------------------------
+The GNU linker
+--------------------------
+
+todo
+
+=== readelf         
+--------------------------
+Displays information about ELF file
+--------------------------
+
+todo
+
+=== pkg-config      
+--------------------------
+Return metainformation about installed libraries
+--------------------------
+
+todo
+
+=== ldconfig        
+--------------------------
+Configure dynamic linker run-time bindings
+--------------------------
+
+todo
+    
+=> ldconfig -p: list all installed/loaded libraries
+        -> ldonfig -p | grep -i opencv: find all libraries which contains opencv
+
+=== valgrind        
+--------------------------
+A suite of tools for debugging and profiling programs
+--------------------------
+
+todo
+
 
 === Autoconf
+--------------------------
+Generate configuration scripts
+--------------------------
 
 todo
 

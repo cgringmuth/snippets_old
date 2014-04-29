@@ -773,101 +773,11 @@ asciidoc.install(2);
 <div class="sect1">
 <h2 id="_tools_gnu">2. Tools (GNU)</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Before starting develping, you should read the <a href="https://www.gnu.org/prep/standards/">GNU coding standards</a> even though you are not intending to write GNU software.</p></div>
+<div class="paragraph"><p>Before starting developing, you should read the <a href="https://www.gnu.org/prep/standards/">GNU coding standards</a> even though you are not intending to write GNU software.</p></div>
 <div class="paragraph"><p>A list of <a href="https://www.gnu.org/manual/">GNU manuals</a>.</p></div>
-<div class="paragraph"><p>There is a package called <a href="https://www.gnu.org/software/hello/">hello</a> (<a href="https://www.gnu.org/software/hello/manual/">hello manual</a>) in the gnu project which serves as an example GNU package following good practise and the GNU coding standards. If one wants to write or maintain a GNU package, this package can be a starting point. It is based on <span class="monospaced">automake</span> and <span class="monospaced">autoconf</span> to be protable. To get the source of the package just invoke following command: <span class="monospaced">apt-get source hello</span>. If you just want to download that package invoke following command: <span class="monospaced">apt-get download hello</span>.</p></div>
+<div class="paragraph"><p>There is a package called <a href="https://www.gnu.org/software/hello/">hello</a> (<a href="https://www.gnu.org/software/hello/manual/">hello manual</a>) in the gnu project which serves as an example GNU package following good practice and the GNU coding standards. If one wants to write or maintain a GNU package, this package can be a starting point. It is based on <span class="monospaced">automake</span> and <span class="monospaced">autoconf</span> to be portable. To get the source of the package just invoke following command: <span class="monospaced">apt-get source hello</span>. If you just want to download that package invoke following command: <span class="monospaced">apt-get download hello</span>.</p></div>
 <div class="sect2">
-<h3 id="_gcc">2.1. gcc</h3>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<img src="../asciidoc/images/icons/note.png" alt="Note">
-</td>
-<td class="content"><strong>gcc</strong> - GNU project C and C++ compiler</td>
-</tr></table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_cpp">2.2. cpp</h3>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<img src="../asciidoc/images/icons/note.png" alt="Note">
-</td>
-<td class="content"><strong>cpp</strong> - The C Preprocessor</td>
-</tr></table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ldd">2.3. ldd</h3>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<img src="../asciidoc/images/icons/note.png" alt="Note">
-</td>
-<td class="content"><strong>ldd</strong> - print shared library dependencies</td>
-</tr></table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ld">2.4. ld</h3>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<img src="../asciidoc/images/icons/note.png" alt="Note">
-</td>
-<td class="content"><strong>ld</strong> - The GNU linker</td>
-</tr></table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_readelf">2.5. readelf</h3>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<img src="../asciidoc/images/icons/note.png" alt="Note">
-</td>
-<td class="content"><strong>readelf</strong> - Displays information about ELF file</td>
-</tr></table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_pkg_config">2.6. pkg-config</h3>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<img src="../asciidoc/images/icons/note.png" alt="Note">
-</td>
-<td class="content"><strong>pkg-config</strong> - Return metainformation about installed libraries</td>
-</tr></table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ldconfig">2.7. ldconfig</h3>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<img src="../asciidoc/images/icons/note.png" alt="Note">
-</td>
-<td class="content"><strong>ldconfig</strong> - configure dynamic linker run-time bindings</td>
-</tr></table>
-</div>
-<div class="paragraph"><p>&#8658; ldconfig -p: list all installed/loaded libraries
-        &#8594; ldonfig -p | grep -i opencv: find all libraries which contains opencv</p></div>
-</div>
-<div class="sect2">
-<h3 id="_valgrind">2.8. valgrind</h3>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<img src="../asciidoc/images/icons/note.png" alt="Note">
-</td>
-<td class="content"><strong>valgrind</strong> - a suite of tools for debugging and profiling programs</td>
-</tr></table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_make">2.9. Make</h3>
+<h3 id="_make">2.1. Make</h3>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -898,8 +808,8 @@ asciidoc.install(2);
 <div class="paragraph"><p>Make knows how to build most of the source files. For example if you have a file named <span class="monospaced">foo.c</span> and invoke <span class="monospaced">make foo</span>. Make will call <span class="monospaced">cc foo.c -o foo</span>. If you want to set flags you can do this by invoking <span class="monospaced">CFLAGS="-Wall -g" make foo</span> which will result in <span class="monospaced">cc -Wall -g foo.c -o foo</span>. And if you want to to change the compiler you can do this by setting the <span class="monospaced">CC</span> flags like so: <span class="monospaced">CFLAGS="-Wall -g" CC=gcc make foo</span> which results in <span class="monospaced">gcc -Wall -g foo.c -o foo</span>.</p></div>
 <div class="paragraph"><p>But is it more convenient to write makefiles which is a textfile which is loaded and interpreted by make if it is in the same folder and is called <span class="monospaced">makefile</span>.</p></div>
 <div class="sect3">
-<h4 id="_makefile">2.9.1. Makefile</h4>
-<div class="paragraph"><p>Some <a href="https://www.gnu.org/prep/standards/html_node/Makefile-Basics.html#Makefile-Basics">general conventions</a> from gnu.org.</p></div>
+<h4 id="_makefile">2.1.1. Makefile</h4>
+<div class="paragraph"><p>Some <a href="https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions">general conventions</a> from gnu.org.</p></div>
 <div class="listingblock">
 <div class="title">Example of typical target</div>
 <div class="content"><!-- Generator: GNU source-highlight 3.1.6
@@ -915,7 +825,7 @@ http://www.gnu.org/software/src-highlite -->
 <pre>SHELL = /bin/sh</pre>
 </div></div>
 <div class="paragraph"><p>to avoid trouble on systems where <span class="monospaced">SHELL</span> variable might inherited from the environment.</p></div>
-<div class="paragraph"><p>Programs for building and compiling should be called by variables to enbale users to substitute alternatives. For example following commands:</p></div>
+<div class="paragraph"><p>Programs for building and compiling should be called by variables to enable users to substitute alternatives. For example following commands:</p></div>
 <div class="literalblock">
 <div class="content monospaced">
 <pre>'ar bison cc flex install ld ldconfig lex make makeinfo ranlib texi2dvi yacc'</pre>
@@ -926,10 +836,119 @@ http://www.gnu.org/software/src-highlite -->
 <pre>'$(AR) $(BISON) $(CC) $(FLEX) $(INSTALL) $(LD) $(LDCONFIG) $(LEX)
 $(MAKE) $(MAKEINFO) $(RANLIB) $(TEXI2DVI) $(YACC)'</pre>
 </div></div>
+<div class="sect4">
+<h5 id="_using_multiple_targets">Using multiple targets</h5>
+<div class="paragraph"><p>If you want to compile multiple targets which should be compiled to the same name you can use <span class="monospaced">$&lt;</span> which returns the depending filenames and <span class="monospaced">$@</span> which returns the target name.</p></div>
+<div class="listingblock">
+<div class="title">Example of using $&lt; and $@</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>CFLAGS <span style="color: #990000">=</span> -Wall -g
+SRC <span style="color: #990000">=</span> prog1 prog2
+
+all<span style="color: #990000">:</span> <span style="color: #009900">$(SRC)</span>
+
+<span style="color: #009900">$(SRC)</span><span style="color: #990000">:</span> <span style="color: #009900">$(SRC)</span><span style="color: #990000">.</span>c
+    <span style="color: #009900">$(CC)</span> <span style="color: #009900">$(CFLAGS)</span> <span style="color: #009900">$&lt;</span> -o <span style="color: #009900">$@</span>
+
+clean<span style="color: #990000">:</span>
+    rm -r <span style="color: #009900">$(SRC)</span></tt></pre></div></div>
+<div class="paragraph"><p>Calling <span class="monospaced">make</span> results <span class="monospaced">prog1</span> and <span class="monospaced">prog2</span> assuming their exist <span class="monospaced">prog1.c</span> and <span class="monospaced">prog2.c</span>.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_a_href_http_www_gnu_org_software_make_manual_make_html_target_002dspecific_target_specific_variables_a"><a href="http://www.gnu.org/software/make/manual/make.html#Target_002dspecific">Target specific variables</a></h5>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>CFLAGS = -Wall -g
+SRC = prog1 prog2
+
+all: $(SRC)
+
+$(SRC): $(SRC).c
+    $(CC) $(CFLAGS) $&lt; -o $@
+
+test: CFLAGS += -DTEST
+test: $(SRC)
+
+clean:
+    rm -r $(SRC)</pre>
+</div></div>
+</div>
 </div>
 </div>
 <div class="sect2">
+<h3 id="_gcc">2.2. gcc</h3>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>GNU project C and C++ compiler</pre>
+</div></div>
+<div class="paragraph"><p>todo</p></div>
+</div>
+<div class="sect2">
+<h3 id="_cpp">2.3. cpp</h3>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>The C Preprocessor</pre>
+</div></div>
+<div class="paragraph"><p>todo</p></div>
+</div>
+<div class="sect2">
+<h3 id="_ldd">2.4. ldd</h3>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>Print shared library dependencies</pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_ld">2.5. ld</h3>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>The GNU linker</pre>
+</div></div>
+<div class="paragraph"><p>todo</p></div>
+</div>
+<div class="sect2">
+<h3 id="_readelf">2.6. readelf</h3>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>Displays information about ELF file</pre>
+</div></div>
+<div class="paragraph"><p>todo</p></div>
+</div>
+<div class="sect2">
+<h3 id="_pkg_config">2.7. pkg-config</h3>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>Return metainformation about installed libraries</pre>
+</div></div>
+<div class="paragraph"><p>todo</p></div>
+</div>
+<div class="sect2">
+<h3 id="_ldconfig">2.8. ldconfig</h3>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>Configure dynamic linker run-time bindings</pre>
+</div></div>
+<div class="paragraph"><p>todo</p></div>
+<div class="paragraph"><p>&#8658; ldconfig -p: list all installed/loaded libraries
+        &#8594; ldonfig -p | grep -i opencv: find all libraries which contains opencv</p></div>
+</div>
+<div class="sect2">
+<h3 id="_valgrind">2.9. valgrind</h3>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>A suite of tools for debugging and profiling programs</pre>
+</div></div>
+<div class="paragraph"><p>todo</p></div>
+</div>
+<div class="sect2">
 <h3 id="_autoconf">2.10. Autoconf</h3>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>Generate configuration scripts</pre>
+</div></div>
 <div class="paragraph"><p>todo</p></div>
 </div>
 <div class="sect2">
@@ -1001,7 +1020,7 @@ $(MAKE) $(MAKEINFO) $(RANLIB) $(TEXI2DVI) $(YACC)'</pre>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2014-04-23 20:16:33 CEST
+Last updated 2014-04-29 20:56:18 CEST
 </div>
 </div>
 </body>
