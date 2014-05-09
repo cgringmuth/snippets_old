@@ -23,6 +23,16 @@ Here is a list of interesting links:
 * http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html[Code Like a Pythonista: Idiomatic Python]
 * http://code.activestate.com/recipes/langs/python/[Popular Python recipes ]
 
+== List of good literature
+
+* http://www.gnu.org/software/libc/manual/pdf/libc.pdf[The GNU C Library
+Reference Manual]
+* https://www.kernel.org/doc/Documentation/CodingStyle[Linux kernel coding style]
+* http://lwn.net/Articles/250967/[What every programmer should know about memory, Part 1]
+* http://lwn.net/Articles/336224/[Linux kernel design patterns - part 1]
+* https://lwn.net/Kernel/LDD3/[Linux Device Drivers, Third Edition]
+* todo
+
 == GNU building tools
 
 Before starting developing, you should read the https://www.gnu.org/prep/standards/[GNU coding standards] even though you are not intending to write GNU software.
