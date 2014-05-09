@@ -771,7 +771,7 @@ asciidoc.install(2);
 </div>
 </div>
 <div class="sect1">
-<h2 id="_tools_gnu">2. Tools (GNU)</h2>
+<h2 id="_gnu_building_tools">2. GNU building tools</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Before starting developing, you should read the <a href="https://www.gnu.org/prep/standards/">GNU coding standards</a> even though you are not intending to write GNU software.</p></div>
 <div class="paragraph"><p>A list of <a href="https://www.gnu.org/manual/">GNU manuals</a>.</p></div>
@@ -864,6 +864,16 @@ all<span style="color: #990000">:</span> <span style="color: #009900">$(SRC)</sp
 clean<span style="color: #990000">:</span>
     rm -r <span style="color: #009900">$(SRC)</span></tt></pre></div></div>
 <div class="paragraph"><p>Calling <span class="monospaced">make</span> results <span class="monospaced">prog1</span> and <span class="monospaced">prog2</span> assuming their exist <span class="monospaced">prog1.c</span> and <span class="monospaced">prog2.c</span>.</p></div>
+<div class="listingblock">
+<div class="title">Brief summary of <a href="http://www.gnu.org/software/make/manual/make.html#Automatic-Variables">Automatic variables</a></div>
+<div class="content monospaced">
+<pre>For more detailes just go to http://www.gnu.org/software/make/manual/make.html#Automatic-Variables[Automatic variables]
+
+* `$@` The name of the target file (the one before the colon)
+* `$&lt;` The name of the first (or only) prerequisite file (the first one after the colon)
+* `$^` The names of all the prerequisite files (space separated)
+* `$*` The stem (the bit which matches the % wildcard in the rule definition.</pre>
+</div></div>
 </div>
 <div class="sect4">
 <h5 id="_a_href_http_www_gnu_org_software_make_manual_make_html_target_002dspecific_target_specific_variables_a"><a href="http://www.gnu.org/software/make/manual/make.html#Target_002dspecific">Target specific variables</a></h5>
@@ -891,7 +901,7 @@ clean:
 <div class="content monospaced">
 <pre>GNU project C and C++ compiler</pre>
 </div></div>
-<div class="paragraph"><p>todo</p></div>
+<div class="paragraph"><p>If you want to know the default include paths you have to consulte the used preprocessor which is in charge of replaceing all preprocessor commands including <span class="monospaced">#include</span> with actual valid C/C++ code. Just use <span class="monospaced">cpp -v</span> to show the required information.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_cpp">2.3. cpp</h3>
@@ -899,7 +909,9 @@ clean:
 <div class="content monospaced">
 <pre>The C Preprocessor</pre>
 </div></div>
-<div class="paragraph"><p>todo</p></div>
+<div class="paragraph"><p>"The C preprocessor, often known as cpp, is a macro processor that is used automatically by the C compiler to transform your program before
+compilation.  It is called a macro processor because it allows you to define macros, which are brief abbreviations for longer constructs."</p></div>
+<div class="paragraph"><p><span class="monospaced">cpp -v</span> is the verbose mode which depitcs the default include paths and other useful information. If you&#8217;re working with microcontroller you might be familiar with the <span class="monospaced">avr-*</span> applications (especially if you&#8217;re working with arduino or other prototype boards). For the avr system exist also a preprocessor <em>avr-cpp</em> which can be used, inter alia, to figure out where to find the default including files: <span class="monospaced">avr-cpp -v</span>.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_ldd">2.4. ldd</h3>
@@ -951,7 +963,12 @@ clean:
 <div class="paragraph"><p>todo</p></div>
 </div>
 <div class="sect2">
-<h3 id="_autoconf">2.10. Autoconf</h3>
+<h3 id="_configure_script">2.10. Configure script</h3>
+<div class="paragraph"><p><a href="http://www.gnu.org/prep/standards/html_node/Directory-Variables.html">Coding standards: Directory Variables</a> also for autoconf</p></div>
+<div class="paragraph"><p>todo</p></div>
+</div>
+<div class="sect2">
+<h3 id="_autoconf">2.11. Autoconf</h3>
 <div class="listingblock">
 <div class="content monospaced">
 <pre>Generate configuration scripts</pre>
@@ -959,13 +976,13 @@ clean:
 <div class="paragraph"><p>todo</p></div>
 </div>
 <div class="sect2">
-<h3 id="_automake">2.11. Automake</h3>
+<h3 id="_automake">2.12. Automake</h3>
 <div class="paragraph"><p>todo</p></div>
 </div>
 <div class="sect2">
-<h3 id="_patching_changes">2.12. Patching changes</h3>
+<h3 id="_patching_changes">2.13. Patching changes</h3>
 <div class="sect3">
-<h4 id="_diff">2.12.1. diff</h4>
+<h4 id="_diff">2.13.1. diff</h4>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -983,7 +1000,7 @@ clean:
         . ls &#8658; file1 newfile1 fix.patch</p></div>
 </div>
 <div class="sect3">
-<h4 id="_patch">2.12.2. patch</h4>
+<h4 id="_patch">2.13.2. patch</h4>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -1027,7 +1044,7 @@ clean:
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2014-04-29 21:15:55 CEST
+Last updated 2014-05-09 18:51:57 CEST
 </div>
 </div>
 </body>

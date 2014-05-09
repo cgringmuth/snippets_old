@@ -23,7 +23,7 @@ Here is a list of interesting links:
 * http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html[Code Like a Pythonista: Idiomatic Python]
 * http://code.activestate.com/recipes/langs/python/[Popular Python recipes ]
 
-== Tools (GNU)
+== GNU building tools
 
 Before starting developing, you should read the https://www.gnu.org/prep/standards/[GNU coding standards] even though you are not intending to write GNU software.
 
@@ -95,6 +95,18 @@ clean:
 Calling `make` results `prog1` and `prog2` assuming their exist `prog1.c` and `prog2.c`.
 
 
+.Brief summary of http://www.gnu.org/software/make/manual/make.html#Automatic-Variables[Automatic variables]
+--------------------------
+For more detailes just go to http://www.gnu.org/software/make/manual/make.html#Automatic-Variables[Automatic variables]
+
+* `$@` The name of the target file (the one before the colon)
+* `$<` The name of the first (or only) prerequisite file (the first one after the colon)
+* `$^` The names of all the prerequisite files (space separated)
+* `$*` The stem (the bit which matches the % wildcard in the rule definition.
+--------------------------
+
+
+
 ===== http://www.gnu.org/software/make/manual/make.html#Target_002dspecific[Target specific variables]
 
 If it is required to set target specific variables you can use the targe specific variables. For example if you want a target which sets a macro `TEST`, following code will do the trick:
@@ -119,14 +131,18 @@ Calling `make test` will compile likewise the target `all` expect that the `TEST
 GNU project C and C++ compiler
 --------------------------
 
-todo
+If you want to know the default include paths you have to consulte the used preprocessor which is in charge of replaceing all preprocessor commands including `#include` with actual valid C/C++ code. Just use `cpp -v` to show the required information.
 
 === cpp             
 --------------------------
 The C Preprocessor
 --------------------------
 
-todo
+"The C preprocessor, often known as cpp, is a macro processor that is used automatically by the C compiler to transform your program before
+compilation.  It is called a macro processor because it allows you to define macros, which are brief abbreviations for longer constructs."
+
+
+`cpp -v` is the verbose mode which depitcs the default include paths and other useful information. If you're working with microcontroller you might be familiar with the `avr-*` applications (especially if you're working with arduino or other prototype boards). For the avr system exist also a preprocessor 'avr-cpp' which can be used, inter alia, to figure out where to find the default including files: `avr-cpp -v`.
 
 === ldd             
 --------------------------
@@ -168,6 +184,13 @@ todo
 --------------------------
 A suite of tools for debugging and profiling programs
 --------------------------
+
+todo
+
+
+=== Configure script
+
+http://www.gnu.org/prep/standards/html_node/Directory-Variables.html[Coding standards: Directory Variables] also for autoconf
 
 todo
 
