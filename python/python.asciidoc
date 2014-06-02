@@ -906,9 +906,12 @@ class C(object):
     __name = None
     _name2 = None
     
->>> c = C()
->>> dir(c)
-['_C__name',        # <<< notice _C in front of name
+class D(C):
+    pass
+    
+>>> d = D()
+>>> dir(d)
+['_C__name',        # <<< notice _C in front of name -> thus, this variable can be used in the current Class only
  '__class__',
  '__delattr__',
  '__dict__',
@@ -927,8 +930,160 @@ class C(object):
  '__str__',
  '__subclasshook__',
  '__weakref__',
- '_name2']          # <<< has not been changed
+ '_name2']          # <<< has not been changed -> thus, this property can be easily used in sublcasses
 
+--------------------------
+
+
+== @override and @implements decorators
+
+The following `@overrides` and `@implements` decoratos can be used to show
+that the following functions overrides or implements the method from super class.
+It also copies the `__doc__` string from the super method if it is not specified
+in the new function. http://pydev.blogspot.de/2011/06/overrideimplements-templates-on-pydev.html[src]
+
+.decoratos.py
+[source]
+--------------------------
+def overrides(method):
+    def wrapper(func):
+        if func.__name__ != method.__name__:
+            msg = "Wrong @override: %r expected, but overwriting %r."
+            msg = msg % (func.__name__, method.__name__)
+            raise AssertionError(msg)
+
+        if func.__doc__ is None:
+            func.__doc__ = method.__doc__
+
+        return func
+
+    return wrapper
+
+
+def implements(method):
+    def wrapper(func):
+        if func.__name__ != method.__name__:
+            msg = "Wrong @implements: %r expected, but implementing %r."
+            msg = msg % (func.__name__, method.__name__)
+            raise AssertionError(msg)
+
+        if func.__doc__ is None:
+            func.__doc__ = method.__doc__
+
+        return func
+
+    return wrapper
+--------------------------
+
+== Docstring copy with decorators
+
+NOTE: Heavily borrowed from https://github.com/matplotlib/matplotlib[matplotlib]. https://github.com/matplotlib/matplotlib/blob/master/lib/matplotlib/docstring.py[docstring.py]
+
+This decorator can be used to copy the docstring from function to another. This is usefule in cases where a wrapper function
+calls an internal function which does mostly the same and has the same interface.
+
+IMPORTANT: Instead of writing your own `docstring.py` please consider to use that provided by `matplotlib`: `from matplotlib import docstring`
+
+.docstring.py
+[source]
+--------------------------
+import re
+
+# A regular expression used to determine the amount of space to
+# remove.  It looks for the first sequence of spaces immediately
+# following the first newline, or at the beginning of the string.
+_find_dedent_regex = re.compile("(?:(?:\n\r?)|^)( *)\S")
+# A cache to hold the regexs that actually remove the indent.
+_dedent_regex = {}
+
+def _dedent(s):
+    """
+    Remove excess indentation from docstring *s*.
+
+    Discards any leading blank lines, then removes up to n whitespace
+    characters from each line, where n is the number of leading
+    whitespace characters in the first line. It differs from
+    textwrap.dedent in its deletion of leading blank lines and its use
+    of the first non-blank line to determine the indentation.
+
+    It is also faster in most cases.
+    """
+    # This implementation has a somewhat obtuse use of regular
+    # expressions.  However, this function accounted for almost 30% of
+    # matplotlib startup time, so it is worthy of optimization at all
+    # costs.
+
+    if not s:      # includes case of s is None
+        return ''
+
+    match = _find_dedent_regex.match(s)
+    if match is None:
+        return s
+
+    # This is the number of spaces to remove from the left-hand side.
+    nshift = match.end(1) - match.start(1)
+    if nshift == 0:
+        return s
+
+    # Get a regex that will remove *up to* nshift spaces from the
+    # beginning of each line.  If it isn't in the cache, generate it.
+    unindent = _dedent_regex.get(nshift, None)
+    if unindent is None:
+        unindent = re.compile("\n\r? {0,%d}" % nshift)
+        _dedent_regex[nshift] = unindent
+
+    result = unindent.sub("\n", s).strip()
+    return result
+
+def dedent(func):
+    "Dedent a docstring (if present)"
+    func.__doc__ = func.__doc__ and _dedent(func.__doc__)
+    return func
+
+def copy_dedent(source):
+    """A decorator that will copy the docstring from the source and
+    then dedent it"""
+    # note the following is ugly because "Python is not a functional
+    # language" - GVR. Perhaps one day, functools.compose will exist.
+    #  or perhaps not.
+    #  http://mail.python.org/pipermail/patches/2007-February/021687.html
+    return lambda target: dedent(copy(source)(target))
+
+def copy(source):
+    "Copy a docstring from another source function (if present)"
+    def do_copy(target):
+        if source.__doc__:
+            target.__doc__ = source.__doc__
+        return target
+    return do_copy
+
+class Appender(object):
+    """
+    A function decorator that will append an addendum to the docstring
+    of the target function.
+
+    This decorator should be robust even if func.__doc__ is None
+    (for example, if -OO was passed to the interpreter).
+
+    Usage: construct a docstring.Appender with a string to be joined to
+    the original docstring. An optional 'join' parameter may be supplied
+    which will be used to join the docstring and addendum. e.g.
+
+    add_copyright = Appender("Copyright (c) 2009", join='\n')
+
+    @add_copyright
+    def my_dog(has='fleas'):
+        "This docstring will have a copyright below"
+        pass
+    """
+    def __init__(self, addendum, join=''):
+        self.addendum = addendum
+        self.join = join
+
+    def __call__(self, func):
+        docitems = [func.__doc__, self.addendum]
+        func.__doc__ = func.__doc__ and self.join.join(docitems)
+        return func
 --------------------------
 
 //////////////////////////
