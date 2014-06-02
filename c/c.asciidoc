@@ -152,7 +152,7 @@ The C Preprocessor
 compilation.  It is called a macro processor because it allows you to define macros, which are brief abbreviations for longer constructs."
 
 
-`cpp -v` is the verbose mode which depitcs the default include paths and other useful information. If you're working with microcontroller you might be familiar with the `avr-*` applications (especially if you're working with arduino or other prototype boards). For the avr system exist also a preprocessor 'avr-cpp' which can be used, inter alia, to figure out where to find the default including files: `avr-cpp -v`.
+`cpp -v` is the verbose mode which depicts the default include paths and other useful information. If you're working with microcontroller you might be familiar with the `avr-*` applications (especially if you're working with arduino or other prototype boards). For the avr system a preprocessor 'avr-cpp' exits also, which can be used, inter alia, to figure out where to find the default including files: `avr-cpp -v`.
 
 === ldd             
 --------------------------
