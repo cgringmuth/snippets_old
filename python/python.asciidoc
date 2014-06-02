@@ -815,6 +815,8 @@ variable access or assignment.
 
 === Decorator
 
+TIP: Read http://legacy.python.org/dev/peps/pep-0318/[pep-318] for more information
+
 Decorate each function with purpose. `@property` has to start each property.
 
 .Example code
