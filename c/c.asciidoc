@@ -121,6 +121,7 @@ For more detailes just go to http://www.gnu.org/software/make/manual/make.html#A
 
 If it is required to set target specific variables you can use the targe specific variables. For example if you want a target which sets a macro `TEST`, following code will do the trick:
 
+[source, shell]
 --------------------------
 CFLAGS = -Wall -g
 SRC = prog1 prog2
