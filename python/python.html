@@ -1761,7 +1761,46 @@ If the current module is loaded from another module, which is called as main, th
 </div>
 </div>
 <div class="sect1">
-<h2 id="_check_if_assertion_turned_off">24. Check if assertion turned off</h2>
+<h2 id="_python_and_optimization">24. Python and optimization</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>If you run a python script without optimization this is normally invoked in debug mode (check <a href="https://docs.python.org/2/library/constants.html?highlight=%5F%5Fdebug%5F%5F#%5F%5Fdebug%5F%5F">__debug__</a>). This means for example that all
+assertions will be tested. You can test if python is running in debug mode by invoking following code:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>    $ python -c <span style="color: #FF0000">'print __debug__'</span>
+    True
+    $ python -c <span style="color: #FF0000">'assert False, "assert"'</span>
+    Traceback <span style="color: #990000">(</span>most recent call last<span style="color: #990000">):</span>
+      File <span style="color: #FF0000">"&lt;string&gt;"</span><span style="color: #990000">,</span> line <span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="color: #990000">&lt;</span>module<span style="color: #990000">&gt;</span>
+    AssertionError<span style="color: #990000">:</span> assert</tt></pre></div></div>
+<div class="paragraph"><p>Turning optimization on by passing <span class="monospaced">-O</span> or <span class="monospaced">-OO</span> to python, will optimize the script (the latter will also discard the docstring in favor for optimal code), which includes that alle assertions
+will be ignored (see <span class="monospaced">man python</span> or <a href="https://docs.python.org/2/using/cmdline.html?highlight=#-O">html</a> for more details;
+or just invoke <span class="monospaced">python -h</span>).</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>    $ python -OO -c <span style="color: #FF0000">'print __debug__'</span>
+    False
+    $ python -O -c <span style="color: #FF0000">'assert False, "assert"'</span>
+    <span style="color: #990000">&lt;</span>blank<span style="color: #990000">&gt;</span> <span style="font-style: italic"><span style="color: #9A1900"># &lt;- assertion should have been thrown if it wasn't be ignored</span></span></tt></pre></div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="../asciidoc/images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">For testing you should run your scripts in debug mode. To deploy or running the scripts in actual task (assuming you
+have tested everything properly) you should run your scripts in optimzation mode.</td>
+</tr></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_check_if_assertion_turned_off">25. Check if assertion turned off</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Assertions are useful for several things such as:</p></div>
 <div class="ulist"><ul>
@@ -1809,7 +1848,7 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_properties">25. Properties</h2>
+<h2 id="_properties">26. Properties</h2>
 <div class="sectionbody">
 <div class="admonitionblock">
 <table><tr>
@@ -1855,7 +1894,7 @@ variable access or assignment.</td>
 </tr></table>
 </div>
 <div class="sect2">
-<h3 id="_decorator">25.1. Decorator</h3>
+<h3 id="_decorator">26.1. Decorator</h3>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -1911,7 +1950,7 @@ Another good link to why to use <a href="http://stackoverflow.com/a/6618176/1959
 </ul></div>
 </div>
 <div class="sect2">
-<h3 id="_using_constructor">25.2. Using constructor</h3>
+<h3 id="_using_constructor">26.2. Using constructor</h3>
 <div class="paragraph"><p>Source: article: <a href="http://tomayko.com/writings/getters-setters-fuxors">http://tomayko.com/writings/getters-setters-fuxors</a></p></div>
 <div class="paragraph"><p>Calling <a href="http://docs.python.org/2/library/functions.html?highlight=property#property">property constructor</a> for each property.</p></div>
 <div class="listingblock">
@@ -1953,7 +1992,7 @@ contact<span style="color: #990000">.</span>email <span style="color: #990000">=
 contact<span style="color: #990000">.</span>email <span style="color: #990000">=</span> <span style="color: #FF0000">"xx.com"</span>    <span style="font-style: italic"><span style="color: #9A1900"># Exception</span></span></tt></pre></div></div>
 </div>
 <div class="sect2">
-<h3 id="_private_variables">25.3. Private variables</h3>
+<h3 id="_private_variables">26.3. Private variables</h3>
 <div class="paragraph"><p>"Any identifier of the form __spam (at least two leading underscores, at most one trailing underscore) is textually replaced with _classname__spam, where classname is the current class name with leading underscore(s) stripped."
 This prevents a sublcass from using self.__spam!</p></div>
 <div class="listingblock">
@@ -1996,7 +2035,7 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_override_and_implements_decorators">26. @override and @implements decorators</h2>
+<h2 id="_override_and_implements_decorators">27. @override and @implements decorators</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>The following <span class="monospaced">@overrides</span> and <span class="monospaced">@implements</span> decoratos can be used to show
 that the following functions overrides or implements the method from super class.
@@ -2039,7 +2078,7 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_docstring_copy_with_decorators">27. Docstring copy with decorators</h2>
+<h2 id="_docstring_copy_with_decorators">28. Docstring copy with decorators</h2>
 <div class="sectionbody">
 <div class="admonitionblock">
 <table><tr>
@@ -2056,7 +2095,7 @@ calls an internal function which does mostly the same and has the same interface
 <td class="icon">
 <img src="../asciidoc/images/icons/important.png" alt="Important">
 </td>
-<td class="content">Instead of writing your own <span class="monospaced">docstring.py</span> please consider to use that provided by <span class="monospaced">matplotlib</span>: <span class="monospaced">from matplotlib import docstring</span></td>
+<td class="content">Instead of writing your own <span class="monospaced">docstring.py</span> please consider to use that provided by matplotlib: <span class="monospaced">from matplotlib import docstring</span></td>
 </tr></table>
 </div>
 <div class="listingblock">
@@ -2169,7 +2208,7 @@ _dedent_regex <span style="color: #990000">=</span> <span style="color: #990000"
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2014-06-02 18:25:30 CEST
+Last updated 2014-06-04 16:07:50 CEST
 </div>
 </div>
 </body>
