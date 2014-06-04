@@ -739,6 +739,35 @@ if __name__ == "__main__":       # <1>
 <1> If the current module is loaded from another module, which is called as main, this `if` has to be omitted.
 
 
+== Python and optimization
+
+If you run a python script without optimization this is normally invoked in debug mode (check https://docs.python.org/2/library/constants.html?highlight=%5F%5Fdebug%5F%5F#%5F%5Fdebug%5F%5F[\\__debug__]). This means for example that all
+assertions will be tested. You can test if python is running in debug mode by invoking following code:
+[source, shell]
+--------------------------
+    $ python -c 'print __debug__'
+    True
+    $ python -c 'assert False, "assert"'
+    Traceback (most recent call last):
+      File "<string>", line 1, in <module>
+    AssertionError: assert
+--------------------------
+
+Turning optimization on by passing `-O` or `-OO` to python, will optimize the script (the latter will also discard the docstring in favor for optimal code), which includes that alle assertions
+will be ignored (see `man python` or https://docs.python.org/2/using/cmdline.html?highlight=#-O[html] for more details;
+or just invoke `python -h`). 
+[source, shell]
+--------------------------
+    $ python -OO -c 'print __debug__'
+    False
+    $ python -O -c 'assert False, "assert"'
+    <blank> # <- assertion should have been thrown if it wasn't be ignored
+--------------------------
+
+TIP: For testing you should run your scripts in debug mode. To deploy or running the scripts in actual task (assuming you
+have tested everything properly) you should run your scripts in optimzation mode.
+
+
 == Check if assertion turned off
 Assertions are useful for several things such as:
 
