@@ -1013,7 +1013,7 @@ NOTE: Heavily borrowed from https://github.com/matplotlib/matplotlib[matplotlib]
 This decorator can be used to copy the docstring from function to another. This is usefule in cases where a wrapper function
 calls an internal function which does mostly the same and has the same interface.
 
-IMPORTANT: Instead of writing your own `docstring.py` please consider to use that provided by `matplotlib`: `from matplotlib import docstring`
+IMPORTANT: Instead of writing your own `docstring.py` please consider to use that provided by matplotlib: `from matplotlib import docstring`
 
 .docstring.py
 [source]
