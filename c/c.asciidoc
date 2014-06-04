@@ -137,12 +137,37 @@ clean:
 
 Calling `make test` will compile likewise the target `all` expect that the `TEST` macro will be set, which can be used in the source code.
 
+
 === gcc
 --------------------------
 GNU project C and C++ compiler
 --------------------------
 
 If you want to know the default include paths you have to consulte the used preprocessor which is in charge of replaceing all preprocessor commands including `#include` with actual valid C/C++ code. Just use `cpp -v` to show the required information.
+
+
+===== gcc dump preprocessor defines
+
+[source, shell]
+--------------------------
+$ gcc -dM -E - < /dev/null
+--------------------------
+
+examples
+
+[source, shell]
+--------------------------
+$ gcc -dM -E -msse4 - < /dev/null | grep SSE[34]
+--------------------------
+
+
+How do I dump preprocessor macros coming from a particular header file:
+
+[source, shell]
+--------------------------
+$ echo "#include <sys/socket.h>" | gcc -E -dM - | grep SOMAXCONN
+#define SOMAXCONN 128
+--------------------------
 
 === cpp             
 --------------------------
@@ -245,6 +270,7 @@ apply a diff file to an original
 
 === if
 
+[source]
 --------------------------
 if(condition) {
     statement
