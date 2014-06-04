@@ -1856,6 +1856,14 @@ variable access or assignment.</td>
 </div>
 <div class="sect2">
 <h3 id="_decorator">25.1. Decorator</h3>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="../asciidoc/images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">Read <a href="http://legacy.python.org/dev/peps/pep-0318/">pep-318</a> for more information</td>
+</tr></table>
+</div>
 <div class="paragraph"><p>Decorate each function with purpose. <span class="monospaced">@property</span> has to start each property.</p></div>
 <div class="listingblock">
 <div class="title">Example code</div>
@@ -1958,9 +1966,12 @@ http://www.gnu.org/software/src-highlite -->
     __name <span style="color: #990000">=</span> None
     _name2 <span style="color: #990000">=</span> None
 
-<span style="color: #990000">&gt;&gt;&gt;</span> c <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">C</span></span><span style="color: #990000">()</span>
-<span style="color: #990000">&gt;&gt;&gt;</span> <span style="font-weight: bold"><span style="color: #000000">dir</span></span><span style="color: #990000">(</span>c<span style="color: #990000">)</span>
-<span style="color: #990000">[</span><span style="color: #FF0000">'_C__name'</span><span style="color: #990000">,</span>        <span style="font-style: italic"><span style="color: #9A1900"># &lt;&lt;&lt; notice _C in front of name</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="font-weight: bold"><span style="color: #000000">D</span></span><span style="color: #990000">(</span>C<span style="color: #990000">):</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">pass</span></span>
+
+<span style="color: #990000">&gt;&gt;&gt;</span> d <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">D</span></span><span style="color: #990000">()</span>
+<span style="color: #990000">&gt;&gt;&gt;</span> <span style="font-weight: bold"><span style="color: #000000">dir</span></span><span style="color: #990000">(</span>d<span style="color: #990000">)</span>
+<span style="color: #990000">[</span><span style="color: #FF0000">'_C__name'</span><span style="color: #990000">,</span>        <span style="font-style: italic"><span style="color: #9A1900"># &lt;&lt;&lt; notice _C in front of name -&gt; thus, this variable can be used in the current Class only</span></span>
  <span style="color: #FF0000">'__class__'</span><span style="color: #990000">,</span>
  <span style="color: #FF0000">'__delattr__'</span><span style="color: #990000">,</span>
  <span style="color: #FF0000">'__dict__'</span><span style="color: #990000">,</span>
@@ -1979,9 +1990,178 @@ http://www.gnu.org/software/src-highlite -->
  <span style="color: #FF0000">'__str__'</span><span style="color: #990000">,</span>
  <span style="color: #FF0000">'__subclasshook__'</span><span style="color: #990000">,</span>
  <span style="color: #FF0000">'__weakref__'</span><span style="color: #990000">,</span>
- <span style="color: #FF0000">'_name2'</span><span style="color: #990000">]</span>          <span style="font-style: italic"><span style="color: #9A1900"># &lt;&lt;&lt; has not been changed</span></span>
+ <span style="color: #FF0000">'_name2'</span><span style="color: #990000">]</span>          <span style="font-style: italic"><span style="color: #9A1900"># &lt;&lt;&lt; has not been changed -&gt; thus, this property can be easily used in sublcasses</span></span>
 </tt></pre></div></div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_override_and_implements_decorators">26. @override and @implements decorators</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The following <span class="monospaced">@overrides</span> and <span class="monospaced">@implements</span> decoratos can be used to show
+that the following functions overrides or implements the method from super class.
+It also copies the <span class="monospaced">__doc__</span> string from the super method if it is not specified
+in the new function. <a href="http://pydev.blogspot.de/2011/06/overrideimplements-templates-on-pydev.html">src</a></p></div>
+<div class="listingblock">
+<div class="title">decoratos.py</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">overrides</span></span><span style="color: #990000">(</span>method<span style="color: #990000">):</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">wrapper</span></span><span style="color: #990000">(</span>func<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> func<span style="color: #990000">.</span>__name__ <span style="color: #990000">!=</span> method<span style="color: #990000">.</span>__name__<span style="color: #990000">:</span>
+            msg <span style="color: #990000">=</span> <span style="color: #FF0000">"Wrong @override: %r expected, but overwriting %r."</span>
+            msg <span style="color: #990000">=</span> msg <span style="color: #990000">%</span> <span style="color: #990000">(</span>func<span style="color: #990000">.</span>__name__<span style="color: #990000">,</span> method<span style="color: #990000">.</span>__name__<span style="color: #990000">)</span>
+            <span style="font-weight: bold"><span style="color: #0000FF">raise</span></span> <span style="font-weight: bold"><span style="color: #000000">AssertionError</span></span><span style="color: #990000">(</span>msg<span style="color: #990000">)</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> func<span style="color: #990000">.</span>__doc__ <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> None<span style="color: #990000">:</span>
+            func<span style="color: #990000">.</span>__doc__ <span style="color: #990000">=</span> method<span style="color: #990000">.</span>__doc__
+
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> func
+
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> wrapper
+
+
+<span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">implements</span></span><span style="color: #990000">(</span>method<span style="color: #990000">):</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">wrapper</span></span><span style="color: #990000">(</span>func<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> func<span style="color: #990000">.</span>__name__ <span style="color: #990000">!=</span> method<span style="color: #990000">.</span>__name__<span style="color: #990000">:</span>
+            msg <span style="color: #990000">=</span> <span style="color: #FF0000">"Wrong @implements: %r expected, but implementing %r."</span>
+            msg <span style="color: #990000">=</span> msg <span style="color: #990000">%</span> <span style="color: #990000">(</span>func<span style="color: #990000">.</span>__name__<span style="color: #990000">,</span> method<span style="color: #990000">.</span>__name__<span style="color: #990000">)</span>
+            <span style="font-weight: bold"><span style="color: #0000FF">raise</span></span> <span style="font-weight: bold"><span style="color: #000000">AssertionError</span></span><span style="color: #990000">(</span>msg<span style="color: #990000">)</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> func<span style="color: #990000">.</span>__doc__ <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> None<span style="color: #990000">:</span>
+            func<span style="color: #990000">.</span>__doc__ <span style="color: #990000">=</span> method<span style="color: #990000">.</span>__doc__
+
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> func
+
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> wrapper</tt></pre></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_docstring_copy_with_decorators">27. Docstring copy with decorators</h2>
+<div class="sectionbody">
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="../asciidoc/images/icons/note.png" alt="Note">
+</td>
+<td class="content">Heavily borrowed from <a href="https://github.com/matplotlib/matplotlib">matplotlib</a>. <a href="https://github.com/matplotlib/matplotlib/blob/master/lib/matplotlib/docstring.py">docstring.py</a></td>
+</tr></table>
+</div>
+<div class="paragraph"><p>This decorator can be used to copy the docstring from function to another. This is usefule in cases where a wrapper function
+calls an internal function which does mostly the same and has the same interface.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="../asciidoc/images/icons/important.png" alt="Important">
+</td>
+<td class="content">Instead of writing your own <span class="monospaced">docstring.py</span> please consider to use that provided by <span class="monospaced">matplotlib</span>: <span class="monospaced">from matplotlib import docstring</span></td>
+</tr></table>
+</div>
+<div class="listingblock">
+<div class="title">docstring.py</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> re
+
+<span style="font-style: italic"><span style="color: #9A1900"># A regular expression used to determine the amount of space to</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># remove.  It looks for the first sequence of spaces immediately</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># following the first newline, or at the beginning of the string.</span></span>
+_find_dedent_regex <span style="color: #990000">=</span> re<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">compile</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"(?:(?:\n\r?)|^)( *)\S"</span><span style="color: #990000">)</span>
+<span style="font-style: italic"><span style="color: #9A1900"># A cache to hold the regexs that actually remove the indent.</span></span>
+_dedent_regex <span style="color: #990000">=</span> <span style="color: #990000">{}</span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">_dedent</span></span><span style="color: #990000">(</span>s<span style="color: #990000">):</span>
+<span style="font-style: italic"><span style="color: #9A1900">    """</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">    Remove excess indentation from docstring *s*.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">    Discards any leading blank lines, then removes up to n whitespace</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">    characters from each line, where n is the number of leading</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">    whitespace characters in the first line. It differs from</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">    textwrap.dedent in its deletion of leading blank lines and its use</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">    of the first non-blank line to determine the indentation.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">    It is also faster in most cases.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">    """</span></span>
+    <span style="font-style: italic"><span style="color: #9A1900"># This implementation has a somewhat obtuse use of regular</span></span>
+    <span style="font-style: italic"><span style="color: #9A1900"># expressions.  However, this function accounted for almost 30% of</span></span>
+    <span style="font-style: italic"><span style="color: #9A1900"># matplotlib startup time, so it is worthy of optimization at all</span></span>
+    <span style="font-style: italic"><span style="color: #9A1900"># costs.</span></span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="font-weight: bold"><span style="color: #0000FF">not</span></span> s<span style="color: #990000">:</span>      <span style="font-style: italic"><span style="color: #9A1900"># includes case of s is None</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="color: #FF0000">''</span>
+
+    match <span style="color: #990000">=</span> _find_dedent_regex<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">match</span></span><span style="color: #990000">(</span>s<span style="color: #990000">)</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> match <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> None<span style="color: #990000">:</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> s
+
+    <span style="font-style: italic"><span style="color: #9A1900"># This is the number of spaces to remove from the left-hand side.</span></span>
+    nshift <span style="color: #990000">=</span> match<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">end</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">)</span> <span style="color: #990000">-</span> match<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">start</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">)</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> nshift <span style="color: #990000">==</span> <span style="color: #993399">0</span><span style="color: #990000">:</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> s
+
+    <span style="font-style: italic"><span style="color: #9A1900"># Get a regex that will remove *up to* nshift spaces from the</span></span>
+    <span style="font-style: italic"><span style="color: #9A1900"># beginning of each line.  If it isn't in the cache, generate it.</span></span>
+    unindent <span style="color: #990000">=</span> _dedent_regex<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get</span></span><span style="color: #990000">(</span>nshift<span style="color: #990000">,</span> None<span style="color: #990000">)</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> unindent <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> None<span style="color: #990000">:</span>
+        unindent <span style="color: #990000">=</span> re<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">compile</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"\n\r? {0,%d}"</span> <span style="color: #990000">%</span> nshift<span style="color: #990000">)</span>
+        _dedent_regex<span style="color: #990000">[</span>nshift<span style="color: #990000">]</span> <span style="color: #990000">=</span> unindent
+
+    result <span style="color: #990000">=</span> unindent<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">sub</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"\n"</span><span style="color: #990000">,</span> s<span style="color: #990000">).</span><span style="font-weight: bold"><span style="color: #000000">strip</span></span><span style="color: #990000">()</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> result
+
+<span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">dedent</span></span><span style="color: #990000">(</span>func<span style="color: #990000">):</span>
+<span style="font-style: italic"><span style="color: #9A1900">    "Dedent a docstring (if present)"</span></span>
+    func<span style="color: #990000">.</span>__doc__ <span style="color: #990000">=</span> func<span style="color: #990000">.</span>__doc__ <span style="font-weight: bold"><span style="color: #0000FF">and</span></span> <span style="font-weight: bold"><span style="color: #000000">_dedent</span></span><span style="color: #990000">(</span>func<span style="color: #990000">.</span>__doc__<span style="color: #990000">)</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> func
+
+<span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">copy_dedent</span></span><span style="color: #990000">(</span>source<span style="color: #990000">):</span>
+<span style="font-style: italic"><span style="color: #9A1900">    """A decorator that will copy the docstring from the source and</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">    then dedent it"""</span></span>
+    <span style="font-style: italic"><span style="color: #9A1900"># note the following is ugly because "Python is not a functional</span></span>
+    <span style="font-style: italic"><span style="color: #9A1900"># language" - GVR. Perhaps one day, functools.compose will exist.</span></span>
+    <span style="font-style: italic"><span style="color: #9A1900">#  or perhaps not.</span></span>
+    <span style="font-style: italic"><span style="color: #9A1900">#  http://mail.python.org/pipermail/patches/2007-February/021687.html</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">lambda</span></span> target<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #000000">dedent</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">copy</span></span><span style="color: #990000">(</span>source<span style="color: #990000">)(</span>target<span style="color: #990000">))</span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">copy</span></span><span style="color: #990000">(</span>source<span style="color: #990000">):</span>
+<span style="font-style: italic"><span style="color: #9A1900">    "Copy a docstring from another source function (if present)"</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">do_copy</span></span><span style="color: #990000">(</span>target<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> source<span style="color: #990000">.</span>__doc__<span style="color: #990000">:</span>
+            target<span style="color: #990000">.</span>__doc__ <span style="color: #990000">=</span> source<span style="color: #990000">.</span>__doc__
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> target
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> do_copy
+
+<span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="font-weight: bold"><span style="color: #000000">Appender</span></span><span style="color: #990000">(</span>object<span style="color: #990000">):</span>
+<span style="font-style: italic"><span style="color: #9A1900">    """</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">    A function decorator that will append an addendum to the docstring</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">    of the target function.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">    This decorator should be robust even if func.__doc__ is None</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">    (for example, if -OO was passed to the interpreter).</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">    Usage: construct a docstring.Appender with a string to be joined to</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">    the original docstring. An optional 'join' parameter may be supplied</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">    which will be used to join the docstring and addendum. e.g.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">    add_copyright = Appender("Copyright (c) 2009", join='\n')</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">    @add_copyright</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">    def my_dog(has='fleas'):</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        "This docstring will have a copyright below"</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        pass</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">    """</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> addendum<span style="color: #990000">,</span> join<span style="color: #990000">=</span><span style="color: #FF0000">''</span><span style="color: #990000">):</span>
+        self<span style="color: #990000">.</span>addendum <span style="color: #990000">=</span> addendum
+        self<span style="color: #990000">.</span>join <span style="color: #990000">=</span> join
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">__call__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> func<span style="color: #990000">):</span>
+        docitems <span style="color: #990000">=</span> <span style="color: #990000">[</span>func<span style="color: #990000">.</span>__doc__<span style="color: #990000">,</span> self<span style="color: #990000">.</span>addendum<span style="color: #990000">]</span>
+        func<span style="color: #990000">.</span>__doc__ <span style="color: #990000">=</span> func<span style="color: #990000">.</span>__doc__ <span style="font-weight: bold"><span style="color: #0000FF">and</span></span> self<span style="color: #990000">.</span>join<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span>docitems<span style="color: #990000">)</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> func</tt></pre></div></div>
 </div>
 </div>
 </div>
@@ -1989,7 +2169,7 @@ http://www.gnu.org/software/src-highlite -->
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2014-03-28 09:04:51 CET
+Last updated 2014-06-02 18:25:30 CEST
 </div>
 </div>
 </body>
