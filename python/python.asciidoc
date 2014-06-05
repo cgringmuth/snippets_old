@@ -400,9 +400,83 @@ Iterate over the complete dictionary.
 
 [source,python]
 --------------------------
-knights = {'gallahad': 'the pure', 'robin': 'the brave'}
-for k, v in knights.iteritems():
+d = {'xxx': 'fuu', 'ggg': 'bar', 'aaa': 'fuubar', '123': 'fuu bar fuubar'}
+for k, v in d.iteritems():  # <1>
     print k, v
+    
+# or
+for k, v in d.items():      # <2>
+    print k, v
+--------------------------
+NOTE: The difference between <1> and <2> is that dict.items() returns a list of
+2-tuples ([(key, value), (key, value), ...]) whereas dict.iteritems returns a 
+generator that yields 2-typles:
+
+[source,python]
+--------------------------
+>>> d.items()
+[('123', 'fuu bar fuubar'), ('ggg', 'bar'), ('xxx', 'fuu'), ('aaa', 'fuubar')]
+>>> d.iteritems()
+<dictionary-itemiterator at 0x368bc00>
+--------------------------
+
+==== (ordered) Dictionary
+
+Iterating over a dictionary does not guarantee a specific order. Thus, you 
+cannot guarantee a certain order of (key, value)-pairs. For this you can use `sorted(...)`:
+
+.Example
+[source,python]
+--------------------------
+>>> sorted(d.items())
+[('123', 'fuu bar fuubar'), ('aaa', 'fuubar'), ('ggg', 'bar'), ('xxx', 'fuu')]
+>>> sorted(d.iteritems())
+[('123', 'fuu bar fuubar'), ('aaa', 'fuubar'), ('ggg', 'bar'), ('xxx', 'fuu')]
+--------------------------
+
+NOTE: Using this technique yields a list of 2D-tubple in both cases. Getting back
+the generator can be done by:
+
+[source,python]
+--------------------------
+>>> it = iter(sorted(d.iteritems()))
+>>> it.next()
+('123', 'fuu bar fuubar')
+>>> k, v = it.next()
+>>> print k, v
+aaa fuubar
+--------------------------
+
+===== OrderedDict
+
+Annother approach to guarantee a specific order you can
+use the http://docs.python.org/dev/library/collections.html#collections.OrderedDict[`OrderedDict`] from the module `collection`. This class can be used just as normal dictionaries. This dictionary remembers the order of insterions
+and will iterate like so.
+
+[source,python]
+--------------------------
+import collections
+
+d = {}
+o = collections.OrderedDict()
+
+# add to regular dictionary
+d['a'] = 1
+d['b'] = 2
+d['c'] = 3
+
+# add to ordered dictionary
+o['a'] = 1
+o['b'] = 2
+o['c'] = 3
+
+# print both. o returns pairs in order added
+print d
+print o
+
+# you can still reference by key
+print d['a']
+print o['a']
 --------------------------
 
 
@@ -1115,6 +1189,42 @@ class Appender(object):
         docitems = [func.__doc__, self.addendum]
         func.__doc__ = func.__doc__ and self.join.join(docitems)
         return func
+--------------------------
+
+
+== Creating Folders
+
+Normally you can create folders by calling https://docs.python.org/2/library/os.html?highlight=mkdir#os.mkdir[`os.mkdir(path[, mode])`].
+However, if the folder already exist this function throws an exception. If
+you want to have the same behavior as `mkdir -p <folder>` which ignores if
+the <folder> already exists. You write following code:
+[source]
+--------------------------
+import os
+import errno
+
+def mkdirs_p(path):
+    try:
+        os.makedirs(path)
+    except OSError as exception:
+        if exception.errno != errno.EEXIST:
+            raise
+--------------------------
+
+Since Python 3.2 it is possible to use https://docs.python.org/3/library/os.html?highlight=makedirs#os.makedirs[`os.makedirs(<folder>, mode=0o777, exist_ok=True)`] for having the same behavior. 
+
+
+== Upgrade all python packages via pip
+
+.Script test on Ubuntu 13.10
+[source]
+--------------------------
+#!/usr/bin/env python
+import pip
+from subprocess import call
+
+for dist in pip.get_installed_distributions():
+    call("sudo pip install --upgrade " + dist.project_name, shell=True)
 --------------------------
 
 //////////////////////////
