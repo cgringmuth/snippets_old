@@ -17,12 +17,6 @@
 
 todo ...
 
-Here is a list of interesting links:
-
-* http://ivory.idyll.org/articles/advanced-swc/[Intermediate and Advanced Software Carpentry in Python]
-* http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html[Code Like a Pythonista: Idiomatic Python]
-* http://code.activestate.com/recipes/langs/python/[Popular Python recipes ]
-
 == List of good literature
 
 * http://www.gnu.org/software/libc/manual/pdf/libc.pdf[The GNU C Library
@@ -57,6 +51,8 @@ But is it more convenient to write makefiles which is a textfile which is loaded
 ==== Makefile
 
 Some https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions[general conventions] from gnu.org.
+
+Link to http://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html[implicit variables] like `CC LDLIBS` etc.
 
 .Example of typical target
 [source, shell]

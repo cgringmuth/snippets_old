@@ -1,10 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.9" />
-<title>A List of <code>C</code> Tips, Tricks and recipes/idioms</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="AsciiDoc 8.6.9">
+<title>A List of <span class="monospaced">C</span> Tips, Tricks and recipes/idioms</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -733,9 +732,9 @@ asciidoc.install(2);
 </head>
 <body class="article">
 <div id="header">
-<h1>A List of <code>C</code> Tips, Tricks and recipes/idioms</h1>
-<span id="author">Christoph Hoffmann</span><br />
-<span id="email"><code>&lt;<a href="mailto:choffmann1983@gmail.com">choffmann1983@gmail.com</a>&gt;</code></span><br />
+<h1>A List of <span class="monospaced">C</span> Tips, Tricks and recipes/idioms</h1>
+<span id="author">Christoph Hoffmann</span><br>
+<span id="email" class="monospaced">&lt;<a href="mailto:choffmann1983@gmail.com">choffmann1983@gmail.com</a>&gt;</span><br>
 <span id="revnumber">version 0.0.1 'http://semver.org/[(semver)]'</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
@@ -747,24 +746,6 @@ asciidoc.install(2);
 <h2 id="_introduction">1. Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>todo &#8230;</p></div>
-<div class="paragraph"><p>Here is a list of interesting links:</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-<a href="http://ivory.idyll.org/articles/advanced-swc/">Intermediate and Advanced Software Carpentry in Python</a>
-</p>
-</li>
-<li>
-<p>
-<a href="http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html">Code Like a Pythonista: Idiomatic Python</a>
-</p>
-</li>
-<li>
-<p>
-<a href="http://code.activestate.com/recipes/langs/python/">Popular Python recipes </a>
-</p>
-</li>
-</ul></div>
 </div>
 </div>
 <div class="sect1">
@@ -810,13 +791,13 @@ todo
 <div class="sectionbody">
 <div class="paragraph"><p>Before starting developing, you should read the <a href="https://www.gnu.org/prep/standards/">GNU coding standards</a> even though you are not intending to write GNU software.</p></div>
 <div class="paragraph"><p>A list of <a href="https://www.gnu.org/manual/">GNU manuals</a>.</p></div>
-<div class="paragraph"><p>There is a package called <a href="https://www.gnu.org/software/hello/">hello</a> (<a href="https://www.gnu.org/software/hello/manual/">hello manual</a>) in the gnu project which serves as an example GNU package following good practice and the GNU coding standards. If one wants to write or maintain a GNU package, this package can be a starting point. It is based on <code>automake</code> and <code>autoconf</code> to be portable. To get the source of the package just invoke following command: <code>apt-get source hello</code>. If you just want to download that package invoke following command: <code>apt-get download hello</code>.</p></div>
+<div class="paragraph"><p>There is a package called <a href="https://www.gnu.org/software/hello/">hello</a> (<a href="https://www.gnu.org/software/hello/manual/">hello manual</a>) in the gnu project which serves as an example GNU package following good practice and the GNU coding standards. If one wants to write or maintain a GNU package, this package can be a starting point. It is based on <span class="monospaced">automake</span> and <span class="monospaced">autoconf</span> to be portable. To get the source of the package just invoke following command: <span class="monospaced">apt-get source hello</span>. If you just want to download that package invoke following command: <span class="monospaced">apt-get download hello</span>.</p></div>
 <div class="sect2">
 <h3 id="_make">3.1. Make</h3>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<img src="../asciidoc/images/icons/note.png" alt="Note" />
+<img src="../asciidoc/images/icons/note.png" alt="Note">
 </td>
 <td class="content">
 <div class="ulist"><ul>
@@ -840,11 +821,12 @@ todo
 </td>
 </tr></table>
 </div>
-<div class="paragraph"><p>Make knows how to build most of the source files. For example if you have a file named <code>foo.c</code> and invoke <code>make foo</code>. Make will call <code>cc foo.c -o foo</code>. If you want to set flags you can do this by invoking <code>CFLAGS="-Wall -g" make foo</code> which will result in <code>cc -Wall -g foo.c -o foo</code>. And if you want to to change the compiler you can do this by setting the <code>CC</code> flags like so: <code>CFLAGS="-Wall -g" CC=gcc make foo</code> which results in <code>gcc -Wall -g foo.c -o foo</code>.</p></div>
-<div class="paragraph"><p>But is it more convenient to write makefiles which is a textfile which is loaded and interpreted by make if it is in the same folder and is called <code>makefile</code>.</p></div>
+<div class="paragraph"><p>Make knows how to build most of the source files. For example if you have a file named <span class="monospaced">foo.c</span> and invoke <span class="monospaced">make foo</span>. Make will call <span class="monospaced">cc foo.c -o foo</span>. If you want to set flags you can do this by invoking <span class="monospaced">CFLAGS="-Wall -g" make foo</span> which will result in <span class="monospaced">cc -Wall -g foo.c -o foo</span>. And if you want to to change the compiler you can do this by setting the <span class="monospaced">CC</span> flags like so: <span class="monospaced">CFLAGS="-Wall -g" CC=gcc make foo</span> which results in <span class="monospaced">gcc -Wall -g foo.c -o foo</span>.</p></div>
+<div class="paragraph"><p>But is it more convenient to write makefiles which is a textfile which is loaded and interpreted by make if it is in the same folder and is called <span class="monospaced">makefile</span>.</p></div>
 <div class="sect3">
 <h4 id="_makefile">3.1.1. Makefile</h4>
 <div class="paragraph"><p>Some <a href="https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions">general conventions</a> from gnu.org.</p></div>
+<div class="paragraph"><p>Link to <a href="http://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html">implicit variables</a> like <span class="monospaced">CC LDLIBS</span> etc.</p></div>
 <div class="listingblock">
 <div class="title">Example of typical target</div>
 <div class="content">
@@ -852,67 +834,67 @@ todo
 </div></div>
 <div class="paragraph"><p>Every Makefile should contain this line:</p></div>
 <div class="literalblock">
-<div class="content">
-<pre><code>SHELL = /bin/sh</code></pre>
+<div class="content monospaced">
+<pre>SHELL = /bin/sh</pre>
 </div></div>
-<div class="paragraph"><p>to avoid trouble on systems where <code>SHELL</code> variable might inherited from the environment.</p></div>
+<div class="paragraph"><p>to avoid trouble on systems where <span class="monospaced">SHELL</span> variable might inherited from the environment.</p></div>
 <div class="paragraph"><p>Programs for building and compiling should be called by variables to enable users to substitute alternatives. For example following commands:</p></div>
 <div class="literalblock">
-<div class="content">
-<pre><code>'ar bison cc flex install ld ldconfig lex make makeinfo ranlib texi2dvi yacc'</code></pre>
+<div class="content monospaced">
+<pre>'ar bison cc flex install ld ldconfig lex make makeinfo ranlib texi2dvi yacc'</pre>
 </div></div>
 <div class="paragraph"><p>should be called with following variables:</p></div>
 <div class="literalblock">
-<div class="content">
-<pre><code>'$(AR) $(BISON) $(CC) $(FLEX) $(INSTALL) $(LD) $(LDCONFIG) $(LEX)
-$(MAKE) $(MAKEINFO) $(RANLIB) $(TEXI2DVI) $(YACC)'</code></pre>
+<div class="content monospaced">
+<pre>'$(AR) $(BISON) $(CC) $(FLEX) $(INSTALL) $(LD) $(LDCONFIG) $(LEX)
+$(MAKE) $(MAKEINFO) $(RANLIB) $(TEXI2DVI) $(YACC)'</pre>
 </div></div>
 <div class="sect4">
 <h5 id="_using_multiple_targets">Using multiple targets</h5>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<img src="../asciidoc/images/icons/warning.png" alt="Warning" />
+<img src="../asciidoc/images/icons/warning.png" alt="Warning">
 </td>
 <td class="content">Is not correct. Has to be revised!</td>
 </tr></table>
 </div>
-<div class="paragraph"><p>If you want to compile multiple targets which should be compiled to the same name you can use <code>$&lt;</code> which returns the depending filenames and <code>$@</code> which returns the target name.</p></div>
+<div class="paragraph"><p>If you want to compile multiple targets which should be compiled to the same name you can use <span class="monospaced">$&lt;</span> which returns the depending filenames and <span class="monospaced">$@</span> which returns the target name.</p></div>
 <div class="listingblock">
 <div class="title">Example of using $&lt; and $@</div>
 <div class="content">
 <pre><code></code></pre>
 </div></div>
-<div class="paragraph"><p>Calling <code>make</code> results <code>prog1</code> and <code>prog2</code> assuming their exist <code>prog1.c</code> and <code>prog2.c</code>.</p></div>
+<div class="paragraph"><p>Calling <span class="monospaced">make</span> results <span class="monospaced">prog1</span> and <span class="monospaced">prog2</span> assuming their exist <span class="monospaced">prog1.c</span> and <span class="monospaced">prog2.c</span>.</p></div>
 <div class="listingblock">
 <div class="title">Brief summary of <a href="http://www.gnu.org/software/make/manual/make.html#Automatic-Variables">Automatic variables</a></div>
-<div class="content">
-<pre><code>For more detailes just go to http://www.gnu.org/software/make/manual/make.html#Automatic-Variables[Automatic variables]
+<div class="content monospaced">
+<pre>For more detailes just go to http://www.gnu.org/software/make/manual/make.html#Automatic-Variables[Automatic variables]
 
 * `$@` The name of the target file (the one before the colon)
 * `$&lt;` The name of the first (or only) prerequisite file (the first one after the colon)
 * `$^` The names of all the prerequisite files (space separated)
-* `$*` The stem (the bit which matches the % wildcard in the rule definition.</code></pre>
+* `$*` The stem (the bit which matches the % wildcard in the rule definition.</pre>
 </div></div>
 </div>
 <div class="sect4">
 <h5 id="_a_href_http_www_gnu_org_software_make_manual_make_html_target_002dspecific_target_specific_variables_a"><a href="http://www.gnu.org/software/make/manual/make.html#Target_002dspecific">Target specific variables</a></h5>
-<div class="paragraph"><p>If it is required to set target specific variables you can use the targe specific variables. For example if you want a target which sets a macro <code>TEST</code>, following code will do the trick:</p></div>
+<div class="paragraph"><p>If it is required to set target specific variables you can use the targe specific variables. For example if you want a target which sets a macro <span class="monospaced">TEST</span>, following code will do the trick:</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><code></code></pre>
 </div></div>
-<div class="paragraph"><p>Calling <code>make test</code> will compile likewise the target <code>all</code> expect that the <code>TEST</code> macro will be set, which can be used in the source code.</p></div>
+<div class="paragraph"><p>Calling <span class="monospaced">make test</span> will compile likewise the target <span class="monospaced">all</span> expect that the <span class="monospaced">TEST</span> macro will be set, which can be used in the source code.</p></div>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_gcc">3.2. gcc</h3>
 <div class="listingblock">
-<div class="content">
-<pre><code>GNU project C and C++ compiler</code></pre>
+<div class="content monospaced">
+<pre>GNU project C and C++ compiler</pre>
 </div></div>
-<div class="paragraph"><p>If you want to know the default include paths you have to consulte the used preprocessor which is in charge of replaceing all preprocessor commands including <code>#include</code> with actual valid C/C++ code. Just use <code>cpp -v</code> to show the required information.</p></div>
+<div class="paragraph"><p>If you want to know the default include paths you have to consulte the used preprocessor which is in charge of replaceing all preprocessor commands including <span class="monospaced">#include</span> with actual valid C/C++ code. Just use <span class="monospaced">cpp -v</span> to show the required information.</p></div>
 <div class="sect4">
 <h5 id="_gcc_dump_preprocessor_defines">gcc dump preprocessor defines</h5>
 <div class="listingblock">
@@ -934,49 +916,49 @@ $(MAKE) $(MAKEINFO) $(RANLIB) $(TEXI2DVI) $(YACC)'</code></pre>
 <div class="sect2">
 <h3 id="_cpp">3.3. cpp</h3>
 <div class="listingblock">
-<div class="content">
-<pre><code>The C Preprocessor</code></pre>
+<div class="content monospaced">
+<pre>The C Preprocessor</pre>
 </div></div>
 <div class="paragraph"><p>"The C preprocessor, often known as cpp, is a macro processor that is used automatically by the C compiler to transform your program before
 compilation.  It is called a macro processor because it allows you to define macros, which are brief abbreviations for longer constructs."</p></div>
-<div class="paragraph"><p><code>cpp -v</code> is the verbose mode which depicts the default include paths and other useful information. If you&#8217;re working with microcontroller you might be familiar with the <code>avr-*</code> applications (especially if you&#8217;re working with arduino or other prototype boards). For the avr system a preprocessor <em>avr-cpp</em> exits also, which can be used, inter alia, to figure out where to find the default including files: <code>avr-cpp -v</code>.</p></div>
+<div class="paragraph"><p><span class="monospaced">cpp -v</span> is the verbose mode which depicts the default include paths and other useful information. If you&#8217;re working with microcontroller you might be familiar with the <span class="monospaced">avr-*</span> applications (especially if you&#8217;re working with arduino or other prototype boards). For the avr system a preprocessor <em>avr-cpp</em> exits also, which can be used, inter alia, to figure out where to find the default including files: <span class="monospaced">avr-cpp -v</span>.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_ldd">3.4. ldd</h3>
 <div class="listingblock">
-<div class="content">
-<pre><code>Print shared library dependencies</code></pre>
+<div class="content monospaced">
+<pre>Print shared library dependencies</pre>
 </div></div>
 </div>
 <div class="sect2">
 <h3 id="_ld">3.5. ld</h3>
 <div class="listingblock">
-<div class="content">
-<pre><code>The GNU linker</code></pre>
+<div class="content monospaced">
+<pre>The GNU linker</pre>
 </div></div>
 <div class="paragraph"><p>todo</p></div>
 </div>
 <div class="sect2">
 <h3 id="_readelf">3.6. readelf</h3>
 <div class="listingblock">
-<div class="content">
-<pre><code>Displays information about ELF file</code></pre>
+<div class="content monospaced">
+<pre>Displays information about ELF file</pre>
 </div></div>
 <div class="paragraph"><p>todo</p></div>
 </div>
 <div class="sect2">
 <h3 id="_pkg_config">3.7. pkg-config</h3>
 <div class="listingblock">
-<div class="content">
-<pre><code>Return metainformation about installed libraries</code></pre>
+<div class="content monospaced">
+<pre>Return metainformation about installed libraries</pre>
 </div></div>
 <div class="paragraph"><p>todo</p></div>
 </div>
 <div class="sect2">
 <h3 id="_ldconfig">3.8. ldconfig</h3>
 <div class="listingblock">
-<div class="content">
-<pre><code>Configure dynamic linker run-time bindings</code></pre>
+<div class="content monospaced">
+<pre>Configure dynamic linker run-time bindings</pre>
 </div></div>
 <div class="paragraph"><p>todo</p></div>
 <div class="paragraph"><p>&#8658; ldconfig -p: list all installed/loaded libraries
@@ -985,8 +967,8 @@ compilation.  It is called a macro processor because it allows you to define mac
 <div class="sect2">
 <h3 id="_valgrind">3.9. valgrind</h3>
 <div class="listingblock">
-<div class="content">
-<pre><code>A suite of tools for debugging and profiling programs</code></pre>
+<div class="content monospaced">
+<pre>A suite of tools for debugging and profiling programs</pre>
 </div></div>
 <div class="paragraph"><p>todo</p></div>
 </div>
@@ -998,8 +980,8 @@ compilation.  It is called a macro processor because it allows you to define mac
 <div class="sect2">
 <h3 id="_autoconf">3.11. Autoconf</h3>
 <div class="listingblock">
-<div class="content">
-<pre><code>Generate configuration scripts</code></pre>
+<div class="content monospaced">
+<pre>Generate configuration scripts</pre>
 </div></div>
 <div class="paragraph"><p>todo</p></div>
 </div>
@@ -1014,7 +996,7 @@ compilation.  It is called a macro processor because it allows you to define mac
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<img src="../asciidoc/images/icons/note.png" alt="Note" />
+<img src="../asciidoc/images/icons/note.png" alt="Note">
 </td>
 <td class="content"><strong>diff</strong> - compare files line by line</td>
 </tr></table>
@@ -1032,18 +1014,18 @@ compilation.  It is called a macro processor because it allows you to define mac
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<img src="../asciidoc/images/icons/note.png" alt="Note" />
+<img src="../asciidoc/images/icons/note.png" alt="Note">
 </td>
 <td class="content"><strong>patch</strong> - apply a diff file to an original</td>
 </tr></table>
 </div>
 <div class="paragraph"><p>apply a diff file to an original</p></div>
 <div class="literalblock">
-<div class="content">
-<pre><code>Example:
+<div class="content monospaced">
+<pre>Example:
     . patch -p0 -b &lt; fix.patch
     . file1 == newfile1
-    . -b: makes backup of the patched file &gt; file1.orig</code></pre>
+    . -b: makes backup of the patched file &gt; file1.orig</pre>
 </div></div>
 </div>
 </div>
@@ -1068,11 +1050,11 @@ compilation.  It is called a macro processor because it allows you to define mac
 </div>
 </div>
 </div>
-<div id="footnotes"><hr /></div>
+<div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
-Version 0.0.1 'http://semver.org/[(semver)]'<br />
-Last updated 2014-06-04 20:13:59 CEST
+Version 0.0.1 'http://semver.org/[(semver)]'<br>
+Last updated 2014-07-13 15:57:21 CEST
 </div>
 </div>
 </body>
