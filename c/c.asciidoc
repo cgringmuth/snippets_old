@@ -96,7 +96,7 @@ arit.o: arit.c arit.h
 .PHONY: all clean
 --------------------------
 
-since `make` knows how to create object files `.o` form source files `.c` and `make` knows hot link everything together like in rule for `calc`.
+since `make` knows how to create object files `.o` form source files `.c` and `make` knows how to link everything together required for rule `calc`.
 
 ==== Makefile
 
