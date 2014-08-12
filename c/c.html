@@ -823,6 +823,46 @@ todo
 </div>
 <div class="paragraph"><p>Make knows how to build most of the source files. For example if you have a file named <span class="monospaced">foo.c</span> and invoke <span class="monospaced">make foo</span>. Make will call <span class="monospaced">cc foo.c -o foo</span>. If you want to set flags you can do this by invoking <span class="monospaced">CFLAGS="-Wall -g" make foo</span> which will result in <span class="monospaced">cc -Wall -g foo.c -o foo</span>. And if you want to to change the compiler you can do this by setting the <span class="monospaced">CC</span> flags like so: <span class="monospaced">CFLAGS="-Wall -g" CC=gcc make foo</span> which results in <span class="monospaced">gcc -Wall -g foo.c -o foo</span>.</p></div>
 <div class="paragraph"><p>But is it more convenient to write makefiles which is a textfile which is loaded and interpreted by make if it is in the same folder and is called <span class="monospaced">makefile</span>.</p></div>
+<div class="paragraph"><p>Targets don&#8217;t have to be provided if they will be created in a standard way. This is done by <em>Implicet Rules</em> (<a href="https://www.gnu.org/software/make/manual/make.html#Implicit-Rules">link</a>). For example if execute <span class="monospaced">make prog</span> and there is no explicit rule for this, make will search for prog.c and compile this to a program. All</p></div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre><code>foo <span style="color:#000000">:</span> foo.o bar.o
+     cc <span style="color:#000000">-</span>o foo foo.o bar.o $<span style="color:#000000">(</span>CFLAGS<span style="color:#000000">)</span> $<span style="color:#000000">(</span>LDFLAGS<span style="color:#000000">)</span></code></pre>
+</div></div>
+<div class="paragraph"><p>Here no explicit rule for <span class="monospaced">foo.o</span> and <span class="monospaced">bar.o</span> is porvided and make will loo for an implicit rule to create those files. If one of those files requires some other files, this can be done by:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>foo.o<span style="color:#000000">:</span> foo.h
+bar.o<span style="color:#000000">:</span> bar.h</code></pre>
+</div></div>
+<div class="paragraph"><p>You can list all implicit rulse and all environment variables by executing <span class="monospaced">make -p</span></p></div>
+<div class="paragraph"><p>By using implicit rules the makefiles can be shortened. For example this makefile:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>all<span style="color:#000000">:</span> calc
+clean<span style="color:#000000">:</span>
+    <span style="color:#000000; font-weight:bold">rm</span> <span style="color:#000000">-</span>rf calc <span style="color:#000000">*</span>.o
+calc<span style="color:#000000">:</span> calc.o arit.o
+    $<span style="color:#000000">(</span>CC<span style="color:#000000">) -</span>o calc calc.o arit.o
+calc.o<span style="color:#000000">:</span> calc.c arit.h
+    $<span style="color:#000000">(</span>CC<span style="color:#000000">) -</span>c calc.c
+arit.o<span style="color:#000000">:</span> arit.c arit.h
+    $<span style="color:#000000">(</span>CC<span style="color:#000000">) -</span>c arit.c
+.PHONY<span style="color:#000000">:</span> all clean</code></pre>
+</div></div>
+<div class="paragraph"><p>Can be reduced to:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>all<span style="color:#000000">:</span> calc
+clean<span style="color:#000000">:</span>
+    <span style="color:#000000; font-weight:bold">rm</span> <span style="color:#000000">-</span>rf calc <span style="color:#000000">*</span>.o
+calc<span style="color:#000000">:</span> calc.o arit.o
+calc.o<span style="color:#000000">:</span> calc.c arit.h
+arit.o<span style="color:#000000">:</span> arit.c arit.h
+.PHONY<span style="color:#000000">:</span> all clean</code></pre>
+</div></div>
+<div class="paragraph"><p>since <span class="monospaced">make</span> knows how to create object files <span class="monospaced">.o</span> form source files <span class="monospaced">.c</span> and <span class="monospaced">make</span> knows hot link everything together like in rule for <span class="monospaced">calc</span>.</p></div>
 <div class="sect3">
 <h4 id="_makefile">3.1.1. Makefile</h4>
 <div class="paragraph"><p>Some <a href="https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions">general conventions</a> from gnu.org.</p></div>
@@ -830,7 +870,9 @@ todo
 <div class="listingblock">
 <div class="title">Example of typical target</div>
 <div class="content">
-<pre><code></code></pre>
+<pre><code>target<span style="color:#000000">:</span> dependencies ..
+<span style="color:#000000">[</span>tab<span style="color:#000000">]</span>   commands
+        ...</code></pre>
 </div></div>
 <div class="paragraph"><p>Every Makefile should contain this line:</p></div>
 <div class="literalblock">
@@ -863,7 +905,16 @@ $(MAKE) $(MAKEINFO) $(RANLIB) $(TEXI2DVI) $(YACC)'</pre>
 <div class="listingblock">
 <div class="title">Example of using $&lt; and $@</div>
 <div class="content">
-<pre><code></code></pre>
+<pre><code>CFLAGS <span style="color:#000000">= -</span>Wall <span style="color:#000000">-</span>g
+SRC <span style="color:#000000">=</span> prog1 prog2
+
+all<span style="color:#000000">:</span> $<span style="color:#000000">(</span>SRC<span style="color:#000000">)</span>
+
+$<span style="color:#000000">(</span>SRC<span style="color:#000000">):</span> $<span style="color:#000000">(</span>SRC<span style="color:#000000">)</span>.c
+    $<span style="color:#000000">(</span>CC<span style="color:#000000">)</span> $<span style="color:#000000">(</span>CFLAGS<span style="color:#000000">)</span> $<span style="color:#000000">&lt; -</span>o $&#64;
+
+clean<span style="color:#000000">:</span>
+    <span style="color:#000000; font-weight:bold">rm</span> <span style="color:#000000">-</span>r $<span style="color:#000000">(</span>SRC<span style="color:#000000">)</span></code></pre>
 </div></div>
 <div class="paragraph"><p>Calling <span class="monospaced">make</span> results <span class="monospaced">prog1</span> and <span class="monospaced">prog2</span> assuming their exist <span class="monospaced">prog1.c</span> and <span class="monospaced">prog2.c</span>.</p></div>
 <div class="listingblock">
@@ -882,7 +933,16 @@ $(MAKE) $(MAKEINFO) $(RANLIB) $(TEXI2DVI) $(YACC)'</pre>
 <div class="paragraph"><p>If it is required to set target specific variables you can use the targe specific variables. For example if you want a target which sets a macro <span class="monospaced">TEST</span>, following code will do the trick:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code></code></pre>
+<pre><code>CFLAGS <span style="color:#000000">= -</span>Wall <span style="color:#000000">-</span>g
+SRC <span style="color:#000000">=</span> prog1 prog2
+
+all<span style="color:#000000">:</span> $<span style="color:#000000">(</span>SRC<span style="color:#000000">)</span>
+
+<span style="color:#0057ae">test</span><span style="color:#000000">:</span> CFLAGS <span style="color:#000000">+= -</span>DTEST
+<span style="color:#0057ae">test</span><span style="color:#000000">:</span> $<span style="color:#000000">(</span>SRC<span style="color:#000000">)</span>
+
+clean<span style="color:#000000">:</span>
+    <span style="color:#000000; font-weight:bold">rm</span> <span style="color:#000000">-</span>r $<span style="color:#000000">(</span>SRC<span style="color:#000000">)</span></code></pre>
 </div></div>
 <div class="paragraph"><p>Calling <span class="monospaced">make test</span> will compile likewise the target <span class="monospaced">all</span> expect that the <span class="monospaced">TEST</span> macro will be set, which can be used in the source code.</p></div>
 </div>
@@ -895,23 +955,22 @@ $(MAKE) $(MAKEINFO) $(RANLIB) $(TEXI2DVI) $(YACC)'</pre>
 <pre>GNU project C and C++ compiler</pre>
 </div></div>
 <div class="paragraph"><p>If you want to know the default include paths you have to consulte the used preprocessor which is in charge of replaceing all preprocessor commands including <span class="monospaced">#include</span> with actual valid C/C++ code. Just use <span class="monospaced">cpp -v</span> to show the required information.</p></div>
-<div class="sect4">
-<h5 id="_gcc_dump_preprocessor_defines">gcc dump preprocessor defines</h5>
+<div class="paragraph"><p>gcc dump preprocessor defines</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code></code></pre>
+<pre><code>$ gcc <span style="color:#000000">-</span>dM <span style="color:#000000">-</span>E <span style="color:#000000">- &lt; /</span>dev<span style="color:#000000">/</span>null</code></pre>
 </div></div>
 <div class="paragraph"><p>examples</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code></code></pre>
+<pre><code>$ gcc <span style="color:#000000">-</span>dM <span style="color:#000000">-</span>E <span style="color:#000000">-</span>msse4 <span style="color:#000000">- &lt; /</span>dev<span style="color:#000000">/</span>null | <span style="color:#000000; font-weight:bold">grep</span> SSE<span style="color:#000000">[</span><span style="color:#b07e00">34</span><span style="color:#000000">]</span></code></pre>
 </div></div>
 <div class="paragraph"><p>How do I dump preprocessor macros coming from a particular header file:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code></code></pre>
+<pre><code>$ <span style="color:#0057ae">echo</span> <span style="color:#bf0303">&quot;#include &lt;sys/socket.h&gt;&quot;</span> | gcc <span style="color:#000000">-</span>E <span style="color:#000000">-</span>dM <span style="color:#000000">-</span> | <span style="color:#000000; font-weight:bold">grep</span> SOMAXCONN
+<span style="color:#838183; font-style:italic">#define SOMAXCONN 128</span></code></pre>
 </div></div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_cpp">3.3. cpp</h3>
@@ -1049,12 +1108,55 @@ compilation.  It is called a macro processor because it allows you to define mac
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_loading_file_at_once">5. Loading File at once</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This is a code snippet which loads the complete file into memory.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code><span style="color:#838183; font-style:italic">/**</span>
+<span style="color:#838183; font-style:italic"> * Store all the file's contents in memory, useful to pass shaders</span>
+<span style="color:#838183; font-style:italic"> * source code to OpenGL</span>
+<span style="color:#838183; font-style:italic"> */</span>
+<span style="color:#838183; font-style:italic">/* Problem:</span>
+<span style="color:#838183; font-style:italic"> *  We should close the input file before the return NULL; statements but this would lead to a lot of repetition (DRY)</span>
+<span style="color:#838183; font-style:italic"> *   -you could solve this by using goto or by abusing switch/for/while + break or by building an if else mess</span>
+<span style="color:#838183; font-style:italic"> *  better solution: let the user handle the File: char* file_read(const FILE* input)</span>
+<span style="color:#838183; font-style:italic">*/</span>
+<span style="color:#0057ae">char</span><span style="color:#000000">*</span> <span style="color:#010181">file_read</span><span style="color:#000000">(</span><span style="color:#0057ae">const char</span><span style="color:#000000">*</span> filename<span style="color:#000000">)</span>
+<span style="color:#000000">{</span>
+  <span style="color:#0057ae">FILE</span><span style="color:#000000">*</span> input <span style="color:#000000">=</span> <span style="color:#010181">fopen</span><span style="color:#000000">(</span>filename<span style="color:#000000">,</span> <span style="color:#bf0303">&quot;rb&quot;</span><span style="color:#000000">);</span>
+  <span style="color:#000000; font-weight:bold">if</span><span style="color:#000000">(</span>input <span style="color:#000000">==</span> NULL<span style="color:#000000">)</span> <span style="color:#000000; font-weight:bold">return</span> NULL<span style="color:#000000">;</span>
+
+  <span style="color:#000000; font-weight:bold">if</span><span style="color:#000000">(</span><span style="color:#010181">fseek</span><span style="color:#000000">(</span>input<span style="color:#000000">,</span> <span style="color:#b07e00">0</span><span style="color:#000000">,</span> SEEK_END<span style="color:#000000">) == -</span><span style="color:#b07e00">1</span><span style="color:#000000">)</span> <span style="color:#000000; font-weight:bold">return</span> NULL<span style="color:#000000">;</span>
+  <span style="color:#0057ae">long</span> size <span style="color:#000000">=</span> <span style="color:#010181">ftell</span><span style="color:#000000">(</span>input<span style="color:#000000">);</span>
+  <span style="color:#000000; font-weight:bold">if</span><span style="color:#000000">(</span>size <span style="color:#000000">== -</span><span style="color:#b07e00">1</span><span style="color:#000000">)</span> <span style="color:#000000; font-weight:bold">return</span> NULL<span style="color:#000000">;</span>
+  <span style="color:#000000; font-weight:bold">if</span><span style="color:#000000">(</span><span style="color:#010181">fseek</span><span style="color:#000000">(</span>input<span style="color:#000000">,</span> <span style="color:#b07e00">0</span><span style="color:#000000">,</span> SEEK_SET<span style="color:#000000">) == -</span><span style="color:#b07e00">1</span><span style="color:#000000">)</span> <span style="color:#000000; font-weight:bold">return</span> NULL<span style="color:#000000">;</span>
+
+  <span style="color:#838183; font-style:italic">/*if using c-compiler: dont cast malloc's return value*/</span>
+  <span style="color:#0057ae">char</span> <span style="color:#000000">*</span>content <span style="color:#000000">= (</span><span style="color:#0057ae">char</span><span style="color:#000000">*)</span> <span style="color:#010181">malloc</span><span style="color:#000000">( (</span><span style="color:#0057ae">size_t</span><span style="color:#000000">)</span> size <span style="color:#000000">+</span><span style="color:#b07e00">1</span>  <span style="color:#000000">);</span>
+  <span style="color:#000000; font-weight:bold">if</span><span style="color:#000000">(</span>content <span style="color:#000000">==</span> NULL<span style="color:#000000">)</span> <span style="color:#000000; font-weight:bold">return</span> NULL<span style="color:#000000">;</span>
+
+  <span style="color:#010181">fread</span><span style="color:#000000">(</span>content<span style="color:#000000">,</span> <span style="color:#b07e00">1</span><span style="color:#000000">, (</span><span style="color:#0057ae">size_t</span><span style="color:#000000">)</span>size<span style="color:#000000">,</span> input<span style="color:#000000">);</span>
+  <span style="color:#000000; font-weight:bold">if</span><span style="color:#000000">(</span><span style="color:#010181">ferror</span><span style="color:#000000">(</span>input<span style="color:#000000">)) {</span>
+    <span style="color:#010181">free</span><span style="color:#000000">(</span>content<span style="color:#000000">);</span>
+    <span style="color:#000000; font-weight:bold">return</span> NULL<span style="color:#000000">;</span>
+  <span style="color:#000000">}</span>
+
+  <span style="color:#010181">fclose</span><span style="color:#000000">(</span>input<span style="color:#000000">);</span>
+  content<span style="color:#000000">[</span>size<span style="color:#000000">] =</span> <span style="color:#bf0303">'\0'</span><span style="color:#000000">;</span>
+  <span style="color:#000000; font-weight:bold">return</span> content<span style="color:#000000">;</span>
+<span style="color:#000000">}</span></code></pre>
+</div></div>
+<div class="paragraph"><p>Source: <a href="http://en.wikibooks.org/wiki/OpenGL_Programming/Modern_OpenGL_Tutorial_02">OpenGL Tut02</a></p></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2014-07-13 15:57:21 CEST
+Last updated 2014-08-12 23:12:55 CEST
 </div>
 </div>
 </body>

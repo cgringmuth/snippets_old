@@ -48,6 +48,56 @@ Make knows how to build most of the source files. For example if you have a file
 
 But is it more convenient to write makefiles which is a textfile which is loaded and interpreted by make if it is in the same folder and is called `makefile`.
 
+Targets don't have to be provided if they will be created in a standard way. This is done by _Implicet Rules_ (https://www.gnu.org/software/make/manual/make.html#Implicit-Rules[link]). For example if execute `make prog` and there is no explicit rule for this, make will search for prog.c and compile this to a program. All
+
+.Example
+[source, sh]
+--------------------------
+foo : foo.o bar.o
+     cc -o foo foo.o bar.o $(CFLAGS) $(LDFLAGS)
+--------------------------
+
+Here no explicit rule for `foo.o` and `bar.o` is porvided and make will loo for an implicit rule to create those files. If one of those files requires some other files, this can be done by:
+
+[source, sh]
+--------------------------
+foo.o: foo.h
+bar.o: bar.h
+--------------------------
+
+You can list all implicit rulse and all environment variables by executing `make -p`
+
+By using implicit rules the makefiles can be shortened. For example this makefile:
+
+[source, sh]
+--------------------------
+all: calc 
+clean:  
+    rm -rf calc *.o
+calc: calc.o arit.o
+    $(CC) -o calc calc.o arit.o
+calc.o: calc.c arit.h
+    $(CC) -c calc.c 
+arit.o: arit.c arit.h
+    $(CC) -c arit.c
+.PHONY: all clean
+--------------------------
+
+Can be reduced to:
+
+[source, sh]
+--------------------------
+all: calc 
+clean:  
+    rm -rf calc *.o
+calc: calc.o arit.o
+calc.o: calc.c arit.h
+arit.o: arit.c arit.h
+.PHONY: all clean
+--------------------------
+
+since `make` knows how to create object files `.o` form source files `.c` and `make` knows hot link everything together like in rule for `calc`.
+
 ==== Makefile
 
 Some https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions[general conventions] from gnu.org.
@@ -55,7 +105,7 @@ Some https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Make
 Link to http://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html[implicit variables] like `CC LDLIBS` etc.
 
 .Example of typical target
-[source, shell]
+[source, sh]
 --------------------------
 target: dependencies ..
 [tab]   commands
@@ -85,7 +135,7 @@ WARNING: Is not correct. Has to be revised!
 If you want to compile multiple targets which should be compiled to the same name you can use `$<` which returns the depending filenames and `$@` which returns the target name.
 
 .Example of using $< and $@
-[source, shell]
+[source, sh]
 --------------------------
 CFLAGS = -Wall -g
 SRC = prog1 prog2
@@ -117,7 +167,7 @@ For more detailes just go to http://www.gnu.org/software/make/manual/make.html#A
 
 If it is required to set target specific variables you can use the targe specific variables. For example if you want a target which sets a macro `TEST`, following code will do the trick:
 
-[source, shell]
+[source, sh]
 --------------------------
 CFLAGS = -Wall -g
 SRC = prog1 prog2
@@ -142,16 +192,16 @@ GNU project C and C++ compiler
 If you want to know the default include paths you have to consulte the used preprocessor which is in charge of replaceing all preprocessor commands including `#include` with actual valid C/C++ code. Just use `cpp -v` to show the required information.
 
 
-===== gcc dump preprocessor defines
+gcc dump preprocessor defines
 
-[source, shell]
+[source, sh]
 --------------------------
 $ gcc -dM -E - < /dev/null
 --------------------------
 
 examples
 
-[source, shell]
+[source, sh]
 --------------------------
 $ gcc -dM -E -msse4 - < /dev/null | grep SSE[34]
 --------------------------
@@ -159,7 +209,7 @@ $ gcc -dM -E -msse4 - < /dev/null | grep SSE[34]
 
 How do I dump preprocessor macros coming from a particular header file:
 
-[source, shell]
+[source, sh]
 --------------------------
 $ echo "#include <sys/socket.h>" | gcc -E -dM - | grep SOMAXCONN
 #define SOMAXCONN 128
@@ -277,6 +327,48 @@ if(condition) {
 }
 --------------------------
 
+
+== Loading File at once
+
+This is a code snippet which loads the complete file into memory.
+
+[source]
+--------------------------
+/**
+ * Store all the file's contents in memory, useful to pass shaders
+ * source code to OpenGL
+ */
+/* Problem:
+ *  We should close the input file before the return NULL; statements but this would lead to a lot of repetition (DRY)
+ *   -you could solve this by using goto or by abusing switch/for/while + break or by building an if else mess
+ *  better solution: let the user handle the File: char* file_read(const FILE* input)
+*/
+char* file_read(const char* filename)
+{
+  FILE* input = fopen(filename, "rb");
+  if(input == NULL) return NULL;
+ 
+  if(fseek(input, 0, SEEK_END) == -1) return NULL;
+  long size = ftell(input);
+  if(size == -1) return NULL;
+  if(fseek(input, 0, SEEK_SET) == -1) return NULL;
+ 
+  /*if using c-compiler: dont cast malloc's return value*/
+  char *content = (char*) malloc( (size_t) size +1  ); 
+  if(content == NULL) return NULL;
+ 
+  fread(content, 1, (size_t)size, input);
+  if(ferror(input)) {
+    free(content);
+    return NULL;
+  }
+ 
+  fclose(input);
+  content[size] = '\0';
+  return content;
+}
+--------------------------
+Source: http://en.wikibooks.org/wiki/OpenGL_Programming/Modern_OpenGL_Tutorial_02[OpenGL Tut02]
 
 
 //////////////////////////
