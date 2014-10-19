@@ -864,7 +864,23 @@ arit.o<span style="color:#000000">:</span> arit.c arit.h
 </div></div>
 <div class="paragraph"><p>since <span class="monospaced">make</span> knows how to create object files <span class="monospaced">.o</span> form source files <span class="monospaced">.c</span> and <span class="monospaced">make</span> knows how to link everything together required for rule <span class="monospaced">calc</span>.</p></div>
 <div class="sect3">
-<h4 id="_makefile">3.1.1. Makefile</h4>
+<h4 id="_paterns_match">3.1.1. Paterns Match</h4>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre><code><span style="color:#000000">%</span>.o<span style="color:#000000">: %</span>.c
+       $<span style="color:#000000">(</span>CC<span style="color:#000000">) -</span>c $<span style="color:#000000">(</span>CFLAGS<span style="color:#000000">)</span> $<span style="color:#000000">(</span>CPPFLAGS<span style="color:#000000">)</span> $<span style="color:#000000">&lt; -</span>o $&#64;
+
+<span style="color:#000000">%</span>.o <span style="color:#000000">: %</span>.f
+       $<span style="color:#000000">(</span>COMPILE.F<span style="color:#000000">)</span> $<span style="color:#000000">(</span>OUTPUT_OPTION<span style="color:#000000">)</span> $<span style="color:#000000">&lt;</span>
+
+lib<span style="color:#000000">/%</span>.o<span style="color:#000000">:</span> lib<span style="color:#000000">/%</span>.c
+       $<span style="color:#000000">(</span>CC<span style="color:#000000">) -</span>fPIC <span style="color:#000000">-</span>c $<span style="color:#000000">(</span>CFLAGS<span style="color:#000000">)</span> $<span style="color:#000000">(</span>CPPFLAGS<span style="color:#000000">)</span> $<span style="color:#000000">&lt; -</span>o $&#64;</code></pre>
+</div></div>
+<div class="paragraph"><p>Executing <span class="monospaced">make bar.o</span> and both bar.c and bar.f exist, <span class="monospaced">make</span> will choose bar.c to be compiled into bar.o, otherwise bar.f will be chosen. Executing <span class="monospaced">make lib/bar.o</span> will use the third rule if both lib/bar.c and lib/bar.f exist. If lib/bar.c does not exist then the third rule is not eligible (since of the dependicy of lib/%.c). Then the second rule will be used.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_makefile">3.1.2. Makefile</h4>
 <div class="paragraph"><p>Some <a href="https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions">general conventions</a> from gnu.org.</p></div>
 <div class="paragraph"><p>Link to <a href="http://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html">implicit variables</a> like <span class="monospaced">CC LDLIBS</span> etc.</p></div>
 <div class="listingblock">
@@ -1156,7 +1172,7 @@ compilation.  It is called a macro processor because it allows you to define mac
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2014-08-12 23:13:48 CEST
+Last updated 2014-08-13 11:28:14 CEST
 </div>
 </div>
 </body>

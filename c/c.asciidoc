@@ -98,6 +98,23 @@ arit.o: arit.c arit.h
 
 since `make` knows how to create object files `.o` form source files `.c` and `make` knows how to link everything together required for rule `calc`.
 
+==== Paterns Match
+
+.Example
+[source, sh]
+--------------------------
+%.o: %.c
+       $(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+
+%.o : %.f
+       $(COMPILE.F) $(OUTPUT_OPTION) $<
+
+lib/%.o: lib/%.c
+       $(CC) -fPIC -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+--------------------------
+
+Executing `make bar.o` and both bar.c and bar.f exist, `make` will choose bar.c to be compiled into bar.o, otherwise bar.f will be chosen. Executing `make lib/bar.o` will use the third rule if both lib/bar.c and lib/bar.f exist. If lib/bar.c does not exist then the third rule is not eligible (since of the dependicy of lib/%.c). Then the second rule will be used.
+
 ==== Makefile
 
 Some https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions[general conventions] from gnu.org.
@@ -107,10 +124,12 @@ Link to http://www.gnu.org/software/make/manual/html_node/Implicit-Variables.htm
 .Example of typical target
 [source, sh]
 --------------------------
-target: dependencies ..
+targets: dependencies ..
 [tab]   commands
         ...
 --------------------------
+
+The target are file names, seperated by spaces. Usually only one file name per target.
 
 Every Makefile should contain this line:
 
@@ -170,15 +189,15 @@ If it is required to set target specific variables you can use the targe specifi
 [source, sh]
 --------------------------
 CFLAGS = -Wall -g
-SRC = prog1 prog2
+PROG = prog1 prog2
 
-all: $(SRC)
+all: $(PROG)
 
 test: CFLAGS += -DTEST
-test: $(SRC) 
+test: $(PROG) 
 
 clean: 
-    rm -r $(SRC)
+    rm -r $(PROG)
 --------------------------
 
 Calling `make test` will compile likewise the target `all` expect that the `TEST` macro will be set, which can be used in the source code.
