@@ -1192,11 +1192,10 @@ class Appender(object):
 --------------------------
 
 
-== Creating Folders
+== Creating (intermediate) Folders
 
 Normally you can create folders by calling https://docs.python.org/2/library/os.html?highlight=mkdir#os.mkdir[`os.mkdir(path[, mode])`].
-However, if the folder already exist this function throws an exception. If
-you want to have the same behavior as `mkdir -p <folder>` which ignores if
+However, if the folder already exist or intermediate folders are missing, this function throws an exception. If you want to have the same behavior as `mkdir -p <folder>` which ignores if
 the <folder> already exists. You write following code:
 [source]
 --------------------------
@@ -1226,6 +1225,28 @@ from subprocess import call
 for dist in pip.get_installed_distributions():
     call("sudo pip install --upgrade " + dist.project_name, shell=True)
 --------------------------
+
+== Make Script "pipeable"
+This script demonstrates how to make python scripts pipeable
+see:
+
+  * http://stackoverflow.com/a/4430047/1959528
+  * http://stackoverflow.com/q/1450393/1959528
+
+Notice however, the scripts blocks until it gets a EOF char `ctrl+d` on unix systems.
+
+
+.echo.py: Example which pipes all lines from stdin to stdout and stderr
+[source]
+--------------------------
+#!/usr/bin/env python
+if __name__ == "__main__":
+    import sys
+    for line in sys.stdin:
+        sys.stderr.write("DEBUG: got line: " + line)
+        sys.stdout.write(line)
+--------------------------
+
 
 //////////////////////////
 CommentBlock:     //////////////////////////
