@@ -234,6 +234,21 @@ $ echo "#include <sys/socket.h>" | gcc -E -dM - | grep SOMAXCONN
 #define SOMAXCONN 128
 --------------------------
 
+==== Neat tipps using gcc and its derivatives
+
+If you need to `define` a constant you can do this by testing if it is already defined before. This permits that the constant can be changed in another header filer or even at compile time `-D`.
+
+Example
+[source, c]
+--------------------------
+#ifndef BUF_SIZE  // allow to overwrite by cc -DBUF_SIZE
+#define BUF_SIZE 256
+#endif
+--------------------------
+
+
+
+
 === cpp             
 --------------------------
 The C Preprocessor

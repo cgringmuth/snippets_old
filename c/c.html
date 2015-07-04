@@ -886,10 +886,11 @@ lib<span style="color:#000000">/%</span>.o<span style="color:#000000">:</span> l
 <div class="listingblock">
 <div class="title">Example of typical target</div>
 <div class="content">
-<pre><code>target<span style="color:#000000">:</span> dependencies ..
+<pre><code>targets<span style="color:#000000">:</span> dependencies ..
 <span style="color:#000000">[</span>tab<span style="color:#000000">]</span>   commands
         ...</code></pre>
 </div></div>
+<div class="paragraph"><p>The target are file names, seperated by spaces. Usually only one file name per target.</p></div>
 <div class="paragraph"><p>Every Makefile should contain this line:</p></div>
 <div class="literalblock">
 <div class="content monospaced">
@@ -950,15 +951,15 @@ clean<span style="color:#000000">:</span>
 <div class="listingblock">
 <div class="content">
 <pre><code>CFLAGS <span style="color:#000000">= -</span>Wall <span style="color:#000000">-</span>g
-SRC <span style="color:#000000">=</span> prog1 prog2
+PROG <span style="color:#000000">=</span> prog1 prog2
 
-all<span style="color:#000000">:</span> $<span style="color:#000000">(</span>SRC<span style="color:#000000">)</span>
+all<span style="color:#000000">:</span> $<span style="color:#000000">(</span>PROG<span style="color:#000000">)</span>
 
 <span style="color:#0057ae">test</span><span style="color:#000000">:</span> CFLAGS <span style="color:#000000">+= -</span>DTEST
-<span style="color:#0057ae">test</span><span style="color:#000000">:</span> $<span style="color:#000000">(</span>SRC<span style="color:#000000">)</span>
+<span style="color:#0057ae">test</span><span style="color:#000000">:</span> $<span style="color:#000000">(</span>PROG<span style="color:#000000">)</span>
 
 clean<span style="color:#000000">:</span>
-    <span style="color:#000000; font-weight:bold">rm</span> <span style="color:#000000">-</span>r $<span style="color:#000000">(</span>SRC<span style="color:#000000">)</span></code></pre>
+    <span style="color:#000000; font-weight:bold">rm</span> <span style="color:#000000">-</span>r $<span style="color:#000000">(</span>PROG<span style="color:#000000">)</span></code></pre>
 </div></div>
 <div class="paragraph"><p>Calling <span class="monospaced">make test</span> will compile likewise the target <span class="monospaced">all</span> expect that the <span class="monospaced">TEST</span> macro will be set, which can be used in the source code.</p></div>
 </div>
@@ -987,6 +988,17 @@ clean<span style="color:#000000">:</span>
 <pre><code>$ <span style="color:#0057ae">echo</span> <span style="color:#bf0303">&quot;#include &lt;sys/socket.h&gt;&quot;</span> | gcc <span style="color:#000000">-</span>E <span style="color:#000000">-</span>dM <span style="color:#000000">-</span> | <span style="color:#000000; font-weight:bold">grep</span> SOMAXCONN
 <span style="color:#838183; font-style:italic">#define SOMAXCONN 128</span></code></pre>
 </div></div>
+<div class="sect3">
+<h4 id="_neat_tipps_using_gcc_and_its_derivatives">3.2.1. Neat tipps using gcc and its derivatives</h4>
+<div class="paragraph"><p>If you need to <span class="monospaced">define</span> a constant you can do this by testing if it is already defined before. This permits that the constant can be changed in another header filer or even at compile time <span class="monospaced">-D</span>.</p></div>
+<div class="paragraph"><p>Example</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code><span style="color:#008200">#ifndef BUF_SIZE</span>  <span style="color:#838183; font-style:italic">// allow to overwrite by cc -DBUF_SIZE</span>
+<span style="color:#008200"></span><span style="color:#008200">#define BUF_SIZE 256</span>
+<span style="color:#008200">#endif</span></code></pre>
+</div></div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_cpp">3.3. cpp</h3>
@@ -1172,7 +1184,8 @@ compilation.  It is called a macro processor because it allows you to define mac
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2014-08-13 11:28:14 CEST
+Last updated
+ 2015-07-04 17:40:37 CEST
 </div>
 </div>
 </body>
