@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="generator" content="AsciiDoc 8.6.7">
+<meta name="generator" content="AsciiDoc 8.6.9">
 <title>A List of <span class="monospaced">unix</span> and <span class="monospaced">terminal</span> Tips, Tricks and recipes/idioms</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -86,9 +86,15 @@ ul, ol, li > p {
 ul > li     { color: #aaa; }
 ul > li > * { color: black; }
 
-pre {
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
   padding: 0;
   margin: 0;
+}
+pre {
+  white-space: pre-wrap;
 }
 
 #author {
@@ -218,7 +224,7 @@ div.exampleblock > div.content {
 }
 
 div.imageblock div.content { padding-left: 0; }
-span.image img { border-style: none; }
+span.image img { border-style: none; vertical-align: text-bottom; }
 a.image:visited { color: white; }
 
 dl {
@@ -414,12 +420,6 @@ div.unbreakable { page-break-inside: avoid; }
  *
  * */
 
-tt {
-  font-family: "Courier New", Courier, monospace;
-  font-size: inherit;
-  color: navy;
-}
-
 div.tableblock {
   margin-top: 1.0em;
   margin-bottom: 1.5em;
@@ -452,12 +452,6 @@ div.tableblock > table[frame="vsides"] {
  * html5 specific
  *
  * */
-
-.monospaced {
-  font-family: "Courier New", Courier, monospace;
-  font-size: inherit;
-  color: navy;
-}
 
 table.tableblock {
   margin-top: 1.0em;
@@ -538,6 +532,8 @@ body.manpage div.sectionbody {
 @media print {
   body.manpage div#toc { display: none; }
 }
+
+
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
@@ -762,20 +758,28 @@ asciidoc.install(2);
 <div class="paragraph"><p>This command can be used to determine if file is a binary, text or if a file is symbolic link.</p></div>
 <div class="listingblock">
 <div class="title">Example which shows that cc is a symbolic link to gcc</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ which cc
-/usr/bin/cc
-$ file /usr/bin/cc
-/usr/bin/cc<span style="color: #990000">:</span> symbolic link to /etc/alternatives/cc
-$ file /etc/alternatives/cc
-/etc/alternatives/cc<span style="color: #990000">:</span> symbolic link to /usr/bin/gcc</tt></pre></div></div>
+<div class="content">
+<pre><code>$ <span style="color:#000000; font-weight:bold">which</span> cc
+<span style="color:#000000">/</span>usr<span style="color:#000000">/</span>bin<span style="color:#000000">/</span>cc
+$ <span style="color:#000000; font-weight:bold">file</span> <span style="color:#000000">/</span>usr<span style="color:#000000">/</span>bin<span style="color:#000000">/</span>cc
+<span style="color:#000000">/</span>usr<span style="color:#000000">/</span>bin<span style="color:#000000">/</span>cc<span style="color:#000000">:</span> symbolic link to <span style="color:#000000">/</span>etc<span style="color:#000000">/</span>alternatives<span style="color:#000000">/</span>cc
+$ <span style="color:#000000; font-weight:bold">file</span> <span style="color:#000000">/</span>etc<span style="color:#000000">/</span>alternatives<span style="color:#000000">/</span>cc
+<span style="color:#000000">/</span>etc<span style="color:#000000">/</span>alternatives<span style="color:#000000">/</span>cc<span style="color:#000000">:</span> symbolic link to <span style="color:#000000">/</span>usr<span style="color:#000000">/</span>bin<span style="color:#000000">/</span>gcc</code></pre>
+</div></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_find">3. find</h2>
+<h2 id="_type">3. type</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content monospaced">
+<pre>type is a shell builtin</pre>
+</div></div>
+<div class="paragraph"><p>Similar to file determines the type of a command. But <span class="monospaced">type</span> can be used to see if a command is a script, builtin, binary or even an alias. Also, it shows the location of the script.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_find">4. find</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content monospaced">
@@ -790,7 +794,7 @@ find / -name "libglut*" -not -path "/home/*" 2&gt;/dev/null</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_ldconfig">4. ldconfig</h2>
+<h2 id="_ldconfig">5. ldconfig</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>loading new libs:</p></div>
 <div class="literalblock">
@@ -809,7 +813,8 @@ find / -name "libglut*" -not -path "/home/*" 2&gt;/dev/null</p></div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1 'http://semver.org/[(semver)]'<br>
-Last updated 2014-04-23 21:49:09 CEST
+Last updated
+ 2017-04-06 22:21:27 CEST
 </div>
 </div>
 </body>

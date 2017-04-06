@@ -11,7 +11,7 @@
 // :scriptsdir:            ../asciidoc/js
 // :linkcss:
 
-:language:              shell
+:language:             bash 
 
 == Introduction
 

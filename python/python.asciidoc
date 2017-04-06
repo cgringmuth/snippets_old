@@ -88,7 +88,7 @@ Installing the PIL on Ubuntu 64 bit revealed some issues.
 [quote, anonymous]
 It turns out that the APT installations put the libraries under '/usr/lib/x86_64-linux-gnu' and PIL will search for them in '/usr/lib/'. So you have to create symlinks for PIL to see them.
 
-[source,shell]
+[source,bash]
 ----
 ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
 ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
@@ -817,7 +817,7 @@ if __name__ == "__main__":       # <1>
 
 If you run a python script without optimization this is normally invoked in debug mode (check https://docs.python.org/2/library/constants.html?highlight=%5F%5Fdebug%5F%5F#%5F%5Fdebug%5F%5F[\\__debug__]). This means for example that all
 assertions will be tested. You can test if python is running in debug mode by invoking following code:
-[source, shell]
+[source, bash]
 --------------------------
     $ python -c 'print __debug__'
     True
@@ -830,7 +830,7 @@ assertions will be tested. You can test if python is running in debug mode by in
 Turning optimization on by passing `-O` or `-OO` to python, will optimize the script (the latter will also discard the docstring in favor for optimal code), which includes that alle assertions
 will be ignored (see `man python` or https://docs.python.org/2/using/cmdline.html?highlight=#-O[html] for more details;
 or just invoke `python -h`). 
-[source, shell]
+[source, bash]
 --------------------------
     $ python -OO -c 'print __debug__'
     False
