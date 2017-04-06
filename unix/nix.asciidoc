@@ -1,0 +1,233 @@
+= A List of +unix+ and +terminal+ Tips, Tricks and recipes/idioms
+:Author:                Christoph Hoffmann
+:Email:                 choffmann1983@gmail.com
+:Revision:              0.0.1 'http://semver.org/[(semver)]'
+:source-highlighter:    highlight
+:numbered:
+:toc:                   // set table of content
+:icons:                 // search for icons in :inconsdir: (default: ./images/icons.)
+:iconsdir:              ../asciidoc/images/icons
+:imagesdir:             ../asciidoc/images/
+// :scriptsdir:            ../asciidoc/js
+// :linkcss:
+
+:language:             bash
+
+= Introduction
+
+todo
+
+== file
+
+--------------------------
+determine file type
+--------------------------
+
+This command can be used to determine if file is a binary, text or if a file is symbolic link.
+
+.Example which shows that cc is a symbolic link to gcc
+[source, bash]
+--------------------------
+$ which cc
+/usr/bin/cc
+$ file /usr/bin/cc
+/usr/bin/cc: symbolic link to /etc/alternatives/cc
+$ file /etc/alternatives/cc
+/etc/alternatives/cc: symbolic link to /usr/bin/gcc
+--------------------------
+
+
+== type
+
+--------------------------
+type is a shell builtin
+--------------------------
+
+Similar to file determines the type of a command. But `type` can be used to see if a command is a script, builtin, binary or even an alias. Also, it shows the location of the script.
+
+== find
+
+--------------------------
+search for files in a directory hierarchy
+--------------------------
+
+# Find: How to avoid printing to screen Permission denied errors
+find / -name art  2>&1 | grep -v "Permission denied"
+# or pipe stderr to null
+find / -name art  2>/dev/null
+
+# find libglut* in all folders but /home
+find / -name "libglut*" -not -path "/home/*" 2>/dev/null
+
+== ldconfig
+
+loading new libs:
+
+	`sudo ldconfig`
+
+looking for library:
+
+	`ldconfig -p | grep -i glut`
+
+== Devices
+
+In linux everything is a files. Even devices are handled as files. The handle for each device can be found under `/dev`.
+
+.udev
+[source, bash]
+--------------------------
+todo
+--------------------------
+
+.lsusb
+[source, bash]
+--------------------------
+$ lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 003: ID 04f3:21d5 Elan Microelectronics Corp.
+Bus 001 Device 002: ID 0a5c:6410 Broadcom Corp.
+Bus 001 Device 029: ID 046d:c52b Logitech, Inc. Unifying Receiver
+Bus 001 Device 028: ID 1bcf:2b95 Sunplus Innovation Technology Inc.
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+$ tree /dev/bus/
+/dev/bus/
+└── usb
+    ├── 001
+    │   ├── 001
+    │   ├── 002
+    │   ├── 003
+    │   ├── 028
+    │   └── 029
+    └── 002
+        └── 001
+$ dmesg
+[12234.499327] usb 1-2: USB disconnect, device number 25
+[12239.144818] usb 1-2: new full-speed USB device number 29 using xhci_hcd
+[12239.288643] usb 1-2: New USB device found, idVendor=046d, id=c52b
+[12239.288647] usb 1-2: New USB device strings: Mfr=1, =2, SerialNumber=0
+[12239.288649] usb 1-2: : USB Receiver
+[12239.288651] usb 1-2: Manufacturer: Logitech
+[12239.299977] logitech-djreceiver 0003:046D:C52B.0011: hiddev0,hidraw2: USB HID v1.11 Device [Logitech USB Receiver] on usb-0000:00:14.0-2/input2
+[12239.424489] input: Logitech MX Master as /devices/pci0000:00/0000:00:14.0/usb1/1-2/1-2:1.2/0003:046D:C52B.0011/0003:046D:4041.0012/input/input31
+[12239.425203] logitech-hidpp-device 0003:046D:4041.0012: input,hidraw3: USB HID v1.11 Keyboard [Logitech MX Master] on usb-0000:00:14.0-2:1
+$ udevadm info /dev/bus/usb/001/002 -a
+Udevadm info starts with the device specified by the devpath and then
+walks up the chain of parent devices. It prints for every device
+found, all possible attributes in the udev rules key format.
+A rule to match, can be composed by the attributes of the device
+and the attributes from one single parent device.
+
+  looking at device '/devices/pci0000:00/0000:00:14.0/usb1/1-2':
+    KERNEL=="1-2"
+    SUBSYSTEM=="usb"
+    DRIVER=="usb"
+    ATTR{authorized}=="1"
+    ATTR{avoid_reset_quirk}=="0"
+    ATTR{bConfigurationValue}=="1"
+    ATTR{bDeviceClass}=="00"
+    ATTR{bDeviceProtocol}=="00"
+    ATTR{bDeviceSubClass}=="00"
+    ATTR{bMaxPacketSize0}=="32"
+    ATTR{bMaxPower}=="98mA"
+    ATTR{bNumConfigurations}=="1"
+    ATTR{bNumInterfaces}==" 3"
+    ATTR{bcdDevice}=="2401"
+    ATTR{bmAttributes}=="a0"
+    ATTR{busnum}=="1"
+    ATTR{configuration}=="RQR24.01_B0023"
+    ATTR{devnum}=="29"
+    ATTR{devpath}=="2"
+    ATTR{idProduct}=="c52b"
+    ATTR{idVendor}=="046d"
+    ATTR{ltm_capable}=="no"
+    ATTR{manufacturer}=="Logitech"
+    ATTR{maxchild}=="0"
+    ATTR{product}=="USB Receiver"
+    ATTR{quirks}=="0x0"
+    ATTR{removable}=="unknown"
+    ATTR{speed}=="12"
+    ATTR{urbnum}=="109"
+    ATTR{version}==" 2.00"
+
+  looking at parent device '/devices/pci0000:00/0000:00:14.0/usb1':
+    KERNELS=="usb1"
+    SUBSYSTEMS=="usb"
+    DRIVERS=="usb"
+    ATTRS{authorized}=="1"
+    ATTRS{authorized_default}=="1"
+    ATTRS{avoid_reset_quirk}=="0"
+    ATTRS{bConfigurationValue}=="1"
+    ATTRS{bDeviceClass}=="09"
+    ATTRS{bDeviceProtocol}=="01"
+    ATTRS{bDeviceSubClass}=="00"
+    ATTRS{bMaxPacketSize0}=="64"
+    ATTRS{bMaxPower}=="0mA"
+    ATTRS{bNumConfigurations}=="1"
+    ATTRS{bNumInterfaces}==" 1"
+    ATTRS{bcdDevice}=="0408"
+    ATTRS{bmAttributes}=="e0"
+    ATTRS{busnum}=="1"
+    ATTRS{configuration}==""
+    ATTRS{devnum}=="1"
+    ATTRS{devpath}=="0"
+    ATTRS{idProduct}=="0002"
+    ATTRS{idVendor}=="1d6b"
+    ATTRS{interface_authorized_default}=="1"
+    ATTRS{ltm_capable}=="no"
+    ATTRS{manufacturer}=="Linux 4.8.0-46-generic xhci-hcd"
+    ATTRS{maxchild}=="16"
+    ATTRS{product}=="xHCI Host Controller"
+    ATTRS{quirks}=="0x0"
+    ATTRS{removable}=="unknown"
+    ATTRS{serial}=="0000:00:14.0"
+    ATTRS{speed}=="480"
+    ATTRS{urbnum}=="732"
+    ATTRS{version}==" 2.00"
+
+  looking at parent device '/devices/pci0000:00/0000:00:14.0':
+    KERNELS=="0000:00:14.0"
+    SUBSYSTEMS=="pci"
+    DRIVERS=="xhci_hcd"
+    ATTRS{broken_parity_status}=="0"
+    ATTRS{class}=="0x0c0330"
+    ATTRS{consistent_dma_mask_bits}=="64"
+    ATTRS{d3cold_allowed}=="1"
+    ATTRS{device}=="0xa12f"
+    ATTRS{dma_mask_bits}=="64"
+    ATTRS{driver_override}=="(null)"
+    ATTRS{enable}=="1"
+    ATTRS{irq}=="123"
+    ATTRS{local_cpulist}=="0-7"
+    ATTRS{local_cpus}=="ff"
+    ATTRS{msi_bus}=="1"
+    ATTRS{numa_node}=="-1"
+    ATTRS{subsystem_device}=="0x06e4"
+    ATTRS{subsystem_vendor}=="0x1028"
+    ATTRS{vendor}=="0x8086"
+
+  looking at parent device '/devices/pci0000:00':
+    KERNELS=="pci0000:00"
+    SUBSYSTEMS==""
+    DRIVERS==""
+--------------------------
+
+=== Udev rules
+You can define rules to create symlinks or give some rights for specific devices. Usually you use the idProduct and idVendor, often in combination with serial to allow multiple devices of same type.
+The product and vendor id can be get from `lsusb`. The serial number can get from `udevadm` (`udevadm info /dev/bus/usb/001/002 -a | grep serial`). If don't know the file descriptor for the device you could
+figure out by getting the difference between `tree /dev > /tmp/dev1` and `tree /dev > /tmp/dev2` after the device has been plugged in. `diff /tmp/dev{1,2}` gives you a hint where to look at. 
+
+
+== Fuzzy command search
+`compgen -ac | grep <command|alias>`
+
+
+//////////////////////////
+CommentBlock:     //////////////////////////
+PassthroughBlock: ++++++++++++++++++++++++++
+ListingBlock:     --------------------------
+LiteralBlock:     ..........................
+SidebarBlock:     **************************
+QuoteBlock:       __________________________
+ExampleBlock:     ==========================
+OpenBlock:        --
+//////////////////////////

@@ -23,7 +23,7 @@ Here is a list of interesting links:
 * http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html[Code Like a Pythonista: Idiomatic Python]
 * http://code.activestate.com/recipes/langs/python/[Popular Python recipes ]
 
-== Shebang 
+== Shebang
 
 [TIP]
 ==========================
@@ -76,7 +76,7 @@ def enum(*sequential, **named):
     reverse = dict((value, key) for key, value in enums.iteritems())
     enums['reverse_mapping'] = reverse
     return type('Enum', (), enums)
-----    
+----
 
 
 == Python Imaging Library (http://www.pythonware.com/products/pil/[PIL])
@@ -100,13 +100,13 @@ Source: http://jj.isgeek.net/2011/09/install-pil-with-jpeg-support-on-ubuntu-one
 
 == Importing libs in main only
 
-Sometimes libs are only needed if a lib is called as main process. Thus, it is meaningful to import such libs only if this module is called as main process. 
+Sometimes libs are only needed if a lib is called as main process. Thus, it is meaningful to import such libs only if this module is called as main process.
 
 [source,python]
 ----
 if __name__ == '__main__':
     from paste import httpserver    # Paste <http://pythonpaste.org>
-    httpserver.serve(app, host='127.0.0.1', port=8080)  
+    httpserver.serve(app, host='127.0.0.1', port=8080)
 ----
 
 or
@@ -119,7 +119,7 @@ if __name__ == '__main__':
 ----
 
 
-== File handling 
+== File handling
 
 [TIP]
 Detailed description at source: http://docs.python.org/2/tutorial/inputoutput.html#methods-of-file-objects[docs.python.org]
@@ -185,7 +185,7 @@ foobarprivate   # <2>
 <2> Error
 
 
-== Class to handle a bunch of different variables 
+== Class to handle a bunch of different variables
 
 [TIP]
 Detailed description at source: http://code.activestate.com/recipes/52308-the-simple-but-handy-collector-of-a-bunch-of-named/?in=user-97991[code.activestate.com]
@@ -212,7 +212,7 @@ if point.squared > threshold:
 <1> This has the added benefit that it can directly be printed and it shows its contents in interactive environments like ipython.
 
 
-== Dictionary default value 
+== Dictionary default value
 
 [TIP]
 Detailed description at source: http://stackoverflow.com/questions/101268/hidden-features-of-python[stackoverflow.com]
@@ -231,7 +231,7 @@ d['key'] = d.get('key', dafaultKey) + 1
 === Dictionary and default v2
 Assuming you have an unknown number of parameters which have to be set to a default. For instance see following example:
 
-.Example code 
+.Example code
 [source]
 -------------------------
 class SomeClass(object):
@@ -240,22 +240,22 @@ class SomeClass(object):
         self.y = y
         self.args = args
         self.kwargs = kwargs
-        
+
     run(self, **kwargs):
         lskws = dict(mandatory1=10, mandatory2=2)
         lskws.update(self.kwargs)
         lskws.update(kwargs)
         doCoolStuff(**lskws)
 -------------------------
-In this example you can provide the parameter "globally" with the constructor or 
-by the function `run`. Here `mandatory1` and `mandatory2` are variables which 
+In this example you can provide the parameter "globally" with the constructor or
+by the function `run`. Here `mandatory1` and `mandatory2` are variables which
 are required for the later function call and will be set locally in the function
-to default values. The values, along with other parameters, will be overwritten 
+to default values. The values, along with other parameters, will be overwritten
 by the internal values in the property `self.kwargs` or by the provided parameters
-in `kwargs`. 
+in `kwargs`.
 
 The order here is, take the values provided by `kwarags`. If not provided, take
-the parameters provided by `self.kwargs`. If not provided, take default values 
+the parameters provided by `self.kwargs`. If not provided, take default values
 of local parameters in `lskws`.
 
 
@@ -295,7 +295,7 @@ def func(v1, v2, **args):
 func(1, 2, v3=22)       # <1>
 func(1, 2)              # <2>
 ----
-<1> >>> 1  2 22
+<1> >>> 1 2 22
 <2> >>> 1 2 -1
 
 
@@ -317,7 +317,7 @@ folder = [f for f in os.listdir(of) if os.path.isdir(os.path.join(of, f))]      
 
 
 
-== List Comprehensions 
+== List Comprehensions
 
 [TIP]
 Detailed description at source: http://docs.python.org/2.7/tutorial/datastructures.html#list-comprehensions[docs.python.org]
@@ -352,7 +352,7 @@ matrix = [
     [4, 8, 12]
 ]
 
-matrix_trans = [[row[n] for row in matrix] for n in range(len(matrix))]  
+matrix_trans = [[row[n] for row in matrix] for n in range(len(matrix))]
 print matrix_trans      # <1>
 ----
 
@@ -375,7 +375,7 @@ words       # <1>
 
 <1> >>> ['defenestrate', 'cat', 'window', 'defenestrate']
 
-== Looping Techniques 
+== Looping Techniques
 
 [TIP]
 ==========================
@@ -403,13 +403,13 @@ Iterate over the complete dictionary.
 d = {'xxx': 'fuu', 'ggg': 'bar', 'aaa': 'fuubar', '123': 'fuu bar fuubar'}
 for k, v in d.iteritems():  # <1>
     print k, v
-    
+
 # or
 for k, v in d.items():      # <2>
     print k, v
 --------------------------
 NOTE: The difference between <1> and <2> is that dict.items() returns a list of
-2-tuples ([(key, value), (key, value), ...]) whereas dict.iteritems returns a 
+2-tuples ([(key, value), (key, value), ...]) whereas dict.iteritems returns a
 generator that yields 2-typles:
 
 [source,python]
@@ -422,7 +422,7 @@ generator that yields 2-typles:
 
 ==== (ordered) Dictionary
 
-Iterating over a dictionary does not guarantee a specific order. Thus, you 
+Iterating over a dictionary does not guarantee a specific order. Thus, you
 cannot guarantee a certain order of (key, value)-pairs. For this you can use `sorted(...)`:
 
 .Example
@@ -590,11 +590,11 @@ listargs = [1,2,3]
 myfunc2(*listargs, **keywords)     # <3>
 --------------------------
 <1> `*args` = list arguments; `**kwargs` = keyword arguments
-<2> `>>> 1` 
+<2> `>>> 1`
 +
 `>>> 2`
 +
-`>>> 3` 
+`>>> 3`
 +
 `>>> banan = 123`
 
@@ -602,22 +602,22 @@ myfunc2(*listargs, **keywords)     # <3>
 
 
 == **kwargs vs. named arguments (keywords)
-In many cases it is useful to provide a variable number of arguments. Often many arguments 
+In many cases it is useful to provide a variable number of arguments. Often many arguments
 can be inferred or set to a default value. This can be done
 by `def func1(*args, **kwargs)` or `def func2(x, *args, plot=True, debug=True)`.
-So, when to use which idiom? 
+So, when to use which idiom?
 
 While the fromer version has the main advantage that the
 list of named arguments is more arbitrary than the latter, it's readability is much
 worse. For example one caller has to read the docstring assuming their exists one and
-it is consistent with the source code or, worse, he has to read the source code. 
+it is consistent with the source code or, worse, he has to read the source code.
 Also, the latter version provides a fast grasp of the possible arguments and assuming
 the arguments are given appropriate names, the user understands its meaning without
-reading the docstring or source code at all. 
+reading the docstring or source code at all.
 
 Furthermore, the latter version could be called with positional
 arguments like `func2(x, y, True, False)` while the latter version always has to be called
-like `func1(x, y, plot=True, debug=False)`. A good example is the 
+like `func1(x, y, plot=True, debug=False)`. A good example is the
 http://docs.python.org/2/library/subprocess.html#popen-constructor[subprocess.Popen]
 Construrctor:
 
@@ -634,11 +634,11 @@ class Popen(object):
         ...
 --------------------------
 
-While there exist reasons to use the former version, my suggestion would be 
+While there exist reasons to use the former version, my suggestion would be
 to use the latter version `def func2(x, *args, plot=True, debug=True)` in most cases.
 
-If you want, for some reason, ensure that some arguments are "keyword-only" arguments 
-and thus will never be automatically filled in by positional argument, the 
+If you want, for some reason, ensure that some arguments are "keyword-only" arguments
+and thus will never be automatically filled in by positional argument, the
 http://www.python.org/dev/peps/pep-3102/[pep3102] is the way to go.
 
 .2 Positional arguments and keywords arguments
@@ -655,7 +655,7 @@ or `compare(1,2)` will give the intended behavior.
 
 The former version should be used if the number and/or names of the arguments is
 not known in advanced. For example for writing a wrapper function which mainly calls
-another function and where the parameter only should be passed on to the other 
+another function and where the parameter only should be passed on to the other
 function. A good example is the `subprocess.call` function which is in
 principle only a wrapper function which creates a `Popen` object and waits until
 the process has been finished.
@@ -674,7 +674,7 @@ def call(*popenargs, **kwargs):
     return Popen(*popenargs, **kwargs).wait()
 --------------------------
 
-The main advantage here is that, suppose the argument list in the `Popen` 
+The main advantage here is that, suppose the argument list in the `Popen`
 constructor changed, the `call` function does not have to be changed at all. Thus
 there is no additional maintenance here as it would be in the other case.
 
@@ -752,7 +752,7 @@ try:
     mallard.quack()
 except (AttributeError, TypeError):
     print("mallard can't quack()")
---------------------------    
+--------------------------
 
 Since `hasattr(object, name)` does almost the same job and is well optimized it should be preferred where applicable.
 
@@ -763,11 +763,11 @@ if (hasattr(mallard, 'quack')):
     mallard.quack()
 else:
     print("mallard can't quack()")
--------------------------- 
+--------------------------
 
 
 == Testing python code
-In general there exists two main testing mechanisms one is http://docs.python.org/2/library/unittest.html[unittest] and the other is http://docs.python.org/2/library/doctest.html[doctest]. Both are good ways to verify that the code is correct. However both testing mechanisms have their drawbacks. 
+In general there exists two main testing mechanisms one is http://docs.python.org/2/library/unittest.html[unittest] and the other is http://docs.python.org/2/library/doctest.html[doctest]. Both are good ways to verify that the code is correct. However both testing mechanisms have their drawbacks.
 
 While doctest clutters the docstring, it is a good way to give examples and to see if the docstring is consistent with the actual source code.
 
@@ -809,7 +809,7 @@ if __name__ == "__main__":       # <1>
                      os.path.join(os.path.dirname(__file__), ".."), "..")))
         import httpserver    # load main package to enable relative module import
         __package__ = "httpserver.lib"
---------------------------    
+--------------------------
 <1> If the current module is loaded from another module, which is called as main, this `if` has to be omitted.
 
 
@@ -829,7 +829,7 @@ assertions will be tested. You can test if python is running in debug mode by in
 
 Turning optimization on by passing `-O` or `-OO` to python, will optimize the script (the latter will also discard the docstring in favor for optimal code), which includes that alle assertions
 will be ignored (see `man python` or https://docs.python.org/2/using/cmdline.html?highlight=#-O[html] for more details;
-or just invoke `python -h`). 
+or just invoke `python -h`).
 [source, bash]
 --------------------------
     $ python -OO -c 'print __debug__'
@@ -856,9 +856,9 @@ If you want to deploy the software you always should turn `DEBUG` to `0` and sha
 either write wrapper script which calls the script with the python command `-O` or
 you should highlight that the script shall be called with this command.
 
-In some cases assertions can slow down the code, this is why you should use the 
+In some cases assertions can slow down the code, this is why you should use the
 optimization mode of python. To ensure this, you can insert following code
-snippet in your main file or setting file which checks if python ignores all 
+snippet in your main file or setting file which checks if python ignores all
 assertions otherwise it throws an assertion with a description.
 
 [source]
@@ -867,9 +867,9 @@ DEBUG = 0
 if not DEBUG:
     import sys
     import os
-    as_msg = """This script has been configured such it runs in release mode. 
-    Since the scripts makes excessive use of assertion for development you should 
-    run this script with "python -O {script_name}" to neglect assertions or 
+    as_msg = """This script has been configured such it runs in release mode.
+    Since the scripts makes excessive use of assertion for development you should
+    run this script with "python -O {script_name}" to neglect assertions or
     switch back to debug mode by setting setting.DEBUG = 1.
 """.format(script_name=os.path.basename(sys.argv[0]))
     assert False, as_msg
@@ -885,7 +885,7 @@ be accessed by getter/setter functions. Thus, don't write getter/setter function
 but access all variables directly unless not otherwise possible or meaningful. Then
 use properties!
 
-A big advantage of using property decorator for setting/getting is to have 
+A big advantage of using property decorator for setting/getting is to have
 control of how variables should be read from or written to. For example you want
 want to prevent a variable to be positive (validating) or before you returning a variable
 you want to recompute something etc. This can be ensured by ordinary getter/setter
@@ -893,7 +893,7 @@ methods or by the `@property` decorator. The property decorator is superior when
 code should be more flexible. For instance if you have written a Library which has
 been deployed already and you decided to instead of just returning a value you want
 to recompute or refetch from remote a new value which shall be returned. Thus you
-can hide this behavior behind the property decorator without braking code which 
+can hide this behavior behind the property decorator without braking code which
 uses your library. Additionally if you decided to recompute or update something
 when a variable changes you can also hide this in property setter method without
 braking existing code.
@@ -902,18 +902,18 @@ One disadvantage is the reduced performance which, in most cases, can be neglect
 
 Another area where the property is useful is design-by-contract where you always
 can check pro/post condition and class invariants in the development stage and when
-it comes to the release mode you can just roll back and rename all variables and 
+it comes to the release mode you can just roll back and rename all variables and
 comment the property decorator to be as efficient as possible.
 
 In addition you don't have to write getter/setter just in case you want to have
-control. You can write a variable without the double underscores and if you 
+control. You can write a variable without the double underscores and if you
 decide you want to have more control added properties for those variables and change
-the local variable to have leading underscores but not using refactoring in this 
+the local variable to have leading underscores but not using refactoring in this
 case which would change all access to this variable also.
 
 .Syntactic sugar
 [NOTE]
-This concept is in general syntactic sugar which allows method calls to like 
+This concept is in general syntactic sugar which allows method calls to like
 variable access or assignment.
 
 === Decorator
@@ -929,18 +929,18 @@ class Sphere(object):
     def __init__(self, radius, center):
         self._radius = radius
         self._center = center
-    
+
     @property
     def radius(self):
         print "radius getter is used"
         return self.__radius
-        
+
     @radius.setter
     def radius(self, radius):
         if radius < 0:
             raise TypeError("Radius should never be negative")
         self.__radius = radius
-        
+
 >>> s = Sphere(1, [1,1,1])
 >>> s.radius = 2
 >>> print s.radius
@@ -968,7 +968,7 @@ Calling http://docs.python.org/2/library/functions.html?highlight=property#prope
 --------------------------
 class Contact(object):
 
-    def __init__(self, first_name=None, last_name=None, 
+    def __init__(self, first_name=None, last_name=None,
                  display_name=None, email=None):
         self.first_name = first_name
         self.last_name = last_name
@@ -976,7 +976,7 @@ class Contact(object):
         self.email = email
 
     def print_info(self):
-        print self.display_name, "<" + self.email + ">"            
+        print self.display_name, "<" + self.email + ">"
 
     def set_email(self, value):
         if '@' not in value:
@@ -1001,7 +1001,7 @@ contact.email = "xx.com"    # Exception
 
 === Private variables
 
-"Any identifier of the form \__spam (at least two leading underscores, at most one trailing underscore) is textually replaced with _classname\__spam, where classname is the current class name with leading underscore(s) stripped." 
+"Any identifier of the form \__spam (at least two leading underscores, at most one trailing underscore) is textually replaced with _classname\__spam, where classname is the current class name with leading underscore(s) stripped."
 This prevents a sublcass from using self.__spam!
 
 .Example code
@@ -1010,10 +1010,10 @@ This prevents a sublcass from using self.__spam!
 class C(object):
     __name = None
     _name2 = None
-    
+
 class D(C):
     pass
-    
+
 >>> d = D()
 >>> dir(d)
 ['_C__name',        # <<< notice _C in front of name -> thus, this variable can be used in the current Class only
@@ -1210,7 +1210,7 @@ def mkdirs_p(path):
             raise
 --------------------------
 
-Since Python 3.2 it is possible to use https://docs.python.org/3/library/os.html?highlight=makedirs#os.makedirs[`os.makedirs(<folder>, mode=0o777, exist_ok=True)`] for having the same behavior. 
+Since Python 3.2 it is possible to use https://docs.python.org/3/library/os.html?highlight=makedirs#os.makedirs[`os.makedirs(<folder>, mode=0o777, exist_ok=True)`] for having the same behavior.
 
 
 == Upgrade all python packages via pip

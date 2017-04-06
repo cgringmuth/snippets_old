@@ -19,7 +19,7 @@ TODO
 
 == Self executing/invoking anonymous function
 
-[source]
+[source,javascript]
 --------------------------
 (function () {
     alert(test)
@@ -28,7 +28,7 @@ TODO
 
 or
 
-[source]
+[source,javascript]
 --------------------------
 (function (window, document, undefined) {
     alert(test)
@@ -41,7 +41,7 @@ or
 Use https://developer.mozilla.org/en-US/docs/Web/API/window.setTimeout[window.setTimeout] instead.
 
 .Bad example
-[source]
+[source,javescript]
 --------------------------
 setInterval(function () {
     doStuff();
@@ -50,7 +50,7 @@ setInterval(function () {
 
 
 .Better this way
-[source]
+[source,javascript]
 --------------------------
 (function mainloop() {          // <1>
 
@@ -63,11 +63,11 @@ setInterval(function () {
 <1> Here `mainloop` function name is important to enable recursive calling. `timeoutID` is the numerical ID of the timeout, which can be used later with `window.clearTimeout()`.
 
 
-== Use || operator to fill in a default value. 
+== Use || operator to fill in a default value.
 
 NOTE: The variable has to be undefined! Hence, it has to be instanceated.
 
-[source]
+[source,javascript]
 --------------------------
 (function (b) {
     var a = b || "default"; // ok
@@ -80,7 +80,7 @@ NOTE: The variable has to be undefined! Hence, it has to be instanceated.
 
 == Object propertie retreival by . or by []
 
-[source]
+[source,javascript]
 --------------------------
 var test = {foo: 'bar'};
 
@@ -92,7 +92,7 @@ test['foo'] === 'bar'   // true
 
 == Attempts retrieving a value from `undefined` throws TypeError exception
 
-[source]
+[source,javascript]
 --------------------------
 var obj = {}, defaultName = "Default name: Christoph";
 
@@ -101,7 +101,7 @@ obj.person.name // throw "TypeError"
 obj.person && obj.person.name // undefined
 
 // ->
-try { 
+try {
     var name = obj.person && obj.person.name;
     var nameStr = name || defaultName;
     alert("obj.test1.test: "+nameStr);
@@ -113,7 +113,7 @@ try {
 
 == Object always used as reference
 
-[source]
+[source,javascript]
 --------------------------
 var a={}, b={}, c={}; // a,b,c refer to different objects
 
@@ -123,7 +123,7 @@ var a = b = c = {}; // a,b,c are referring to the same object
 
 == Minimize number of global variables creating one global Object which holds all content
 
-[source]
+[source,javascript]
 --------------------------
 var MYAPP = {};
 
@@ -147,7 +147,7 @@ MYAPP.print();
 
 NOTE: Can be distributed to multiple files.
 
-[source]
+[source,javascript]
 --------------------------
 MYAPP.myObject = {
     value: 0,
@@ -169,14 +169,14 @@ MYAPP.myObject.print(); // -> 3
 == Function Invocation Patter
 
 .Problem
-[source]
+[source,javascript]
 --------------------------
 var sum = add(3,4); // this in function add() is bounded to the global space!
 // Thus no inner function has access to object
 --------------------------
 
 .Workaround
-[source]
+[source,javascript]
 --------------------------
 // easy workaround save "this" in local variable which is accessible to inner function ->
 MYAPP.myObject.double = function () {
@@ -200,7 +200,7 @@ MYAPP.myObject.print(); // -> 6
 TIP: JavaScript: The Good Parts
 
 
-[source]
+[source,javascript]
 --------------------------
 // Define a walk_the_DOM function that visits every
 // node of the tree in HTML source order, starting
@@ -246,9 +246,9 @@ var getElementsByAttribute = function (att, value) {
 [TIP]
 ==========================
 * http://tech.pro/tutorial/1453/7-javascript-basics-many-developers-aren-t-using-properly
-========================== 
+==========================
 
-[source]
+[source,javascript]
 --------------------------
 // Mistake
 var str = "David is an Arsenal fan, which means David is great";
@@ -263,13 +263,13 @@ str.replace(/david/gi, "Darren"); // global replacement which is not case sensit
 == Array.prototype.sort
 
 .Normal sorting
-[source]
+[source,javascript]
 --------------------------
 [1, 3, 9, 2].sort();    // Returns: [1, 2, 3, 9]
 --------------------------
 
 .Powerful sorting of objects
-[source]
+[source,javascript]
 --------------------------
 [
     { name: "Robin Van PurseStrings", age: 30 },
@@ -279,7 +279,7 @@ str.replace(/david/gi, "Darren"); // global replacement which is not case sensit
     // Ascending: first age less than the previous
     return obj1.age - obj2.age;
 });
-    // Returns:  
+    // Returns:
     // [
     //    { name: "Theo Walcott", age: 24 },
     //    { name: "Bacary Sagna", age: 28  },
@@ -290,7 +290,7 @@ str.replace(/david/gi, "Darren"); // global replacement which is not case sensit
 
 == Pass-objects-by-reference (Correct deletion of array)
 
-[source]
+[source,javascript]
 --------------------------
 var myArray = yourArray = [1, 2, 3];
 
@@ -304,7 +304,7 @@ myArray.length = 0; // "yourArray" and "myArray" both []
 
 == Array Merging with push
 
-[source]
+[source,javascript]
 --------------------------
 var mergeTo = [4,5,6],
 var mergeFrom = [7,8,9];
@@ -317,7 +317,7 @@ mergeTo; // is: [4, 5, 6, 7, 8, 9]
 
 == Efficient Feature/Object Property Detection
 
-[source]
+[source,javascript]
 --------------------------
 if(navigator.geolocation) {         // <1>
     // Do some stuff
@@ -332,10 +332,10 @@ if("geolocation" in navigator) {    // <2>
 
 
 
-== Prototype 
+== Prototype
 
 
-[source]
+[source,javascript]
 --------------------------
 var app = {};
 
@@ -373,7 +373,7 @@ t2.print()          // <2>
 ==========================
 
 
-[source]
+[source,javascript]
 --------------------------
 function getCtr() {
     var ctr = 0;    // <1>
@@ -382,7 +382,7 @@ function getCtr() {
 --------------------------
 <1> Initialization for the return function
 
-[source]
+[source,javascript]
 --------------------------
 var ctr = getCtr();
 ctr();      // <1>
@@ -399,7 +399,7 @@ ctr();      // <2>
 * {google_io_2011_js}
 ==========================
 
-[source]
+[source,javascript]
 --------------------------
 {} instanceof Object                // <1>
 [] instanceof Object                // <1>
@@ -413,12 +413,12 @@ ctr();      // <2>
 TIP: JavaScript: The Good Parts
 
 .serial_marker module
-[source]
+[source,javascript]
 --------------------------
 var serial_marker = function () {
     var prefix = '';
     var seq = 0;
-    
+
     return {
         set_prefix: function (p) {
             prefix = String(p);
@@ -436,7 +436,7 @@ var serial_marker = function () {
 --------------------------
 
 .Example how to use it
-[source]
+[source,javascript]
 --------------------------
 var seqer = serial_marker();
 seqer.set_prefix("Q");
@@ -461,11 +461,11 @@ alert(uniqnumbergen())              // <3>
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call?redirectlocale=en-US&redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FFunction%2Fcall[.call()]
 ==========================
 
-[source]
+[source,javascript]
 --------------------------
-function add(a, b){ 
-  return a + b; 
-} 
+function add(a, b){
+  return a + b;
+}
 add.call(this, 1, 2) == 3       // <1>
 add.apply(this, [1, 2]) == 3    // <2>
 --------------------------
@@ -485,7 +485,7 @@ TIP: JavaScript: The Good Parts
 In order to reduce computational cost it is often promising to cache already calculated values. This can lead to signification reduction in computational cost, especially for recursive functions like fibonacci. For this purpose closure can be used to encapsulate the module:
 
 
-[source]
+[source,javascript]
 --------------------------
 var fibonacci = (function (){
     var memo = [0, 1];
@@ -507,15 +507,15 @@ var fibonacci = (function (){
 Sometimes it is important to have a variable number of arguments given to a function. The following sample code is an example of how to implement a function with a variable number of arguments.
 
 .Example
-[source]
+[source,javascript]
 --------------------------
 function test(arg1) {
-    var args = [].slice.call(arguments, 1); 
-    console.log('arg1: ' + arg1 + ' other: ' + args); 
+    var args = [].slice.call(arguments, 1);
+    console.log('arg1: ' + arg1 + ' other: ' + args);
 }
 --------------------------
 
-In this example the arg1 variable is in principle not different to the other arguments, despite it will be used directly while the other arguments will be used by the `arguments` array. 
+In this example the arg1 variable is in principle not different to the other arguments, despite it will be used directly while the other arguments will be used by the `arguments` array.
 
 While it makes no difference it is good practice to have the mandatory arguments listed in the function header to show which arguments should be given to the function.
 
@@ -524,7 +524,7 @@ While it makes no difference it is good practice to have the mandatory arguments
 In oder to extend a given obejct with a new method/varible, you can create a mixin function like
 
 .Mixin
-[source]
+[source,javascript]
 --------------------------
 function mixin(receiver, supplier) {
     if (Object.keys) {  // ECMAScript 5
@@ -549,7 +549,7 @@ function mixin(receiver, supplier) {
 How to use the `mixin` function
 
 .Example
-[source]
+[source,javascript]
 --------------------------
 var object = {};
 
@@ -569,8 +569,8 @@ var test = function() {
     name = "Chris";
 };
 
-test();       
-        
+test();
+
 console.log(object.name);
 --------------------------
 
